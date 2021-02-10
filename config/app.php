@@ -14,6 +14,9 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'singkatan' => env('APP_SINGKATAN_FULL', 'Laravel'),
+    'singkatan_bold' => env('APP_SINGKATAN_BOLD', 'Laravel'),
+    'singkatan_tipis' => env('APP_SINGKATAN_TIPIS', 'Laravel'),
 
     /*
     |--------------------------------------------------------------------------

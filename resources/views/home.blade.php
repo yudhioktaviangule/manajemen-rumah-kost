@@ -1,5 +1,6 @@
-@extends('layouts.app')
+@extends('template.index')
 
+@section('judul','Halaman Utama')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -14,7 +15,7 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                   aaaaa
                 </div>
             </div>
         </div>
