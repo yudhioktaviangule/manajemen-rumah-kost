@@ -1,6 +1,6 @@
 @extends('template.index')
 
-@section('judul','Penyewa')
+@section('judul','Fasilitas Kamar')
 @section('content')
 <div class="box">
   <div class="box-header with-border">
@@ -15,9 +15,8 @@
             <thead>
                 <tr>
                     <th>Nomor Kamar</th>
-                    <th>Harga</th>
                     <th>Fasilitas</th>
-                    <th>&nbsp;</th>
+                    <th>Options</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -29,6 +28,6 @@
     The footer of the box
   </div>
   <!-- box-footer -->
-</div>
-<!-- /.box -->
+</div>  
 @endsection
+
