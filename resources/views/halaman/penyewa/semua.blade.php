@@ -31,7 +31,18 @@
                 <td>{{ $value->name}}</td>
                 <td>{{ $value->hp}}</td>
                 <td>{{ $value->jenis_kelamin}}</td>
-                <td></td>
+                <td>
+                  <a href="{{route('penyewa.show',['penyewa'=> $value->id])}}" class="btn btn-success">
+                      Lihat
+                  </a>
+                  <a href="{{route('penyewa.edit',['penyewa'=> $value->id])}}" class="btn btn-success">
+                      Edit
+                  </a>
+                  <a href="{{route('penyewa.destroy',['penyewa'=> $value->id])}}" class="btn btn-success">
+                      Hapus
+                  </a>
+               </td>
+                <td> </td>
               </tr> 
             @endforeach
             </tbody>
