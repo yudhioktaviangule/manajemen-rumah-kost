@@ -23,14 +23,18 @@
                     <th>Jenis Kelamin</th>
                     <th>&nbsp;</th>
                 </tr>
-                <tr>
-                    <th>&nbsp;</th>
-                    <th>&nbsp;</th>
-                    <th>&nbsp;</th>
-                    <th>&nbsp;</th>
-                </tr>
+               
             </thead>
-            <tbody></tbody>
+            <tbody>
+            @foreach($penyewas as $kunci => $value)
+              <tr>
+                <td>{{ $value->name}}</td>
+                <td>{{ $value->hp}}</td>
+                <td>{{ $value->jenis_kelamin}}</td>
+                <td></td>
+              </tr> 
+            @endforeach
+            </tbody>
         </table>
     </div>
   </div>

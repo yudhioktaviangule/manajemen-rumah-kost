@@ -26,7 +26,7 @@ class PenyewaController extends Controller
      */
     public function create()
     {
-        //
+        return view('halaman.penyewa.create');
     }
 
     /**
@@ -37,7 +37,13 @@ class PenyewaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $penyewas = new Penyewa;
+        $post = $request->only("name",'hp','jenis_kelamin');
+        $penyewas->fill($post);
+        $penyewas->save();
+
+        return redirect(route('penyewa.index'));
+
     }
 
     /**
@@ -71,7 +77,14 @@ class PenyewaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $penyewas = Penyewa::findOrFail($id);
+        $penyewas->name = $request->Nama;
+        $penyewas->hp = $request->No_hp;
+        $penyewas->jenis_kelamin = $request->Jenis_Kelamin;
+        $penyewas->save();
+
+        return redirect()->route('penyewa.index'); 
+
     }
 
     /**
