@@ -239,22 +239,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="user"><i class="fa fa-link"></i> <span>User</span></a></li>
-        <li><a href="{{ route('penyewa.index') }}"><i class="fa fa-link"></i> <span>Penyewa</span></a></li>
-        <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Kamar</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#">Kamar</a></li>
-            <li><a href="#">Fasilitas</a></li>
-            <li><a href="#">Perawatan </a></li>
-          </ul>
-        </li>
-        <li><a href="penyewa"><i class="fa fa-link"></i> <span>Aset</span></a></li>
-        <li><a href="penyewa"><i class="fa fa-link"></i> <span>Kamar sewa</span></a></li>
+        @include('template.menu')
       </ul>
       <!-- /.sidebar-menu -->
     </section>

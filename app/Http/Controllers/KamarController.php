@@ -6,33 +6,21 @@ use Illuminate\Http\Request;
 
 class KamarController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
+<<<<<<< HEAD
         $kamars = Kamar::get();
         return view('halaman.kamar.kamarnya',compact('kamars'));
+=======
+        
+>>>>>>> fa68ee7c54492cb77a3107f0e8747e8c45aed1bc
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
