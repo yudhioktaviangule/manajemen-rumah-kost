@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class KamarController extends Controller
+class AsetController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +13,8 @@ class KamarController extends Controller
      */
     public function index()
     {
-        $kamars = Kamar::get();
-        return view('halaman.kamar.kamarnya',compact('kamars'));
+        $asets = aset::get();
+        return view('halaman.aset.asetkost',compact['asets']);
     }
 
     /**
@@ -24,7 +24,7 @@ class KamarController extends Controller
      */
     public function create()
     {
-        //
+        return view('halaman.aset.create');
     }
 
     /**
