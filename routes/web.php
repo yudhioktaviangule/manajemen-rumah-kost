@@ -13,7 +13,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-//Route::get('/penyewa', [App\Http\Controllers\PenyewaController::class, 'index'])->penyewa('penyewa');
 
 Route::resource('kamar',KamarController::class);
 Route::resource('penyewa',PenyewaController::class);
