@@ -35,7 +35,14 @@ class AsetController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $asets = new aset;
+        $post = $request->only("aset");
+        $asets->fill($post);
+        $asets->save();
+
+        return redirect(route('aset.index'));
+
+
     }
 
     /**
@@ -69,7 +76,12 @@ class AsetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $asets = Aset::findOrFail($id);
+        $asets->aset = $request->Aset;
+        $asets->save();
+
+        return redirect()->route('penyewa.index'); 
+
     }
 
     /**

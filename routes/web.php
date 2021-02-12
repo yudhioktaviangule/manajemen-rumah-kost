@@ -21,4 +21,5 @@ Route::resource('aset',AsetController::class);
 Route::resource('penyewa',PenyewaController::class);
 Route::resource('fasilitas',FasilitasController::class);
 Route::resource('kamar_sewa',KamarSewaController::class);
+Route::delete('penyewa',PenyewaController::class,'destroy');
 

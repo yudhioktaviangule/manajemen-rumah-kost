@@ -95,6 +95,6 @@ class PenyewaController extends Controller
      */
     public function destroy($id)
     {
-        //
+
     }
 }

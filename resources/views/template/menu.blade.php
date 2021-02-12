@@ -1,4 +1,4 @@
-<li class="active"><a href="user"><i class="fa fa-link"></i> <span>User</span></a></li>
+<li><a href="user"><i class="fa fa-link"></i> <span>User</span></a></li>
         <li>
             <a href="{{ route('penyewa.index') }}">
                 <i class="fa fa-link"></i> 
@@ -18,5 +18,5 @@
             <li><a href="#">Perawatan </a></li>
           </ul>
         </li>
-        <li><a href="penyewa"><i class="fa fa-link"></i> <span>Aset</span></a></li>
+        <li><a href="{{route('aset.index')}}"><i class="fa fa-link"></i> <span>Aset</span></a></li>
         <li><a href="penyewa"><i class="fa fa-link"></i> <span>Kamar sewa</span></a></li>

@@ -1,12 +1,12 @@
 @extends('template.index')
 
-@section('judul','Aset')
+@section('judul',Aset Kost'')
 @section('content')
 <div class="box">
   <div class="box-header with-border">
-    <h3 class="box-title">Aset</h3>
+    <h3 class="box-title">Daftar Aset</h3>
     <div class="box-tools pull-right">
-      <a href="{{ route('penyewa.create') }}" class="btn btn-primary btn-sm">
+      <a href="{{ route('aset.create') }}" class="btn btn-primary btn-sm">
           Tambah Aset
       </a>
     </div>
@@ -18,18 +18,20 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Aset</th>
+                    <th>Aset </th>
                     <th>&nbsp;</th>
                 </tr>
                
             </thead>
             <tbody>
-            @foreach($Aset as $kunci => $value)
+            @foreach($asets as $kunci => $value)
               <tr>
                 <td>{{ $value->aset}}</td>
+                <td><button type="button" class="btn btn-danger">hapus</button></td>
                 <td></td>
               </tr> 
             @endforeach
+
             </tbody>
         </table>
     </div>
