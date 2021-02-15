@@ -1,296 +1,141 @@
-/**
- * --------------------------------------------
- * AdminLTE ControlSidebar.js
- * License MIT
- * --------------------------------------------
+/* ControlSidebar()
+ * ===============
+ * Toggles the state of the control sidebar
+ *
+ * @Usage: $('#control-sidebar-trigger').controlSidebar(options)
+ *         or add [data-toggle="control-sidebar"] to the trigger
+ *         Pass any option as data-option="value"
  */
++function ($) {
+  'use strict';
 
-import $ from 'jquery'
+  var DataKey = 'lte.controlsidebar';
 
-/**
- * Constants
- * ====================================================
- */
+  var Default = {
+    slide: true
+  };
 
-const NAME = 'ControlSidebar'
-const DATA_KEY = 'lte.controlsidebar'
-const EVENT_KEY = `.${DATA_KEY}`
-const JQUERY_NO_CONFLICT = $.fn[NAME]
+  var Selector = {
+    sidebar: '.control-sidebar',
+    data   : '[data-toggle="control-sidebar"]',
+    open   : '.control-sidebar-open',
+    bg     : '.control-sidebar-bg',
+    wrapper: '.wrapper',
+    content: '.content-wrapper',
+    boxed  : '.layout-boxed'
+  };
 
-const EVENT_COLLAPSED = `collapsed${EVENT_KEY}`
-const EVENT_EXPANDED = `expanded${EVENT_KEY}`
+  var ClassName = {
+    open : 'control-sidebar-open',
+    fixed: 'fixed'
+  };
 
-const SELECTOR_CONTROL_SIDEBAR = '.control-sidebar'
-const SELECTOR_CONTROL_SIDEBAR_CONTENT = '.control-sidebar-content'
-const SELECTOR_DATA_TOGGLE = '[data-widget="control-sidebar"]'
-const SELECTOR_HEADER = '.main-header'
-const SELECTOR_FOOTER = '.main-footer'
+  var Event = {
+    collapsed: 'collapsed.controlsidebar',
+    expanded : 'expanded.controlsidebar'
+  };
 
-const CLASS_NAME_CONTROL_SIDEBAR_ANIMATE = 'control-sidebar-animate'
-const CLASS_NAME_CONTROL_SIDEBAR_OPEN = 'control-sidebar-open'
-const CLASS_NAME_CONTROL_SIDEBAR_SLIDE = 'control-sidebar-slide-open'
-const CLASS_NAME_LAYOUT_FIXED = 'layout-fixed'
-const CLASS_NAME_NAVBAR_FIXED = 'layout-navbar-fixed'
-const CLASS_NAME_NAVBAR_SM_FIXED = 'layout-sm-navbar-fixed'
-const CLASS_NAME_NAVBAR_MD_FIXED = 'layout-md-navbar-fixed'
-const CLASS_NAME_NAVBAR_LG_FIXED = 'layout-lg-navbar-fixed'
-const CLASS_NAME_NAVBAR_XL_FIXED = 'layout-xl-navbar-fixed'
-const CLASS_NAME_FOOTER_FIXED = 'layout-footer-fixed'
-const CLASS_NAME_FOOTER_SM_FIXED = 'layout-sm-footer-fixed'
-const CLASS_NAME_FOOTER_MD_FIXED = 'layout-md-footer-fixed'
-const CLASS_NAME_FOOTER_LG_FIXED = 'layout-lg-footer-fixed'
-const CLASS_NAME_FOOTER_XL_FIXED = 'layout-xl-footer-fixed'
+  // ControlSidebar Class Definition
+  // ===============================
+  var ControlSidebar = function (element, options) {
+    this.element         = element;
+    this.options         = options;
+    this.hasBindedResize = false;
 
-const Default = {
-  controlsidebarSlide: true,
-  scrollbarTheme: 'os-theme-light',
-  scrollbarAutoHide: 'l'
-}
+    this.init();
+  };
 
-/**
- * Class Definition
- * ====================================================
- */
-
-class ControlSidebar {
-  constructor(element, config) {
-    this._element = element
-    this._config = config
-
-    this._init()
-  }
-
-  // Public
-
-  collapse() {
-    const $body = $('body')
-    const $html = $('html')
-
-    // Show the control sidebar
-    if (this._config.controlsidebarSlide) {
-      $html.addClass(CLASS_NAME_CONTROL_SIDEBAR_ANIMATE)
-      $body.removeClass(CLASS_NAME_CONTROL_SIDEBAR_SLIDE).delay(300).queue(function () {
-        $(SELECTOR_CONTROL_SIDEBAR).hide()
-        $html.removeClass(CLASS_NAME_CONTROL_SIDEBAR_ANIMATE)
-        $(this).dequeue()
-      })
-    } else {
-      $body.removeClass(CLASS_NAME_CONTROL_SIDEBAR_OPEN)
+  ControlSidebar.prototype.init = function () {
+    // Add click listener if the element hasn't been
+    // initialized using the data API
+    if (!$(this.element).is(Selector.data)) {
+      $(this).on('click', this.toggle);
     }
 
-    $(this._element).trigger($.Event(EVENT_COLLAPSED))
-  }
+    this.fix();
+    $(window).resize(function () {
+      this.fix();
+    }.bind(this));
+  };
 
-  show() {
-    const $body = $('body')
-    const $html = $('html')
+  ControlSidebar.prototype.toggle = function (event) {
+    if (event) event.preventDefault();
 
-    // Collapse the control sidebar
-    if (this._config.controlsidebarSlide) {
-      $html.addClass(CLASS_NAME_CONTROL_SIDEBAR_ANIMATE)
-      $(SELECTOR_CONTROL_SIDEBAR).show().delay(10).queue(function () {
-        $body.addClass(CLASS_NAME_CONTROL_SIDEBAR_SLIDE).delay(300).queue(function () {
-          $html.removeClass(CLASS_NAME_CONTROL_SIDEBAR_ANIMATE)
-          $(this).dequeue()
-        })
-        $(this).dequeue()
-      })
+    this.fix();
+
+    if (!$(Selector.sidebar).is(Selector.open) && !$('body').is(Selector.open)) {
+      this.expand();
     } else {
-      $body.addClass(CLASS_NAME_CONTROL_SIDEBAR_OPEN)
+      this.collapse();
+    }
+  };
+
+  ControlSidebar.prototype.expand = function () {
+    $(Selector.sidebar).show();
+    if (!this.options.slide) {
+      $('body').addClass(ClassName.open);
+    } else {
+      $(Selector.sidebar).addClass(ClassName.open);
     }
 
-    this._fixHeight()
-    this._fixScrollHeight()
 
-    $(this._element).trigger($.Event(EVENT_EXPANDED))
-  }
+    $(this.element).trigger($.Event(Event.expanded));
+  };
 
-  toggle() {
-    const $body = $('body')
-    const shouldClose = $body.hasClass(CLASS_NAME_CONTROL_SIDEBAR_OPEN) ||
-        $body.hasClass(CLASS_NAME_CONTROL_SIDEBAR_SLIDE)
+  ControlSidebar.prototype.collapse = function () {
+    $('body, ' + Selector.sidebar).removeClass(ClassName.open);
+    $(Selector.sidebar).fadeOut();
+    $(this.element).trigger($.Event(Event.collapsed));
+  };
 
-    if (shouldClose) {
-      // Close the control sidebar
-      this.collapse()
-    } else {
-      // Open the control sidebar
-      this.show()
+  ControlSidebar.prototype.fix = function () {
+    if ($('body').is(Selector.boxed)) {
+      this._fixForBoxed($(Selector.bg));
     }
-  }
+  };
 
   // Private
 
-  _init() {
-    this._fixHeight()
-    this._fixScrollHeight()
+  ControlSidebar.prototype._fixForBoxed = function (bg) {
+    bg.css({
+      position: 'absolute',
+      height  : $(Selector.wrapper).height()
+    });
+  };
 
-    $(window).resize(() => {
-      this._fixHeight()
-      this._fixScrollHeight()
-    })
-
-    $(window).scroll(() => {
-      const $body = $('body')
-      const shouldFixHeight = $body.hasClass(CLASS_NAME_CONTROL_SIDEBAR_OPEN) ||
-          $body.hasClass(CLASS_NAME_CONTROL_SIDEBAR_SLIDE)
-
-      if (shouldFixHeight) {
-        this._fixScrollHeight()
-      }
-    })
-  }
-
-  _fixScrollHeight() {
-    const $body = $('body')
-
-    if (!$body.hasClass(CLASS_NAME_LAYOUT_FIXED)) {
-      return
-    }
-
-    const heights = {
-      scroll: $(document).height(),
-      window: $(window).height(),
-      header: $(SELECTOR_HEADER).outerHeight(),
-      footer: $(SELECTOR_FOOTER).outerHeight()
-    }
-    const positions = {
-      bottom: Math.abs((heights.window + $(window).scrollTop()) - heights.scroll),
-      top: $(window).scrollTop()
-    }
-
-    const navbarFixed = (
-      $body.hasClass(CLASS_NAME_NAVBAR_FIXED) ||
-        $body.hasClass(CLASS_NAME_NAVBAR_SM_FIXED) ||
-        $body.hasClass(CLASS_NAME_NAVBAR_MD_FIXED) ||
-        $body.hasClass(CLASS_NAME_NAVBAR_LG_FIXED) ||
-        $body.hasClass(CLASS_NAME_NAVBAR_XL_FIXED)
-    ) && $(SELECTOR_HEADER).css('position') === 'fixed'
-
-    const footerFixed = (
-      $body.hasClass(CLASS_NAME_FOOTER_FIXED) ||
-        $body.hasClass(CLASS_NAME_FOOTER_SM_FIXED) ||
-        $body.hasClass(CLASS_NAME_FOOTER_MD_FIXED) ||
-        $body.hasClass(CLASS_NAME_FOOTER_LG_FIXED) ||
-        $body.hasClass(CLASS_NAME_FOOTER_XL_FIXED)
-    ) && $(SELECTOR_FOOTER).css('position') === 'fixed'
-
-    const $controlSidebar = $(SELECTOR_CONTROL_SIDEBAR)
-    const $controlsidebarContent = $(`${SELECTOR_CONTROL_SIDEBAR}, ${SELECTOR_CONTROL_SIDEBAR} ${SELECTOR_CONTROL_SIDEBAR_CONTENT}`)
-
-    if (positions.top === 0 && positions.bottom === 0) {
-      $controlSidebar.css({
-        bottom: heights.footer,
-        top: heights.header
-      })
-      $controlsidebarContent.css('height', heights.window - (heights.header + heights.footer))
-    } else if (positions.bottom <= heights.footer) {
-      if (footerFixed === false) {
-        const top = heights.header - positions.top
-        $controlSidebar.css('bottom', heights.footer - positions.bottom).css('top', top >= 0 ? top : 0)
-        $controlsidebarContent.css('height', heights.window - (heights.footer - positions.bottom))
-      } else {
-        $controlSidebar.css('bottom', heights.footer)
-      }
-    } else if (positions.top <= heights.header) {
-      if (navbarFixed === false) {
-        $controlSidebar.css('top', heights.header - positions.top)
-        $controlsidebarContent.css('height', heights.window - (heights.header - positions.top))
-      } else {
-        $controlSidebar.css('top', heights.header)
-      }
-    } else if (navbarFixed === false) {
-      $controlSidebar.css('top', 0)
-      $controlsidebarContent.css('height', heights.window)
-    } else {
-      $controlSidebar.css('top', heights.header)
-    }
-  }
-
-  _fixHeight() {
-    const $body = $('body')
-
-    if (!$body.hasClass(CLASS_NAME_LAYOUT_FIXED)) {
-      return
-    }
-
-    const heights = {
-      window: $(window).height(),
-      header: $(SELECTOR_HEADER).outerHeight(),
-      footer: $(SELECTOR_FOOTER).outerHeight()
-    }
-
-    let sidebarHeight = heights.window - heights.header
-
-    if (
-      $body.hasClass(CLASS_NAME_FOOTER_FIXED) ||
-          $body.hasClass(CLASS_NAME_FOOTER_SM_FIXED) ||
-          $body.hasClass(CLASS_NAME_FOOTER_MD_FIXED) ||
-          $body.hasClass(CLASS_NAME_FOOTER_LG_FIXED) ||
-          $body.hasClass(CLASS_NAME_FOOTER_XL_FIXED)
-    ) {
-      if ($(SELECTOR_FOOTER).css('position') === 'fixed') {
-        sidebarHeight = heights.window - heights.header - heights.footer
-      }
-    }
-
-    const $controlSidebar = $(`${SELECTOR_CONTROL_SIDEBAR} ${SELECTOR_CONTROL_SIDEBAR_CONTENT}`)
-    $controlSidebar.css('height', sidebarHeight)
-
-    if (typeof $.fn.overlayScrollbars !== 'undefined') {
-      $controlSidebar.overlayScrollbars({
-        className: this._config.scrollbarTheme,
-        sizeAutoCapable: true,
-        scrollbars: {
-          autoHide: this._config.scrollbarAutoHide,
-          clickScrolling: true
-        }
-      })
-    }
-  }
-
-  // Static
-
-  static _jQueryInterface(operation) {
+  // Plugin Definition
+  // =================
+  function Plugin(option) {
     return this.each(function () {
-      let data = $(this).data(DATA_KEY)
-      const _options = $.extend({}, Default, $(this).data())
+      var $this = $(this);
+      var data  = $this.data(DataKey);
 
       if (!data) {
-        data = new ControlSidebar(this, _options)
-        $(this).data(DATA_KEY, data)
+        var options = $.extend({}, Default, $this.data(), typeof option == 'object' && option);
+        $this.data(DataKey, (data = new ControlSidebar($this, options)));
       }
 
-      if (data[operation] === 'undefined') {
-        throw new Error(`${operation} is not a function`)
-      }
-
-      data[operation]()
-    })
+      if (typeof option == 'string') data.toggle();
+    });
   }
-}
 
-/**
- *
- * Data Api implementation
- * ====================================================
- */
-$(document).on('click', SELECTOR_DATA_TOGGLE, function (event) {
-  event.preventDefault()
+  var old = $.fn.controlSidebar;
 
-  ControlSidebar._jQueryInterface.call($(this), 'toggle')
-})
+  $.fn.controlSidebar             = Plugin;
+  $.fn.controlSidebar.Constructor = ControlSidebar;
 
-/**
- * jQuery API
- * ====================================================
- */
+  // No Conflict Mode
+  // ================
+  $.fn.controlSidebar.noConflict = function () {
+    $.fn.controlSidebar = old;
+    return this;
+  };
 
-$.fn[NAME] = ControlSidebar._jQueryInterface
-$.fn[NAME].Constructor = ControlSidebar
-$.fn[NAME].noConflict = function () {
-  $.fn[NAME] = JQUERY_NO_CONFLICT
-  return ControlSidebar._jQueryInterface
-}
+  // ControlSidebar Data API
+  // =======================
+  $(document).on('click', Selector.data, function (event) {
+    if (event) event.preventDefault();
+    Plugin.call($(this), 'toggle');
+  });
 
-export default ControlSidebar
+}(jQuery);

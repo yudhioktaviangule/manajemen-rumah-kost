@@ -1,7 +1,7 @@
 /*!
- * FullCalendar v3.10.1
+ * FullCalendar v3.10.0
  * Docs & License: https://fullcalendar.io/
- * (c) 2019 Adam Shaw
+ * (c) 2018 Adam Shaw
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
