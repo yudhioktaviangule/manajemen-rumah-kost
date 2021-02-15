@@ -9,12 +9,9 @@ class KamarController extends Controller
 
     public function index()
     {
-<<<<<<< HEAD
         $kamars = Kamar::get();
         return view('halaman.kamar.kamarnya',compact('kamars'));
-=======
-        
->>>>>>> fa68ee7c54492cb77a3107f0e8747e8c45aed1bc
+
     }
     public function create()
     {
