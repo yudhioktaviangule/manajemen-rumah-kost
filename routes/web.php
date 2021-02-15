@@ -19,3 +19,5 @@ Route::resource('penyewa',PenyewaController::class);
 
 Route::resource('fasilitas',FasilitasController::class);
 Route::resource('kamar_sewa',KamarSewaController::class);
+
+Route::get('create_fasilitas/{kamar_id}',[FasilitasController::class,'kamar_selected'])->name('fasilitas.kamar.terpilih');

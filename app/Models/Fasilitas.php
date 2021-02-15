@@ -13,4 +13,14 @@ class Fasilitas extends Model
         'aset_id',
         'keterangan',
     ];
+
+    public function getKamar()
+    {
+        return Kamar::find($this->kamar_id);
+    }
+
+    public function getAset()
+    {
+        return Aset::find($this->aset_id);
+    }
 }

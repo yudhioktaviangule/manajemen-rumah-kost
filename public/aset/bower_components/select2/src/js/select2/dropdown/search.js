@@ -49,10 +49,10 @@ define([
     container.on('open', function () {
       self.$search.attr('tabindex', 0);
 
-      self.$search.trigger('focus');
+      self.$search.focus();
 
       window.setTimeout(function () {
-        self.$search.trigger('focus');
+        self.$search.focus();
       }, 0);
     });
 
@@ -60,12 +60,12 @@ define([
       self.$search.attr('tabindex', -1);
 
       self.$search.val('');
-      self.$search.trigger('blur');
+      self.$search.blur();
     });
 
     container.on('focus', function () {
       if (!container.isOpen()) {
-        self.$search.trigger('focus');
+        self.$search.focus();
       }
     });
 
