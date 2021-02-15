@@ -13,4 +13,19 @@ class Penyewa extends Model
         'hp',
         'jenis_kelamin',
     ];
+
+    public function getKamar()
+    {
+        $kmr_sewa = KamarSewa::where('penyewa_id',$this->id)->orderBy('id','desc')->first();
+        if($kmr_sewa==NULL):
+            return NULL;
+        else:
+            return Kamar::find($kmr_sewa->kamar_id);
+        endif;
+    }
+
+    public function getSewa()
+    {
+        return KamarSewa::where('penyewa_id',$this->id)->first();
+    }
 }

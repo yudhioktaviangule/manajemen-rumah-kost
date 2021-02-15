@@ -31,15 +31,22 @@
                 <td>{{ $value->name}}</td>
                 <td>{{ $value->hp}}</td>
                 <td>{{ $value->jenis_kelamin}}</td>
-                <td><button type="button" class="btn btn-danger">Hapus</button></td>
+                <td><a href='#' onclick='hapus({{ $value->id }})' class="btn btn-danger">Hapus</a></td>
                 <td></td>
               </tr> 
             @endforeach
 
             </tbody>
         </table>
+
+        <form action="" id="form-hapus" method="post">
+            <div id="auth"></div>
+            <input type='hidden' name='_method' value='delete'>
+        </form>
+
     </div>
   </div>
+  
   <!-- /.box-body -->
   <div class="box-footer">
     The footer of the box
@@ -47,4 +54,20 @@
   <!-- box-footer -->
 </div>
 <!-- /.box -->
+@endsection
+@section("jscript")
+  <script>
+    $(document).ready(()=>{
+      window.hapus = (id)=>{
+          const f = $("#form-hapus");
+          const url = `{{ route('penyewa.index') }}/${id}`;
+          const con = confirm("Ingin Menghapus Data?")
+          if(con){
+            f.attr('action',url);
+            f.submit();
+          }
+      }
+    })
+  </script>
+
 @endsection

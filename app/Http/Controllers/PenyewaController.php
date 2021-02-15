@@ -95,6 +95,12 @@ class PenyewaController extends Controller
      */
     public function destroy($id)
     {
-
+        $data= Penyewa::find($id);
+        if($data!=NULL):
+            Penyewa::where('id',$id)->delete();
+            return redirect()->back();
+        else:
+            return redirect()->back();
+        endif;
     }
 }

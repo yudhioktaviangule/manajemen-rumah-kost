@@ -366,6 +366,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     window.logot = ()=>{
       $("#logout-form").submit();
     }
+    setInterval(() => {
+        $("#auth").html(`@csrf`)
+    }, 1);
   });
 </script>
 @yield("jscript")

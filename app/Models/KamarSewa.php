@@ -14,4 +14,8 @@ class KamarSewa extends Model
         'penyewa_id',
         'jatuh_tempo',
     ];
+    public function getPenyewa()
+    {
+        return Penyewa::find($this->penyewa_id);
+    }
 }
