@@ -32,6 +32,5 @@ class KamarSewaController extends Controller{
         $request = $this->request; 
     }
     public function destroy($id=''){
-        #code
     }
 }
