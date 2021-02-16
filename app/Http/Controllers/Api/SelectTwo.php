@@ -38,6 +38,14 @@ class SelectTwo extends Controller
         return response()->json($json);
         
     }
+    public function getAllAset()
+    {
+        $request = $this->request;
+        $data = Aset::where('aset','like',"%$request->q%")->limit(5)->get();
+        $json = $this->createJson($data,'aset');
+        return response()->json($json);
+        
+    }
 
     public function getKamar($kamar_id='')
     {

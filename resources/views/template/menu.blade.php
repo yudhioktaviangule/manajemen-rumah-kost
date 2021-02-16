@@ -1,4 +1,5 @@
-<li class="active"><a href="user"><i class="fa fa-link"></i> <span>User</span></a></li>
+<li class=""><a href="user"><i class="fa fa-link"></i> <span>User</span></a></li>
+<li class=""><a href="#"><i class="fa fa-link"></i> <span>Aset</span></a></li>
   <li class='treeview'>
     <a href="penyewa">
       <i class="fa fa-link"></i>
@@ -45,9 +46,21 @@
       </span>
   </a>
   <ul class="treeview-menu">
-    <li><a href="#">Perawatan Fasilitas</a></li>
+    <li class='treeview'>
+        <a href="#">
+          Pengeluaran
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="{{route('pemeliharaan.index')}}">Pemeliharaan Kamar</a></li>
+          <li><a href="{{route('t_aset.index')}}">Penambahan Aset</a></li>
+          <li><a href="#">Perawatan Fasilitas Kamar</a></li>
+        </ul>
+    </li>
     <li><a href="#">Pembayaran Sewa</a></li>
   </ul>
 </li>
-<li><a href="penyewa"><i class="fa fa-link"></i> <span>Aset</span></a></li>
+
         
