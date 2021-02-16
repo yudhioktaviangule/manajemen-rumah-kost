@@ -42,8 +42,9 @@
             $("#fasilitas").DataTable({
                 ...cols,
                 serverSide:true,
+                processing:true,
                 ajax:{
-                    url:"{{route('api.datatable.kamar')}}",
+                    url:"{{route('api.datatable.fasilitas')}}",
                 }
             });
             

@@ -33,7 +33,20 @@
   <ul class="treeview-menu">
     <li><a href="#">Master Kamar</a></li>
     <li><a href="{{route('fasilitas.index')}}">Fasilitas</a></li>
-    <li><a href="#">Perawatan </a></li>
+
+  </ul>
+</li>
+<li class="treeview">
+  <a href="#">
+      <i class="fa fa-link"></i> 
+      <span>Keuangan</span>
+      <span class="pull-right-container">
+          <i class="fa fa-angle-left pull-right"></i>
+      </span>
+  </a>
+  <ul class="treeview-menu">
+    <li><a href="#">Perawatan Fasilitas</a></li>
+    <li><a href="#">Pembayaran Sewa</a></li>
   </ul>
 </li>
 <li><a href="penyewa"><i class="fa fa-link"></i> <span>Aset</span></a></li>

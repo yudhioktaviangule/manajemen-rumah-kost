@@ -11,7 +11,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::group(['prefix'=>'dt'],function(){
-    Route::get('kamar',[DataTable::class,'kamar_fasilitas'])->name('api.datatable.kamar');
+    Route::get('kamar',[DataTable::class,'kamar_fasilitas'])->name('api.datatable.fasilitas');
     Route::get('kamar_sewa',[DataTable::class,'kamar_sewa'])->name('api.datatable.kamar');
 });
 

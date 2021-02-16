@@ -47,6 +47,7 @@
             ]}
             $("#fasilitas").DataTable({
                 ...cols,
+                "processing": true,
                 serverSide:true,
                 ajax:{
                     url:"{{route('api.datatable.kamar')}}",

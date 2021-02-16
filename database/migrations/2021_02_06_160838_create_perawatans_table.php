@@ -16,9 +16,9 @@ class CreatePerawatansTable extends Migration
         Schema::create('perawatans', function (Blueprint $table) {
             $table->id();
             $table->integer('fasilitas_id');
-            $table->integer('aset_id');
             $table->integer('user_id');
             $table->double('biaya');
+            $table->longtext('keterangan');
             $table->timestamps();
         });
     }
