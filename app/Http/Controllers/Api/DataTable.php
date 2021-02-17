@@ -91,7 +91,7 @@ class DataTable extends Controller{
                 $decode = json_decode($r);
                 $kamar  = Fasilitas::find($decode->fasilitas_id);
                 if($kamar==NULL):
-                    return '';
+                    return '-';
                 else:
                     return $kamar->getAset()->aset." Kamar ".$kamar->getKamar()->nomor;
                 endif;
@@ -131,9 +131,10 @@ class DataTable extends Controller{
                 $decode = json_decode($r);
                 $kamar  = Fasilitas::find($decode->fasilitas_id);
                 if($kamar==NULL):
-                    return '';
+                    return '-';
+                    //return $r;
                 else:
-                    return $kamar->getAset()->aset." Kamar ".$kamar->getKamar()->nomor;
+                    return "<strong>".$kamar->getAset()->aset."</strong><br> Kamar :<strong> ".$kamar->getKamar()->nomor."</strong>";
                 endif;
             })
             ->addColumn('aset',function($r){

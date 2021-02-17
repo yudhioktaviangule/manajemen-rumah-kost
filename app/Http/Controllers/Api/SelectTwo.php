@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Aset;
+use App\Models\Fasilitas;
 use App\Models\Kamar;
 class SelectTwo extends Controller
 {
@@ -20,6 +21,20 @@ class SelectTwo extends Controller
             $json[] = [
                 'id' =>$value->id,
                 'text' =>$value->{$text},
+            ];
+        }
+        $json=['results'=>$json];
+        return $json;
+    }
+    private function createJsonAset($data)
+    {
+        $json=[];
+        foreach ($data as $key => $value) {
+            $id = $value->id;
+            $datas = Aset::find($id);
+            $json[] = [
+                'id' =>$value->id,
+                'text' =>$datas->aset,
             ];
         }
         $json=['results'=>$json];
@@ -56,6 +71,34 @@ class SelectTwo extends Controller
         }
         $data = $data->limit(5)->get();
         $json = $this->createJson($data,'nomor');
+        return response()->json($json);
+        
+    }
+    public function getKamarFas()
+    {
+        $request = $this->request;
+        $data = Kamar::where('nomor','like',"%$request->q%")->whereIn('id',
+            function($q){
+                $q->select('kamar_id')->from("fasilitas");
+            }
+        );
+      
+        $data = $data->limit(5)->get();
+        $json = $this->createJson($data,'nomor');
+        return response()->json($json);
+        
+    }
+    public function getFasilitas($kamar_id='')
+    {
+        $request = $this->request;
+        $data = Fasilitas::where('kamar_id',$kamar_id)
+            ->whereIn('aset_id',function($q)use($request){
+                        $q->select("id")->from("asets")->where("aset",'like',"%$request->q%");
+                });
+        
+        $data = $data->limit(5)->get();
+        
+        $json = $this->createJsonAset($data);
         return response()->json($json);
         
     }

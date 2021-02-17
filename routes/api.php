@@ -22,4 +22,6 @@ Route::group(['prefix'=>'select2'],function(){
     Route::get('aset/{id_kamar}',[SelectTwo::class,'getAset'])->name('api.select2.aset');
     Route::get('all.aset',[SelectTwo::class,'getAset'])->name('api.select2.aset.all');
     Route::get('api.cek.kamar/{id_kamar?}',[SelectTwo::class,'getKamar'])->name('api.select2.kamar');
+    Route::get('api.cek.kamar.in.fas',[SelectTwo::class,'getKamarFas'])->name('api.select2.kamar.in.fas');
+    Route::get('api.cek.fas/{id_kamar}',[SelectTwo::class,'getFasilitas'])->name('api.select2.fas');
 });

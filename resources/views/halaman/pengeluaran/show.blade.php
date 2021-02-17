@@ -49,7 +49,7 @@
                         <p>
                           <strong>{{ $data->getFasilitas()==NULL ? '' :
                                       ($data->getFasilitas()->getAset()==NULL ? '' : $data->getFasilitas()->getAset()->aset." Nomor Kamar : ".
-                                        ($data->getFasilitas()->getKamar()==NULL?"-" : $data->getFasilitas()->getKamar()->kamar ) ) }}</strong>
+                                        ($data->getFasilitas()->getKamar() == NULL ? "-" : $data->getFasilitas()->getKamar()->nomor ) ) }}</strong>
                         </p>
                     </p>
                     @break

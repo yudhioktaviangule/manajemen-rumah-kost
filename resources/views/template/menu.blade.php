@@ -56,7 +56,7 @@
         <ul class="treeview-menu">
           <li><a href="{{route('pemeliharaan.index')}}">Pemeliharaan Kamar</a></li>
           <li><a href="{{route('t_aset.index')}}">Penambahan Aset</a></li>
-          <li><a href="#">Perawatan Fasilitas Kamar</a></li>
+          <li><a href="{{ route('perawatan.index') }}">Perawatan Fasilitas Kamar</a></li>
         </ul>
     </li>
     <li><a href="#">Pembayaran Sewa</a></li>
