@@ -32,7 +32,7 @@
       </span>
   </a>
   <ul class="treeview-menu">
-    <li><a href="#">Master Kamar</a></li>
+    <li><a href="{{ route('kamar.index') }}">Master Kamar</a></li>
     <li><a href="{{route('fasilitas.index')}}">Fasilitas</a></li>
 
   </ul>
