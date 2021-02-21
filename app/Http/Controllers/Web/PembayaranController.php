@@ -52,7 +52,7 @@ class PembayaranController extends Controller{
         $now     = Carbon::now();
         $kmr     = KamarSewa::find($jencode['kamar_sewa_id']);
         $harga   = intval($post->jumlah_bayar/$kmr->getKamar()->harga); 
-        dd($harga);
+    //    dd($harga);
         $tanggal = Carbon::parse($kmr->jatuh_tempo)->addMonths($harga);
         $kmr->jatuh_tempo = $tanggal;
         $kmr->save();

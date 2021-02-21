@@ -1,4 +1,4 @@
-<li class=""><a href="user"><i class="fa fa-link"></i> <span>User</span></a></li>
+<li class=""><a href="{{route('home')}}"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
 <li class=""><a href="#"><i class="fa fa-link"></i> <span>Aset</span></a></li>
   <li class='treeview'>
     <a href="penyewa">
