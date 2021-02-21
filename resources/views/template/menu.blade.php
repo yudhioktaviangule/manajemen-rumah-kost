@@ -59,7 +59,7 @@
           <li><a href="{{ route('perawatan.index') }}">Perawatan Fasilitas Kamar</a></li>
         </ul>
     </li>
-    <li><a href="#">Pembayaran Sewa</a></li>
+    <li><a href="{{route('pembayaran.index')}}">Pembayaran Sewa</a></li>
   </ul>
 </li>
 

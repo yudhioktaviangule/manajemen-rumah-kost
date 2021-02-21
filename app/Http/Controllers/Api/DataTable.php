@@ -9,7 +9,10 @@ use App\Models\Kamar;
 use App\Models\Penyewa;
 use App\Models\Aset;
 use App\Models\Fasilitas;
+use App\Models\Pembayaran;
 use App\Models\Pengeluaran;
+use App\Models\KamarSewa;
+
 use DataTables;
 use Carbon\Carbon;
 class DataTable extends Controller{
@@ -149,6 +152,57 @@ class DataTable extends Controller{
         $dt->rawColumns(['tanggal','kamar','fasilitas','aset']);
         return $dt->make(true);
     }
+
+    public function penyewaKamar()
+    {
+        $request = $this->request;
+        $data = KamarSewa::whereIn('kamar_id',function($q){
+                    $q->select('id')->from("kamars")->where('status','disewa');
+                })->get();
+        $dataTable = DataTables::of($data)
+                            ->addIndexColumn()
+                            ->addColumn('penyewa',function($row){
+                                $rowD = json_decode($row,TRUE);
+                                $penyewa = new KamarSewa();
+                                $penyewa->forceFill($rowD);
+                                return $penyewa->getPenyewa()->name;
+                            })
+                            ->addColumn('kamar',function($row){
+                                $rowD = json_decode($row,TRUE);
+                                $kamar = new KamarSewa();
+                                $kamar->forceFill($rowD);
+                                return $kamar->getKamar()->nomor;
+                            })
+                            ->addColumn('tagihan',function($row){
+                                $rowD = json_decode($row,TRUE);
+                                $kamar = new KamarSewa();
+                                $kamar->forceFill($rowD);
+                                $now = Carbon::now();
+                                $tanggal_expair = Carbon::parse($kamar->jatuh_tempo);
+                                $isNearly =  $tanggal_expair->diffInDays($now)<10 ? true : false;
+                                $isLate   = $isNearly ? ($tanggal_expair->diffInDays($now)<0 ?true:false) : false;
+                                $totalBayar = ($tanggal_expair->diffInMonths($now) + 1) * $kamar->getKamar()->harga;
+                                return number_format($totalBayar);
+                            })
+                            ->addColumn('status',function($row){
+                                $rowD = json_decode($row,TRUE);
+                                $kamar = new KamarSewa();
+                                $kamar->forceFill($rowD);
+                                $now = Carbon::now();
+                                $tanggal_expair = Carbon::parse($kamar->jatuh_tempo);
+                                $isNearly =  $tanggal_expair->gt($now) && $tanggal_expair->diffInDays($now)<10 ? true : false;
+                                $isLate   = $now->gt($tanggal_expair)?true:false;
+                                if($isLate):
+                                    return "Melewati Batas Waktu Pembayaran";
+                                elseif($isNearly):
+                                    return "Mendekati Masa Pembayaran";
+                                else:
+                                    return '-';
+                                endif;
+
+                            });
+        return $dataTable->make();
+    }
     
     public function kamar_sewa()
     {
@@ -175,6 +229,45 @@ class DataTable extends Controller{
                     return $tampil;
                 })
                 ->rawColumns(['aksi','nomor']);
+        return $dt->make(true);
+    }
+    
+    public function list_bayar()
+    {
+        $db = Pembayaran::get();
+        $dt = DataTables::of($db)
+                ->addIndexColumn()
+               
+                ->addColumn('nomor',function($row){
+                    $dec = json_decode($row,true);
+                    $dv  = new Pembayaran();
+                    $dv->forceFill($dec);
+                    $data = $dv->getKamarSewa()->getKamar();
+                    $tampil = $data==NULL?"-":$data->nomor;
+                    return $tampil;
+                })
+                ->addColumn('penyewa',function($row){
+                    $dec = json_decode($row,true);
+                    $dv  = new Pembayaran();
+                    $dv->forceFill($dec);
+                    $data = $dv->getKamarSewa()->getPenyewa();
+                    $tampil = $data==NULL?"-":$data->name;
+                    return $tampil;
+                })
+                ->addColumn('jbayar',function($row){
+                    $dec = json_decode($row,true);
+                    $dv  = new Pembayaran();
+                    $dv->forceFill($dec);
+                    $data = $dv->json;
+                    $jsond = json_decode($data);
+                    $tampil = $jsond->jumlah_bayar;
+                    return number_format($tampil);
+                })
+                ->addColumn('tanggal',function($row){
+                    $dec = json_decode($row);
+                    $tampil = Carbon::parse($dec->created_at)->format('d-m-Y');
+                    return $tampil;
+                });
         return $dt->make(true);
     }
 }

@@ -13,9 +13,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['prefix'=>'dt'],function(){
     Route::get('kamar',[DataTable::class,'kamar_fasilitas'])->name('api.datatable.fasilitas');
     Route::get('kamar_sewa',[DataTable::class,'kamar_sewa'])->name('api.datatable.kamar');
+    Route::get('penyewakmr',[DataTable::class,'penyewaKamar'])->name('api.datatable.penyewa.kamar');
     Route::get('dt/pemeliharaan',[DataTable::class,'pemeliharaan'])->name('api.datatable.pemeliharaan');
     Route::get('dt/perawatan',[DataTable::class,'perawatan'])->name('api.datatable.perawatan');
     Route::get('dt/t_aset',[DataTable::class,'tambahAset'])->name('api.datatable.tambah.aset');
+    Route::get('dt/l_bayar',[DataTable::class,'list_bayar'])->name('api.datatable.listbayar');
 });
 
 Route::group(['prefix'=>'select2'],function(){

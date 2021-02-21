@@ -18,6 +18,7 @@ class CreateKamarsTable extends Migration
             $table->string('nomor')->unique();
             $table->enum('status',['ready','disewa']);
             $table->double('harga');
+            $table->enum('is_locked',['no','yes'])->default('no');
             $table->timestamps();
         });
     }

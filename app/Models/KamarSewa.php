@@ -18,4 +18,8 @@ class KamarSewa extends Model
     {
         return Penyewa::find($this->penyewa_id);
     }
+    public function getKamar()
+    {
+        return Kamar::find($this->kamar_id);
+    }
 }

@@ -11,6 +11,8 @@ use App\Http\Controllers\Web\PindahKamarController;
 use App\Http\Controllers\Web\PemeliharaanController;
 use App\Http\Controllers\Web\PerawatanController;
 use App\Http\Controllers\Web\TambahAsetController;
+use App\Http\Controllers\Web\PembayaranController;
+use App\Http\Controllers\Web\TagihanController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -28,6 +30,9 @@ Route::resource('pindah_kamar',PindahKamarController::class);
 Route::resource('pemeliharaan',PemeliharaanController::class);
 Route::resource('perawatan',PerawatanController::class);
 Route::resource('t_aset',TambahAsetController::class);
+Route::resource('pembayaran',PembayaranController::class);
+Route::resource('tagihan',TagihanController::class);
+Route::get('daftar_bayar',[PembayaranController::class,'df_bayar'])->name('df.bayar');
 
 
 Route::get('create_fasilitas/{kamar_id}',[FasilitasController::class,'kamar_selected'])->name('fasilitas.kamar.terpilih');

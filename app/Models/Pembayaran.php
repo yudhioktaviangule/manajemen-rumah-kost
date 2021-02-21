@@ -11,7 +11,12 @@ class Pembayaran extends Model
     protected $fillable = [
         'kamar_sewa_id',
         'user_id',
-        'jumlah_bayar',
-        'denda',
+        'json',
+        
     ];
+
+    public function getKamarSewa()
+    {
+        return KamarSewa::find($this->kamar_sewa_id);
+    }
 }

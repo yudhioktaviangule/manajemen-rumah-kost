@@ -17,9 +17,9 @@ class CreatePembayaransTable extends Migration
             $table->id();
             $table->integer('kamar_sewa_id');
             $table->integer('user_id');
-            $table->double('jumlah_bayar');
-            $table->integer('bulan');
-            $table->double('denda');
+            $table->double('jumlah_tagihan');
+            $table->double('jumlah_pembayaran');
+            $table->double('jumlah_bulan');
             $table->timestamps();
         });
     }
