@@ -1,5 +1,5 @@
 <li class=""><a href="{{route('home')}}"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
-<li class=""><a href="#"><i class="fa fa-link"></i> <span>Aset</span></a></li>
+<li class=""><a href="{{route('m_aset.index')}}"><i class="fa fa-link"></i> <span>Aset</span></a></li>
   <li class='treeview'>
     <a href="penyewa">
       <i class="fa fa-link"></i>

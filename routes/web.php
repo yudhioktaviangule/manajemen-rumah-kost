@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AsetController;
 use App\Http\Controllers\PenyewaController;
 use App\Http\Controllers\KamarController;
 use Illuminate\Support\Facades\Route;
@@ -23,8 +24,8 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::resource('kamar',KamarController::class);
 Route::resource('penyewa',PenyewaController::class);
-
 Route::resource('fasilitas',FasilitasController::class);
+Route::resource('m_aset',AsetController::class);
 Route::resource('kamar_sewa',KamarSewaController::class);
 Route::resource('pindah_kamar',PindahKamarController::class);
 Route::resource('pemeliharaan',PemeliharaanController::class);
