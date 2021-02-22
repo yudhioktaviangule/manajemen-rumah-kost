@@ -13,6 +13,7 @@ use App\Http\Controllers\Web\PerawatanController;
 use App\Http\Controllers\Web\TambahAsetController;
 use App\Http\Controllers\Web\PembayaranController;
 use App\Http\Controllers\Web\TagihanController;
+use App\Http\Controllers\UserController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -21,6 +22,7 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::resource('kamar',KamarController::class);
 Route::resource('penyewa',PenyewaController::class);
+Route::resource('user',UserController::class);
 Route::resource('fasilitas',FasilitasController::class);
 Route::resource('kamar_sewa',KamarSewaController::class);
 Route::resource('pindah_kamar',PindahKamarController::class);
