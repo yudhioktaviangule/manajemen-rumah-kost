@@ -18,12 +18,9 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-
 Route::resource('kamar',KamarController::class);
 Route::resource('penyewa',PenyewaController::class);
-
 Route::resource('fasilitas',FasilitasController::class);
 Route::resource('kamar_sewa',KamarSewaController::class);
 Route::resource('pindah_kamar',PindahKamarController::class);

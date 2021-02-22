@@ -20,7 +20,6 @@ Route::group(['prefix'=>'dt'],function(){
     Route::get('dt/t_aset',[DataTable::class,'tambahAset'])->name('api.datatable.tambah.aset');
     Route::get('dt/l_bayar',[DataTable::class,'list_bayar'])->name('api.datatable.listbayar');
 });
-
 Route::group(['prefix'=>'select2'],function(){
     Route::get('aset/{id_kamar}',[SelectTwo::class,'getAset'])->name('api.select2.aset');
     Route::get('all.aset',[SelectTwo::class,'getAset'])->name('api.select2.aset.all');
@@ -28,8 +27,6 @@ Route::group(['prefix'=>'select2'],function(){
     Route::get('api.cek.kamar.in.fas',[SelectTwo::class,'getKamarFas'])->name('api.select2.kamar.in.fas');
     Route::get('api.cek.fas/{id_kamar}',[SelectTwo::class,'getFasilitas'])->name('api.select2.fas');
 });
-
-
 Route::group(['prefix'=>'morris'],function(){
     Route::get('masuk.keluar',[MorrisApi::class,'masuk_keluar'])->name('chart_pemasukan');
     Route::get('masuk.keluar_skripi',[MorrisApi::class,'skripi'])->name('chart_pengeluaran');
