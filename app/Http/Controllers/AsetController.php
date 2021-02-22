@@ -1,70 +1,47 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-
+use App\Models\Aset;
 class AsetController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $request;
+    
     public function index()
     {
-        $asets = aset::get();
-        return view('halaman.aset.asetkost',compact['asets']);
+        $asets = Aset::get();
+        return view('halaman.aset.asetkost',compact('asets'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('halaman.aset.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        $asets = new aset;
+        
         $post = $request->only("aset");
+        $asets = new aset;
         $asets->fill($post);
         $asets->save();
 
-        return redirect(route('aset.index'));
+        return redirect(route('m_aset.index'));
 
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        $asets = Aset::find($id);
+        return view('halaman.aset.show',compact('asets'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function edit($id)
     {
-        //
+        $asets = Aset::find($id);
+        return view('halaman.aset.edit',compact('asets'));
     }
 
     /**
@@ -74,13 +51,13 @@ class AsetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
         $asets = Aset::findOrFail($id);
-        $asets->aset = $request->Aset;
+        $asets-> aset = $request->aset;
         $asets->save();
 
-        return redirect()->route('penyewa.index'); 
+        return redirect(route('m_aset.index')); 
 
     }
 
@@ -92,6 +69,10 @@ class AsetController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Aset::find($id);
+        if($data!=NULL):
+            Aset::where('id',$id)->delete();
+        endif;
+        return redirect(route('m_aset.index'));
     }
 }
