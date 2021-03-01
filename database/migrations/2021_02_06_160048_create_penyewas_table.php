@@ -15,8 +15,9 @@ class CreatePenyewasTable extends Migration
     {
         Schema::create('penyewas', function (Blueprint $table) {
             $table->id();
+            $table->string('nik',16)->unique();
             $table->string('name');
-            $table->string('hp',20)->unique();
+            $table->string('hp',20);
             $table->enum('jenis_kelamin',['laki-laki','perempuan']);
             $table->timestamps();
         });

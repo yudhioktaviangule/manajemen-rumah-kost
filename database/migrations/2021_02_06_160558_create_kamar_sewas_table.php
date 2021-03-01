@@ -17,6 +17,8 @@ class CreateKamarSewasTable extends Migration
             $table->id();
             $table->integer('kamar_id');
             $table->integer('penyewa_id');
+            $table->integer('lama_sewa');
+            $table->double('total_sewa');
             $table->date('jatuh_tempo');
             $table->timestamps();
         });

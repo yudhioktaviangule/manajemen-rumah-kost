@@ -16,9 +16,11 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->integer('penyewa_id')->default(0)->comment('relasi ke penyewa kalau admin nilainya 0');
             $table->string('email')->unique();
             $table->string('password');
-            $table->enum('level',['admin','user']);
+            $table->enum('level',['admin','penyewa']);
+            $table->enum('aktif',['nonaktif','aktif']);
             $table->rememberToken();
             $table->timestamps();
         });
