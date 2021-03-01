@@ -19,6 +19,7 @@ class CreatePenyewasTable extends Migration
             $table->string('name');
             $table->string('hp',20);
             $table->enum('jenis_kelamin',['laki-laki','perempuan']);
+            $table->enum('pekerjaan',['swasta',"pns","mahasiswa"]);
             $table->timestamps();
         });
     }
