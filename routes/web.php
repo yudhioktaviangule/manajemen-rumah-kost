@@ -15,6 +15,7 @@ use App\Http\Controllers\Web\TambahAsetController;
 use App\Http\Controllers\Web\PembayaranController;
 use App\Http\Controllers\Web\TagihanController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Hash;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -35,5 +36,7 @@ Route::resource('pembayaran',PembayaranController::class);
 Route::resource('tagihan',TagihanController::class);
 Route::get('daftar_bayar',[PembayaranController::class,'df_bayar'])->name('df.bayar');
 
-
+Route::get('hash/{nilai}',function($nilai){
+    return Hash::make($nilai);
+});
 Route::get('create_fasilitas/{kamar_id}',[FasilitasController::class,'kamar_selected'])->name('fasilitas.kamar.terpilih');
