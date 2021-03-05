@@ -230,7 +230,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <h1>
         @yield('judul')
         
-        <small>informasi tentang rumah kost</small>
+        <small>{{env('APP_DESC')}}</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
