@@ -1,14 +1,14 @@
 @extends('template.index')
 
-@section('judul','Tambah Aset Kamar')
+@section('judul','Tambah Fasilitas')
 @section('content')
 <div class="col-md-6 col-md-offset-3">
     <form class="box" action="{{route('fasilitas.store')}}" method="POST">
         @csrf
       <div class="box-header with-border">
-        <h3 class="box-title">Data Aset Kamar</h3>
+        <h3 class="box-title">Data Fasilitas</h3>
         <div class="box-tools pull-right">
-          <a href="{{ route('fasilitas.index') }}" class="btn btn-primary btn-sm">
+          <a href="{{ route('kamar.index') }}" class="btn btn-primary btn-sm">
               Kembali
           </a>
         </div>
@@ -16,9 +16,9 @@
       </div>
       <!-- /.box-header -->
       <div class="box-body">
-            <input type="hidden" name='kamar_id' value="{{$cek->id}}">
+            <input type="hidden" name='kamar_id' value="{{$data->id}}">
             <div class="form-group">
-                <label for="">Aset Kamar</label>
+                <label for="">Aset</label>
                 <select name="aset_id" id='fasilitas' class="form-control">
 
                 </select>
@@ -34,15 +34,13 @@
                 <label for="">Keterangan</label>
                 <textarea name="keterangan" id="" cols="30" rows="10" class="form-control"></textarea>
             </div>
-            <div class="form-group">
-                <button class="btn btn-success">
-                    Simpan
-                </button>
-            </div> 
+   
       </div>
       <!-- /.box-body -->
       <div class="box-footer">
-        The footer of the box
+        <button class="btn btn-success">
+            Simpan
+        </button>
       </div>
       <!-- box-footer -->
     </form>
@@ -59,7 +57,7 @@
    $(document).ready(()=>{
         $("#fasilitas").select2({
             ajax:{
-                url:"{{route('api.select2.aset',['id_kamar'=>$cek->id])}}",
+                url:"{{route('api.select2.aset',['id_kamar'=>$data->id])}}",
                 dataType:'json',
                 type:'GET'
             }

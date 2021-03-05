@@ -16,7 +16,9 @@
             <thead>
                 <tr>
                     <th>Aset </th>
-                    <th>&nbsp;</th>
+                    <th class='text-right'>
+                        <i class="fa fa-cog"></i>
+                    </th>
                 </tr>
                
             </thead>
@@ -24,18 +26,16 @@
             @foreach($asets as $kunci => $value)
               <tr>
                 <td>{{ $value->aset}}</td>
-                <td>
+                <td class='text-right'>
                     <a title='Lihat data aset' href="{{ route('m_aset.show',['m_aset'=>$value->id]) }}" class="btn btn-xs btn-success">
-                        <i class="fa fa-eye"></i>
+                        <i class="fa fa-eye"></i> Lihat
                     </a>
                     <a title='Edit data aset' href="{{ route('m_aset.edit',['m_aset'=>$value->id]) }}" class="btn btn-xs btn-info">
-                        <i class="fa fa-edit"></i>
+                        <i class="fa fa-edit"></i> Ubah
                     </a>
-                    <button type="button" onclick="hapus({{$value->id}})" class="btn btn-xs btn-danger"><i class="fa fa-minus"></i></button>
+                    <button type="button" onclick="hapus({{$value->id}})" class="btn btn-xs btn-danger"><i class="fa fa-minus"></i> Hapus</button>
                     
                 </td>
-                <td></td>
-                <td></td>
               </tr> 
             @endforeach
             

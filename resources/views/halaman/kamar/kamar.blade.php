@@ -21,7 +21,7 @@
                     <th>Nomor </th>
                     <th>Status</th>
                     <th>Harga</th>
-                    <th><i class="fa fa-cog"></i></th>
+                    <th class='text-right'><i class="fa fa-cog"></i></th>
                 </tr>
                
             </thead>
@@ -29,19 +29,23 @@
             @foreach($kamars as $kunci => $value)
               <tr>
                 <td>{{ $value->nomor}}</td>
-                <td>{{ $value->status}}</td>
-                <td>{{ $value->harga}}</td>
-                <td>
+                <td>{{ strtoupper($value->status)}}</td>
+                <td>{{ number_format($value->harga)}}</td>
+                <td class='text-right'> 
+                    <a title='Aset Kamar' href="{{ route('fasilitas.kamar.terpilih',['kamar_id'=>$value->id]) }}" class="btn btn-xs bg-purple">
+                        <i class="fa fa-plus"></i> Aset Kamar
+                    </a>
+
                     <a title='Lihat data kamar' href="{{ route('kamar.show',['kamar'=>$value->id]) }}" class="btn btn-xs btn-success">
-                        <i class="fa fa-eye"></i>
+                        <i class="fa fa-eye"></i> Lihat
                     </a>
                     <a title='Edit data kamar' href="{{ route('kamar.edit',['kamar'=>$value->id]) }}" class="btn btn-xs btn-info">
-                        <i class="fa fa-edit"></i>
+                        <i class="fa fa-edit"></i> Edit
                     </a>
                     @if($value->status=='ready')
-                    <a title='Hapus data kamar' href="#" onclick='hapus({{$value->id}})' class="btn btn-xs btn-danger">
-                        <i class="fa fa-minus"></i>
-                    </a>
+                        <a title='Hapus data kamar' href="#" onclick='hapus({{$value->id}})' class="btn btn-xs btn-danger">
+                            <i class="fa fa-minus"></i> Hapus
+                        </a>
                     @endif
                 </td>
               </tr> 

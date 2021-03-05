@@ -1,13 +1,13 @@
 @extends('template.index')
 
-@section('judul','Penyewa')
+@section('judul','Penghuni')
 @section('content')
 <div class="box">
   <div class="box-header with-border">
-    <h3 class="box-title">Daftar Penyewa</h3>
+    <h3 class="box-title">Daftar Penghuni</h3>
     <div class="box-tools pull-right">
       <a href="{{ route('penyewa.create') }}" class="btn btn-primary btn-sm">
-          Register Penyewa
+          Register Penghuni
       </a>
     </div>
     <!-- /.box-tools -->
@@ -39,20 +39,39 @@
                 <td>{{ $value->getPenyewa()->pekerjaan}}</td>
                 <td class='text-right'>
                     @if($value->aktif==='nonaktif')
-                        <a href="{{ route('user.aktivasi',['user'=>$value->id]) }}" class="btn btn-xs btn-success">
+                        <a href="{{ route('user.aktivasi',['user'=>$value->id]) }}" class="btn btn-sm btn-success">
                             <i class="fa fa-check"></i>Aktivasi
                         </a>
                     @elseif($value->getKamar()==NULL)
-                        <a href="{{route('reservasi.create')}}?id={{$value->penyewa_id}}" class="btn btn-primary btn-xs">
+                        <a href="{{route('reservasi.create')}}?id={{$value->penyewa_id}}" class="btn btn-primary btn-sm">
                             <i class="fa fa-book"></i> Reservasi Kamar
                         </a>
                     @else
-                        <a href="#" class="btn btn-primary btn-xs">
-                            <i class="fa fa-book"></i> Pindah Kamar
-                        </a>
-                        <a href="#" class="btn btn-danger btn-xs">
-                            <i class="fa fa-minus"></i> Hapus
-                        </a>
+                    <div class="dropdown">
+                      <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Aksi
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-book"></i> Pindah Kamar
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-list"></i> Akun Pembayaran
+                            </a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li>
+                          <a href="#" class='text-danger'>
+                              <i class="fa fa-minus"></i> Hapus
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+
                     @endif
                 </td>
                 

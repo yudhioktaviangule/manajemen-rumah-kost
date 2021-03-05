@@ -81,4 +81,13 @@ class KamarController extends Controller
         endif;
         return redirect(route('kamar.index'));
     }
+    public function tambah_aset($id)
+    {
+
+        $data = Kamar::find($id);
+        if($data!=NULL):
+            return view('halaman.kamar.aseting',compact('data'));    
+        endif;
+        return redirect()->back();
+    }
 }

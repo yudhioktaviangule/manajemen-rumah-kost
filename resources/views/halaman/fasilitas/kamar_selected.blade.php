@@ -1,13 +1,13 @@
 @extends('template.index')
 
-@section('judul','Fasilitas Kamar')
+@section('judul','Aset Kamar')
 @section('content')
     <div class="box">
         <div class="box-header with-border">
             <h3 class="box-title">No Kamar : {{$data->nomor}}</h3>
             <div class="box-tools">
                 <a href="{{ route('fasilitas.create') }}?id={{$data->id}}" class="btn btn-primary">
-                    TAMBAH FASILITAS
+                    TAMBAH Aset Kamar
                 </a>
             </div>
         </div>
@@ -16,7 +16,8 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>Fasilitas</th>
+                            <th>Aset Kamar</th>
+                            <th>Kondisi</th>
                             <th>Keterangan</th>
                             <th>#</th>
                         </tr>
@@ -28,6 +29,7 @@
                                 <td>
                                     {{$value->getAset()->aset}}
                                 </td>
+                                <td>{{strtoupper($value->kondisi)}}</td>
                                 <td>{{$value->keterangan}}</td>
                                 <td>
                                     <a href="#" onclick="del({{$value->id}})" class="btn btn-danger btn-xs btn-block">

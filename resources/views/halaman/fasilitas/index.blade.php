@@ -1,6 +1,6 @@
 @extends('template.index')
 
-@section('judul','Fasilitas Kamar')
+@section('judul','Aset Kamar')
 @section('content')
 <div class="box">
   <div class="box-header with-border">
