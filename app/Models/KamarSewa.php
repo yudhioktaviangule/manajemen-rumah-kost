@@ -13,6 +13,8 @@ class KamarSewa extends Model
         'kamar_id',
         'penyewa_id',
         'jatuh_tempo',
+        'lama_sewa',
+        'total_sewa',
     ];
     public function getPenyewa()
     {

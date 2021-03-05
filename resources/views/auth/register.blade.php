@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Regitrasi') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('myregister.store') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -100,21 +100,21 @@
 
                             <div class="col-md-6">
 
-                                <select id="pekerjaan" name="pekerjaan">
-                                    <option value="siswa">Siswa</option>
-                                    <option value="mahasiswa">Mahasiswa</option>
+                                <select id="pekerjaan" name="pekerjaan" class='form-control'>
+                                    
+                                    <option value="pelajar">Pelajar/Mahasiswa</option>
                                     <option value="pns">PNS</option>
-                                    <option value="pekerja_swasta">Pekerja Swasta</option>
+                                    <option value="swasta">Pekerja Swasta</option>
                                 </select>
 
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="jk" class="col-md-6 col-form-label text-md-right">{{ __('Jenis Kelamin') }}</label>
+                            <label for="jk" class="col-md-4 col-form-label text-md-right">{{ __('Jenis Kelamin') }}</label>
 
                                 <div class="col-md-6">
-                                    <select id="jk" name="jk">
+                                    <select id="jk" name="jk" class='form-control'>
                                         <option value="laki-laki">Laki-Laki</option>
                                         <option value="perempuan">Perempuan</option>
                                     </select>

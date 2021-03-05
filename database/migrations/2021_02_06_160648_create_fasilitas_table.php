@@ -16,6 +16,7 @@ class CreateFasilitasTable extends Migration
         Schema::create('fasilitas', function (Blueprint $table) {
             $table->id();
             $table->integer('kamar_id');
+            $table->enum('kondisi',['layak','rusak']);
             $table->integer('aset_id');
             $table->string('keterangan');
             $table->timestamps();

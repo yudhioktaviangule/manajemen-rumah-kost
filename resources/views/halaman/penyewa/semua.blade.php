@@ -21,7 +21,11 @@
                     <th>Nama </th>
                     <th>No.Hp</th>
                     <th>Jenis Kelamin</th>
-                    <th>&nbsp;</th>
+                    <th>Kota Asal</th>
+                    <th>Pekerjaan</th>
+                    <th class='text-right'>
+                      <i class="fa fa-cog"></i>
+                    </th>
                 </tr>
                
             </thead>
@@ -29,10 +33,29 @@
             @foreach($penyewas as $kunci => $value)
               <tr>
                 <td>{{ $value->name}}</td>
-                <td>{{ $value->hp}}</td>
-                <td>{{ $value->jenis_kelamin}}</td>
-                <td><a href='#' onclick='hapus({{ $value->id }})' class="btn btn-danger">Hapus</a></td>
-                <td></td>
+                <td>{{ $value->getPenyewa()->hp}}</td>
+                <td>{{ $value->getPenyewa()->jenis_kelamin}}</td>
+                <td>{{ $value->getPenyewa()->kota_asal}}</td>
+                <td>{{ $value->getPenyewa()->pekerjaan}}</td>
+                <td class='text-right'>
+                    @if($value->aktif==='nonaktif')
+                        <a href="{{ route('user.aktivasi',['user'=>$value->id]) }}" class="btn btn-xs btn-success">
+                            <i class="fa fa-check"></i>Aktivasi
+                        </a>
+                    @elseif($value->getKamar()==NULL)
+                        <a href="{{route('reservasi.create')}}?id={{$value->penyewa_id}}" class="btn btn-primary btn-xs">
+                            <i class="fa fa-book"></i> Reservasi Kamar
+                        </a>
+                    @else
+                        <a href="#" class="btn btn-primary btn-xs">
+                            <i class="fa fa-book"></i> Pindah Kamar
+                        </a>
+                        <a href="#" class="btn btn-danger btn-xs">
+                            <i class="fa fa-minus"></i> Hapus
+                        </a>
+                    @endif
+                </td>
+                
               </tr> 
             @endforeach
 
@@ -55,7 +78,12 @@
 </div>
 <!-- /.box -->
 @endsection
+@section("css")
+    <link rel="stylesheet" href="{{asset('aset/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">
+@endsection
 @section("jscript")
+<script src="{{asset('aset/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('aset/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
   <script>
     $(document).ready(()=>{
       window.hapus = (id)=>{
@@ -67,6 +95,7 @@
             f.submit();
           }
       }
+      $(".table").dataTable();
     })
   </script>
 

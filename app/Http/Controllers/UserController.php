@@ -112,4 +112,13 @@ class UserController extends Controller
             return redirect(route('user.index'));
         }
     }
+    public function aktifasi($id)
+    {
+        $Pemakai=User::find($id);
+        if ($Pemakai!=NULL) {
+            $Pemakai->update(['aktif'=>'aktif']);
+            $user = $Pemakai;
+            return redirect(route('reservasi.create')."?id=$user->penyewa_id");
+        }
+    }
 }

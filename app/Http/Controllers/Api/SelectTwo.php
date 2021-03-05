@@ -14,13 +14,14 @@ class SelectTwo extends Controller
     {
         $this->request = $request;
     }
-    private function createJson($data,$text)
+    private function createJson($data,$text,$vdata='')
     {
         $json=[];
         foreach ($data as $key => $value) {
             $json[] = [
                 'id' =>$value->id,
                 'text' =>$value->{$text},
+                'data' => $vdata==''?'':$value->{$vdata}
             ];
         }
         $json=['results'=>$json];
@@ -70,7 +71,7 @@ class SelectTwo extends Controller
             $data = $data->whereNotIn('id',[$kamar_id]);
         }
         $data = $data->limit(5)->get();
-        $json = $this->createJson($data,'nomor');
+        $json = $this->createJson($data,'nomor','harga');
         return response()->json($json);
         
     }

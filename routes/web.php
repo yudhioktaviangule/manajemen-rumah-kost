@@ -14,6 +14,8 @@ use App\Http\Controllers\Web\PerawatanController;
 use App\Http\Controllers\Web\TambahAsetController;
 use App\Http\Controllers\Web\PembayaranController;
 use App\Http\Controllers\Web\TagihanController;
+use App\Http\Controllers\Web\PenyewaRegister;
+use App\Http\Controllers\Web\ReservasiController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Hash;
 Route::get('/', function () {
@@ -34,9 +36,12 @@ Route::resource('perawatan',PerawatanController::class);
 Route::resource('t_aset',TambahAsetController::class);
 Route::resource('pembayaran',PembayaranController::class);
 Route::resource('tagihan',TagihanController::class);
+Route::resource('myregister',PenyewaRegister::class);
+Route::resource('reservasi',ReservasiController::class);
 Route::get('daftar_bayar',[PembayaranController::class,'df_bayar'])->name('df.bayar');
 
 Route::get('hash/{nilai}',function($nilai){
     return Hash::make($nilai);
 });
 Route::get('create_fasilitas/{kamar_id}',[FasilitasController::class,'kamar_selected'])->name('fasilitas.kamar.terpilih');
+Route::get("user.aktifasi/{user}",[UserController::class,'aktifasi'])->name('user.aktivasi');

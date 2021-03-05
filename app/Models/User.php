@@ -22,6 +22,8 @@ class User extends Authenticatable
         'penyewa_id',
         'password',
         'level',
+        'aktif',
+        'remember_token',
     ];
 
     /**
@@ -42,4 +44,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getPenyewa()
+    {
+        return Penyewa::find($this->penyewa_id);
+    }
+    public function getKamar()
+    {
+        return KamarSewa::where('penyewa_id',$this->penyewa_id)->first();
+    }
 }

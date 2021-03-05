@@ -11,6 +11,9 @@ class Penyewa extends Model
     protected $fillable = [
         'name',
         'hp',
+        'kota_asal',
+        'pekerjaan',
+        'nik',
         'jenis_kelamin',
     ];
 

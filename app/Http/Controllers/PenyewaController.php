@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Penyewa;
+use App\Models\User;
 class PenyewaController extends Controller
 {
     /**
@@ -14,7 +15,7 @@ class PenyewaController extends Controller
     public function index()
     {
    
-        $penyewas = Penyewa::get();
+        $penyewas = User::where('level','penyewa')->get();
         return view('halaman.penyewa.semua',compact('penyewas'));
     }
 
