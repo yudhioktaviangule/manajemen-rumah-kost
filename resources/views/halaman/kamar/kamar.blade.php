@@ -46,6 +46,10 @@
                         <a title='Hapus data kamar' href="#" onclick='hapus({{$value->id}})' class="btn btn-xs btn-danger">
                             <i class="fa fa-minus"></i> Hapus
                         </a>
+                    @else
+                        <a title='Hapus data kamar' href="#" class="btn btn-xs btn-default">
+                            <i class="fa fa-minus"></i> Hapus
+                        </a>
                     @endif
                 </td>
               </tr> 

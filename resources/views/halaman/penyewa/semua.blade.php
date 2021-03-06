@@ -18,11 +18,13 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
+                    <th>NIK </th>
                     <th>Nama </th>
                     <th>No.Hp</th>
                     <th>Jenis Kelamin</th>
                     <th>Kota Asal</th>
                     <th>Pekerjaan</th>
+                    <th>Nomor Kamar</th>
                     <th class='text-right'>
                       <i class="fa fa-cog"></i>
                     </th>
@@ -31,12 +33,17 @@
             </thead>
             <tbody>
             @foreach($penyewas as $kunci => $value)
+              @php
+                  $km = $value->getPenyewa()->getKamar();
+              @endphp
               <tr>
+                <td>{{ $value->getPenyewa()->nik}}</td>
                 <td>{{ $value->name}}</td>
                 <td>{{ $value->getPenyewa()->hp}}</td>
                 <td>{{ $value->getPenyewa()->jenis_kelamin}}</td>
                 <td>{{ $value->getPenyewa()->kota_asal}}</td>
                 <td>{{ $value->getPenyewa()->pekerjaan}}</td>
+                <td>{{ $km==NULL?"-":$km->nomor}}</td>
                 <td class='text-right'>
                     @if($value->aktif==='nonaktif')
                         <a href="{{ route('user.aktivasi',['user'=>$value->id]) }}" class="btn btn-sm btn-success">
@@ -47,31 +54,9 @@
                             <i class="fa fa-book"></i> Reservasi Kamar
                         </a>
                     @else
-                    <div class="dropdown">
-                      <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        Aksi
-                        <span class="caret"></span>
-                      </button>
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-book"></i> Pindah Kamar
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-list"></i> Akun Pembayaran
-                            </a>
-                        </li>
-                        <li role="separator" class="divider"></li>
-                        <li>
-                          <a href="#" class='text-danger'>
-                              <i class="fa fa-minus"></i> Hapus
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-
+                        <a href="{{route('penyewa.show',['penyewa'=>$value->penyewa_id])}}" class="btn btn-primary btn-sm btn-block">
+                          <i class="fa fa-eye"></i> Lihat data
+                        </a>
                     @endif
                 </td>
                 

@@ -38,13 +38,14 @@
                 <label for="">Password User</label>
                 <input type="password" class='form-control' name='password'>
             </div> 
-            <div class="form-group">
-                <label for="">Hak Akses</label>
-                <select name="level" id="" class="form-control">
-                    <option value="admin">ADMIN</option>
-                    <option value="user">USER</option>
+            <div class='form-group'>
+                <label for='level'>Hak Akses</label>
+                <select class='form-control' name='level' id='level'>
+                    <option value=''>Pilih Hak Akses</option>
+                    <option value='admin'>ADMIN</option>
+                    <option value='karyawan'>KARYAWAN</option>
                 </select>
-            </div> 
+            </div>
           
       </div>
       <div class="box-footer">

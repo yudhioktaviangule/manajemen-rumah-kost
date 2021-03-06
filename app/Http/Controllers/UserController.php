@@ -39,6 +39,9 @@ class UserController extends Controller
     {
         $post = $request->only('email','name','password','level');
         $post['password'] = Hash::make($post['password']);
+        $post['penyewa_id'] = '0';
+        $post['aktif'] = 'aktif';
+        
         $usr = new User();
         $usr->fill($post);
         $usr->save();

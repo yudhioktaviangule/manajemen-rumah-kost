@@ -73,4 +73,14 @@ class PembayaranController extends Controller{
     {
         return view('halaman.pembayaran.list');
     }
+
+    public function cek_va($penyewa_id='')
+    {
+        $ks = KamarSewa::where('penyewa_id',$penyewa_id)->first();
+        if($ks==NULL):
+            return redirect()->back();
+        endif;
+        return view('halaman.penyewa.pembayaran',compact('ks'));
+
+    }
 }

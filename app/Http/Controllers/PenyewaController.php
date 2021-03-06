@@ -46,16 +46,13 @@ class PenyewaController extends Controller
         return redirect(route('penyewa.index'));
 
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        $data = Penyewa::find($id);
+        if($data == NULL):
+            return redirect()->back();
+        endif;
+        return view('halaman.penyewa.show',compact('data'));
     }
 
     /**

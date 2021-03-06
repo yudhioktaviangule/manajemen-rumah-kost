@@ -11,7 +11,12 @@ class Pembayaran extends Model
     protected $fillable = [
         'kamar_sewa_id',
         'user_id',
-        'json',
+        'nomor',
+        'name',
+        'metode',
+        'status',
+        'pembayaran',
+        'saldo',
         
     ];
 

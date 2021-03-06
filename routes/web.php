@@ -38,6 +38,7 @@ Route::resource('pembayaran',PembayaranController::class);
 Route::resource('tagihan',TagihanController::class);
 Route::resource('myregister',PenyewaRegister::class);
 Route::resource('reservasi',ReservasiController::class);
+
 Route::get('daftar_bayar',[PembayaranController::class,'df_bayar'])->name('df.bayar');
 
 Route::get('hash/{nilai}',function($nilai){
@@ -45,3 +46,4 @@ Route::get('hash/{nilai}',function($nilai){
 });
 Route::get('create_fasilitas/{kamar_id}',[FasilitasController::class,'kamar_selected'])->name('fasilitas.kamar.terpilih');
 Route::get("user.aktifasi/{user}",[UserController::class,'aktifasi'])->name('user.aktivasi');
+Route::get("pembayaran_penghuni/{penyewa_id}",[PembayaranController::class,'cek_va'])->name('penghuni.bayar');

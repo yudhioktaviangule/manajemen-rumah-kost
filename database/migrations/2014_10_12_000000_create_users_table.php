@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->integer('penyewa_id')->default(0)->comment('relasi ke penyewa kalau admin nilainya 0');
             $table->string('email')->unique();
             $table->string('password');
-            $table->enum('level',['admin','penyewa']);
+            $table->enum('level',['admin','karyawan','penyewa']);
             $table->enum('aktif',['nonaktif','aktif'])->default('nonaktif');
             $table->rememberToken();
             $table->timestamps();

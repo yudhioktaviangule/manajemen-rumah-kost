@@ -15,11 +15,14 @@ class CreatePembayaransTable extends Migration
     {
         Schema::create('pembayarans', function (Blueprint $table) {
             $table->id();
+            $table->string('nomor')->unique();
+            $table->string('name');
+            $table->enum('metode',['tunai','transfer']);
+            $table->longtext('bukti_trf');
+            $table->enum('virtual_account',['verifikasi','selesai']);
             $table->integer('kamar_sewa_id');
             $table->integer('user_id');
-            $table->double('jumlah_tagihan');
-            $table->double('jumlah_pembayaran');
-            $table->double('jumlah_bulan');
+            $table->double('pembayaran');
             $table->timestamps();
         });
     }

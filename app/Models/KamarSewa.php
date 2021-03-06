@@ -24,4 +24,9 @@ class KamarSewa extends Model
     {
         return Kamar::find($this->kamar_id);
     }
+
+    public function getPembayaran()
+    {
+        return Pembayaran::where('kamar_sewa_id',$this->id)->get();
+    }
 }

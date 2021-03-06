@@ -21,7 +21,9 @@
                     <th>Nama </th>
                     <th>Email</th>
                     <th>Hak Akses</th>
-                    <th>&nbsp;</th>
+                    <th class='text-right'>
+                        <i class="fa fa-cog"></i>
+                    </th>
                 </tr>
                
             </thead>
@@ -30,13 +32,17 @@
               <tr>
                 <td>{{ $value->name}}</td>
                 <td>{{ $value->email}}</td>
-                <td>{{ $value->level}}</td>
-                <td>
-                    <a href='{{ route("user.show",["user"=>$value->id]) }}'  class="btn btn-success">Lihat</a>
-                    <a href='{{ route("user.edit",["user"=>$value->id]) }}'  class="btn btn-info">Edit</a>
-                    <a href='#' onclick='hapus({{ $value->id }})' class="btn btn-danger">Hapus</a>
+                <td>{{ strtoupper($value->level)}}</td>
+                <td class='text-right'>
+                    <a href='{{ route("user.show",["user"=>$value->id]) }}'  class="btn btn-sm btn-success"><i class="fa fa-eye"></i> Lihat</a>
+                    <a href='{{ route("user.edit",["user"=>$value->id]) }}'  class="btn btn-sm btn-info"><i class="fa fa-edit"></i> Edit</a>
+                    @if($value->level==='admin')
+                      <a href='#' class="btn btn-sm btn-default"><i class="fa fa-times"></i> Hapus</a>
+                    @else
+                      <a href='#' onclick='hapus({{ $value->id }})' class="btn btn-sm btn-danger"><i class="fa fa-times"></i> Hapus</a>
+                    @endif
                   </td>
-                <td></td>
+                
               </tr> 
             @endforeach
 

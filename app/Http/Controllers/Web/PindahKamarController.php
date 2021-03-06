@@ -45,11 +45,11 @@ class PindahKamarController extends Controller{
         $cek = KamarSewa::find($id);
         $kid = $cek->kamar_id;
         if($cek==NULL):
-            return redirect(route('kamar_sewa.index'));
+            return redirect(route('penyewa.index'));
         endif;
         $cek = Kamar::find($post['kamar_id']);
         if($cek==NULL):
-            return redirect(route('kamar_sewa.index'));
+            return redirect(route('penyewa.index'));
         endif;
         $kamar=Kamar::find($kid);
         $cek = KamarSewa::find($id);
@@ -60,7 +60,7 @@ class PindahKamarController extends Controller{
         $kamar=Kamar::find($post['kamar_id']);
         $kamar->status='disewa';
         $kamar->save();
-        return redirect(route('kamar_sewa.index'));
+        return redirect(route('penyewa.index'));
 
     }
     public function destroy($id=''){
