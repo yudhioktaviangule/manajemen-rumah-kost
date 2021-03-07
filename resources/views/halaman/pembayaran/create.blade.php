@@ -17,7 +17,7 @@
       <div class="box-header with-border">
         <h3 class="box-title">Data Pembayaran</h3>
         <div class="box-tools pull-right">
-          <a href="{{ route('pembayaran.index') }}" class="btn btn-primary btn-sm">
+          <a href="{{ route('penghuni.bayar',['penyewa_id'=>$data->getPenyewa()->id]) }}" class="btn btn-primary btn-sm">
               Kembali
           </a>
         </div>
@@ -34,18 +34,22 @@
                 <p>{{$data->getKamar()->nomor}}</p>
             </div>
             <div class="form-group">
-                <label for="">Jumlah Tagihan</label>
+                <label for="">Tagihan / Bulan</label>
                 <p>Rp. {{ number_format($totbayar) }}</p>
             </div>
             <div class='form-group'>
-                <label for=jumlah_bayar>Jumlah Bayar</label>
+                <label for=jumlah_bayar>Jumlah Pembayaran</label>
                 <input type='number' min='{{$totbayar}}' value="{{ $totbayar }}" class='form-control form-control-sm' name='jumlah_bayar' id='jumlah_bayar'>
             </div>
-
+            <div class='form-group'>
+                <label for='metode_pembayaran'>Metode Pembayaran</label>
+                <select class='form-control' name='metode_pembayaran' id='metode_pembayaran'>
+                    <option value=''>Pilih Metode Pembayaran</option>
+                    <option value='transfer'>Transfer</option>
+                    <option value='tunai'>Tunai</option>
+                </select>
+            </div>
             <input type="hidden" name='kamar_sewa_id' value="{{ $data->id }}">
-            <input type="hidden" name='total_pembayaran' value="{{ $totbayar }}">
-            
-            
       </div>
       <!-- /.box-body -->
       <div class="box-footer">

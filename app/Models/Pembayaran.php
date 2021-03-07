@@ -14,9 +14,9 @@ class Pembayaran extends Model
         'nomor',
         'name',
         'metode',
-        'status',
+        'virtual_account',
+        'user_id',
         'pembayaran',
-        'saldo',
         
     ];
 

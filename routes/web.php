@@ -47,3 +47,4 @@ Route::get('hash/{nilai}',function($nilai){
 Route::get('create_fasilitas/{kamar_id}',[FasilitasController::class,'kamar_selected'])->name('fasilitas.kamar.terpilih');
 Route::get("user.aktifasi/{user}",[UserController::class,'aktifasi'])->name('user.aktivasi');
 Route::get("pembayaran_penghuni/{penyewa_id}",[PembayaranController::class,'cek_va'])->name('penghuni.bayar');
+Route::get("pembayaran_create/{kamar_sewa_id}",[PembayaranController::class,'create'])->name('penghuni.bayar.create');

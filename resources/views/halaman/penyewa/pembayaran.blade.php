@@ -1,14 +1,14 @@
 @php
-    
     $penyewa    = $ks->getPenyewa();
     $kamar      = $ks->getKamar();
+    $byr      = $ks->getPembayaran();
 @endphp
 @extends('template.index')
 @section('judul','Pembayaran')
 @section('content')
 <div class="box">
   <div class="box-header with-border">
-    <h3 class="box-title">Riwayat Pembayaran</h3>
+    <h3 class="box-title">Virtual Account</h3>
     <div class="box-tools pull-right">
      
     </div>
@@ -40,35 +40,70 @@
                 <td>: Rp. {{number_format($ks->total_sewa)}} </td>
             </tr>
         </table>
-        <table class="table table-bordered">
-            <thead>
-                <th>Tanggal</th>
-                <th>No. Pembayaran</th>
-                <th>Nama Tagihan</th>
-                <th>Total Tagihan</th>
-                <th>Jumlah Bayar</th>
-                <th>Sisa Tagihan</th>
-                <th>Status</th>
-                <th class='text-right'>
-                    <i class="fa fa-cog"></i>
-                </th>
-            </thead>
-        </table>    
-        <form action="" id="form-hapus" method="post">
-            <div id="auth"></div>
-            <input type='hidden' name='_method' value='delete'>
-        </form>
-
     </div>
   </div>
-  
-  <!-- /.box-body -->
-  <div class="box-footer">
-    <a href="#" class="btn  btn-primary"><i class="fa fa-get-pocket"></i> Buat Pembayaran</a>
-  </div>
-  <!-- box-footer -->
 </div>
-<!-- /.box -->
+ 
+<div class="box">
+  <div class="box-header with-border">
+    <h3 class="box-title">Riwayat Pembayaran</h3>
+    <div class="box-tools pull-right">
+        <a href="{{ route('penghuni.bayar.create',['kamar_sewa_id'=>$ks->id]) }}" class="btn btn-sm btn-primary"><i class="fa fa-get-pocket"></i> Tambah Pembayaran</a>
+    </div>
+  </div>
+  <div class="box-body">
+      <table class="table table-bordered">
+          <thead>
+              <th>Tanggal</th>
+              <th>No. Pembayaran</th>
+              <th>Nama Tagihan</th>
+              <th>Metode Pambayaran</th>
+              <th>Status Verifikasi</th>
+              <th class='text-right'>Jumlah Bayar</th>
+              <th class='text-right'>Sisa Tagihan</th>
+          </thead>
+          <tbody>
+              @php 
+                  $vm = $ks->total_sewa;
+                  $crb = \Carbon\Carbon::class;
+              @endphp
+              @foreach($byr as $key => $value)
+                  @php 
+                      $vm-=$value->pembayaran;
+                  @endphp
+                  <tr>
+                    <td>{{ $crb::parse($value->created_at)->format('d-m-Y') }}</td>
+                    <td>{{ $value->nomor }}</td>
+                    <td>{{ $value->name }}</td>
+                    <td>{{ strtoupper($value->metode) }}</td>
+                    <td>
+                        @if($value->virtual_account==='verifikasi')
+                            <a href="#" class="btn btn-xs btn-primary">
+                                <i class="fa fa-check"></i> Verifikasi Transfer
+                            </a>
+                        @else
+                            {{strtoupper($value->virtual_account)}}
+                        @endif
+                    </td>
+                    <td class='text-right'>{{ number_format($value->pembayaran) }}</td>
+                    <td class='text-right'>{{ number_format($vm) }}</td>
+                  </tr>
+              @endforeach
+          </tbody>
+          <tbody>
+            <tr>
+                <th colspan='6' class='text-right'>
+                    SALDO TAGIHAN
+                </th>
+                <td class='text-right'>
+                    {{ number_format($vm) }}
+                </td>
+            </tr>
+          </tbody>
+      </table>   
+  </div>
+ </div>
+
 @endsection
 @section("css")
     <link rel="stylesheet" href="{{asset('aset/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">
@@ -76,19 +111,6 @@
 @section("jscript")
 <script src="{{asset('aset/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('aset/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
-  <script>
-    $(document).ready(()=>{
-      window.hapus = (id)=>{
-          const f = $("#form-hapus");
-          const url = `{{ route('penyewa.index') }}/${id}`;
-          const con = confirm("Ingin Menghapus Data?")
-          if(con){
-            f.attr('action',url);
-            f.submit();
-          }
-      }
-      $(".table").dataTable();
-    })
-  </script>
+
 
 @endsection

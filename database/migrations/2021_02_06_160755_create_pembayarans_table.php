@@ -18,7 +18,6 @@ class CreatePembayaransTable extends Migration
             $table->string('nomor')->unique();
             $table->string('name');
             $table->enum('metode',['tunai','transfer']);
-            $table->longtext('bukti_trf');
             $table->enum('virtual_account',['verifikasi','selesai']);
             $table->integer('kamar_sewa_id');
             $table->integer('user_id');
