@@ -29,4 +29,22 @@ class KamarSewa extends Model
     {
         return Pembayaran::where('kamar_sewa_id',$this->id)->get();
     }
+
+    public function getTotalBayar()
+    {
+        return Pembayaran::where('kamar_sewa_id',$this->id)->sum('pembayaran');
+    }
+    public function sisaPembayaran()
+    {
+        $total = Pembayaran::where('kamar_sewa_id',$this->id)->sum('pembayaran');
+        $pembayaran = $this->total_sewa;
+        $sisa = $pembayaran-$total;
+        $json = [
+            'saldo' => $sisa,
+            'lunas' => $sisa==0,
+
+        ];
+        return json_decode(json_encode($json));
+    }
+
 }

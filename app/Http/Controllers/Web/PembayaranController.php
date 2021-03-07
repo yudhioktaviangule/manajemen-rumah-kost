@@ -126,4 +126,28 @@ class PembayaranController extends Controller{
         return view('halaman.penyewa.pembayaran',compact('ks'));
 
     }
+
+    public function verifikasi($id='')
+    {
+        $level = Auth::user()->level;
+        if($level==='admin'||$level==='karyawan'):
+            $p = Pembayaran::find($id);
+            $p->virtual_account = 'selesai';
+            $p->user_id = Auth::id();
+            $p->save();
+        endif;
+        return redirect()->back();
+    }
+    public function cetak($id='')
+    {
+        $level = Auth::user()->level;
+        if($level==='admin'||$level==='karyawan'):
+            $ksewa = KamarSewa::find($id);
+            if($ksewa===NULL):
+                return redirect()->back();
+            endif;
+            return view('cetak.histori',compact('ksewa'));
+        endif;
+        return redirect()->back();
+    }
 }

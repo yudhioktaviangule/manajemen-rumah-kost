@@ -48,7 +48,8 @@
   <div class="box-header with-border">
     <h3 class="box-title">Riwayat Pembayaran</h3>
     <div class="box-tools pull-right">
-        <a href="{{ route('penghuni.bayar.create',['kamar_sewa_id'=>$ks->id]) }}" class="btn btn-sm btn-primary"><i class="fa fa-get-pocket"></i> Tambah Pembayaran</a>
+        <a href="{{ route('penghuni.bayar.create',['kamar_sewa_id'=>$ks->id]) }}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Pembayaran</a>
+        <a target="_blank" href="{{ route('pembayaran.cetak',['kamar_sewa_id'=>$ks->id]) }}" class="btn btn-sm btn-success"><i class="fa fa-print"></i> Histori Pembayaran</a>
     </div>
   </div>
   <div class="box-body">
@@ -69,7 +70,9 @@
               @endphp
               @foreach($byr as $key => $value)
                   @php 
-                      $vm-=$value->pembayaran;
+                      if($value->virtual_account==='selesai'):
+                        $vm-=$value->pembayaran;
+                      endif;
                   @endphp
                   <tr>
                     <td>{{ $crb::parse($value->created_at)->format('d-m-Y') }}</td>
@@ -78,7 +81,7 @@
                     <td>{{ strtoupper($value->metode) }}</td>
                     <td>
                         @if($value->virtual_account==='verifikasi')
-                            <a href="#" class="btn btn-xs btn-primary">
+                            <a href="{{ route('pembayaran.verifikasi',['pembayaran_id'=>$value->id]) }}" class="btn btn-xs btn-primary">
                                 <i class="fa fa-check"></i> Verifikasi Transfer
                             </a>
                         @else

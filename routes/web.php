@@ -48,3 +48,5 @@ Route::get('create_fasilitas/{kamar_id}',[FasilitasController::class,'kamar_sele
 Route::get("user.aktifasi/{user}",[UserController::class,'aktifasi'])->name('user.aktivasi');
 Route::get("pembayaran_penghuni/{penyewa_id}",[PembayaranController::class,'cek_va'])->name('penghuni.bayar');
 Route::get("pembayaran_create/{kamar_sewa_id}",[PembayaranController::class,'create'])->name('penghuni.bayar.create');
+Route::get("verifikasi.pembayaran/{pembayaran_id}",[PembayaranController::class,'verifikasi'])->name('pembayaran.verifikasi');
+Route::get("cetak.pembayaran/{kamar_sewa_id}",[PembayaranController::class,'cetak'])->name('pembayaran.cetak');
