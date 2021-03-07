@@ -48,8 +48,8 @@
   <div class="box-header with-border">
     <h3 class="box-title">Riwayat Pembayaran</h3>
     <div class="box-tools pull-right">
-        <a href="{{ route('penghuni.bayar.create',['kamar_sewa_id'=>$ks->id]) }}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Pembayaran</a>
-        <a target="_blank" href="{{ route('pembayaran.cetak',['kamar_sewa_id'=>$ks->id]) }}" class="btn btn-sm btn-success"><i class="fa fa-print"></i> Histori Pembayaran</a>
+        <a href="{{ route('penghuni.bayar.create',['kamar_sewa_id'=>$ks->id]) }}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>  Pembayaran</a>
+        <a target="_blank" href="{{ route('pembayaran.cetak',['kamar_sewa_id'=>$ks->id]) }}" class="btn btn-sm btn-success"><i class="fa fa-print"></i>  Cetak Histori Pembayaran</a>
     </div>
   </div>
   <div class="box-body">

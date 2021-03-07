@@ -30,7 +30,16 @@
         }
         body{
             font-family: 'Courier New', Courier, monospace;
-            font-size: 10pt;
+            font-size: 8pt;
+        }
+        .btopbottom{
+            border-top:1px solid black;
+            border-bottom:1px solid black;
+            padding-top:15px;
+            padding-bottom:15px
+        }
+        td{
+            padding:5px;
         }
     </style>
 </head>
@@ -61,30 +70,31 @@
         </tr>
     </table>
     <br>
-    <table class='container-fluid' border=1 cellspacing=0 cellpadding=0>
+    <table class='container-fluid' cellspacing=0 cellpadding=0>
         <tr>
-            <th>No. Pembayaran</th>
-            <th>Keterangan</th>
-            <th>Tanggal Bayar</th>
-            <th>Stat. Bayar</th>
-            <th class='text-right'>Jumlah Pembayaran</th>
+            <th class='btopbottom'>No. Pembayaran</th>
+            <th class='btopbottom'>Keterangan</th>
+            <th class='btopbottom'>Tanggal Bayar</th>
+            <th class='btopbottom'>Stat. Bayar</th>
+            <th  class='text-right btopbottom'>Jumlah Pembayaran</th>
         </tr>
         @foreach($bayar as $key => $value)
             <tr>
-                <td>{{$value->nomor}}</td>
-                <td>{{$value->name}}</td>
+                <td class='text-center'>{{$value->nomor}}</td>
+                <td class='text-center'>{{$value->name}}</td>
                 <td class='text-center'>{{$carb::parse($value->created_at)->format('d-m-Y')}}</td>
-                <td>{{strtoupper($value->virtual_account)}}</td>
+                <td class='text-center'>{{strtoupper($value->virtual_account)}}</td>
                 <td class="text-right">
                     {{number_format($value->pembayaran)}}
                 </td>
             </tr>
         @endforeach
+        <tr>
+            <th class="text-right btopbottom" colspan=4>GRAND TOTAL</th>
+            <th class="text-right btopbottom">{{number_format($sum)}}</th>
+        </tr>
     </table>
-    <br>
-    <div class="container-fluid">
-        <hr>
-    </div>
+    
     <br>
     <table class="container-fluid">
         <tr>
