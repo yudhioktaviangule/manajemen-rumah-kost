@@ -10,7 +10,7 @@
   <div class="box-header with-border">
     <h3 class="box-title">Virtual Account</h3>
     <div class="box-tools pull-right">
-     
+        <a href="{{ route('penyewa.show',['penyewa'=>$penyewa->id]) }}" class="btn btn-sm btn-primary">Kembali</a>
     </div>
     <!-- /.box-tools -->
   </div>
@@ -60,17 +60,20 @@
               <th>Nama Tagihan</th>
               <th>Metode Pambayaran</th>
               <th>Status Verifikasi</th>
+              <th class='text-right'>Saldo Awal</th>
               <th class='text-right'>Jumlah Bayar</th>
-              <th class='text-right'>Sisa Tagihan</th>
+              <th class='text-right'>Saldo Akhir</th>
           </thead>
           <tbody>
               @php 
                   $vm = $ks->total_sewa;
                   $crb = \Carbon\Carbon::class;
+                  
               @endphp
               @foreach($byr as $key => $value)
                   @php 
                       if($value->virtual_account==='selesai'):
+                        $sAwal  = $vm;
                         $vm-=$value->pembayaran;
                       endif;
                   @endphp
@@ -88,6 +91,7 @@
                             {{strtoupper($value->virtual_account)}}
                         @endif
                     </td>
+                    <td class='text-right'>{{ number_format($sAwal) }}</td>
                     <td class='text-right'>{{ number_format($value->pembayaran) }}</td>
                     <td class='text-right'>{{ number_format($vm) }}</td>
                   </tr>
@@ -95,7 +99,7 @@
           </tbody>
           <tbody>
             <tr>
-                <th colspan='6' class='text-right'>
+                <th colspan='7' class='text-right'>
                     SALDO TAGIHAN
                 </th>
                 <td class='text-right'>

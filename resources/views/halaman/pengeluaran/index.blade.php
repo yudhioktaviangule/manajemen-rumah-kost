@@ -1,41 +1,31 @@
 @extends('template.index')
 
-@section('judul','Penghuni')
+@section('judul','Pengeluaran')
 @section('content')
 <div class="box">
   <div class="box-header with-border">
-    <h3 class="box-title">Daftar Penghuni</h3>
+    <h3 class="box-title">Daftar Pengeluaran</h3>
     <div class="box-tools pull-right">
-      <a href="{{ route('penyewa.create') }}" class="btn btn-primary btn-sm">
-          Register Penghuni
+      <a href="{{ route('pengeluaran.create') }}" class="btn btn-primary btn-sm">
+          <i class="fa fa-plus"></i> Pengeluaran
       </a>
     </div>
-    <!-- /.box-tools -->
   </div>
   <!-- /.box-header -->
   <div class="box-body">
     <div class="col-md-12 col-xs-12 col-lg-12">
-      <div class='form-group'>
-        <select onchange="createDtable()" class='form-control' name='aktifasi' id='aktivasi'>
-          <option value=''>Filter Aktivasi Penghuni</option>
-          <option value='aktif'>Penghuni Aktif</option>
-          <option value='nonaktif'>Penghuni Non-Aktif</option>
-          <option value='checkout'>Penghuni Checkout</option>
-        </select>
-      </div>
+        &nbsp;
     </div>
     <div class="col-md-12 col-xs-12 col-lg-12">
       <div class="table-responsive">
           <table class="table table-bordered">
               <thead>
                   <tr>
-                      <th>NIK </th>
-                      <th>Nama </th>
-                      <th>No.Hp</th>
-                      <th>Jenis Kelamin</th>
-                      <th>Kota Asal</th>
-                      <th>Pekerjaan</th>
-                      <th>Nomor Kamar</th>
+                      <th>No. Transaksi</th>
+                      <th>Tanggal</th>
+                      <th>Jenis Pengeluaran </th>
+                      <th>Ket. Lunas</th>
+                      <th class='text-right'>Nominal</th>
                       <th class='text-right'>
                         <i class="fa fa-cog"></i>
                       </th>
@@ -75,7 +65,7 @@
     $(document).ready(()=>{
       window.hapus = (id)=>{
           const f = $("#form-hapus");
-          const url = `{{ route('penyewa.index') }}/${id}`;
+          const url = id;
           const con = confirm("Ingin Menghapus Data?")
           if(con){
             f.attr('action',url);
@@ -90,17 +80,15 @@
           serverSide:true,
           processing:true,
           columns:[
-            {data:'nik',name:'nik'},
-            {data:'name',name:'name'},
-            {data:'hp',name:'hp'},
-            {data:'jenis_kelamin',name:'jenis_kelamin'},
-            {data:'kota_asal',name:'kota_asal'},
-            {data:'pekerjaan',name:'pekerjaan'},
             {data:'nomor',name:'nomor'},
+            {data:'tanggal',name:'tanggal'},
+            {data:'pengeluaran',name:'pengeluaran'},
+            {data:'lunas',name:'lunas'},
+            {data:'nominal',name:'nominal'},
             {data:'aksi',name:'aksi'},
           ],
           ajax:{
-            url:`{{route('api.datatable.penyewa')}}`,
+            url:`{{route('api.datatable.pengeluaran')}}`,
             type:'post',
             data:{
               '_token':`{{csrf_token()}}`,

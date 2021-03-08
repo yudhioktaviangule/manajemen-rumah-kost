@@ -11,7 +11,7 @@
       <div class="box-header with-border">
         <h3 class="box-title">Pengeluaran</h3>
         <div class="box-tools pull-right">
-          <a href="{{ route('pemeliharaan.index') }}" class="btn btn-primary btn-sm">
+          <a href="{{ route('pengeluaran.index') }}" class="btn btn-primary btn-sm">
               Kembali
           </a>
         </div>
@@ -23,38 +23,10 @@
             <p>
                 Jenis Pengeluaran
                 <p>
-                  <strong>{{ strtoupper($data->jenis_pengeluaran) }}</strong>
+                  <strong>{{ strtoupper($data->pengeluaran) }}</strong>
                 </p>
             </p>
-            @switch($data->jenis_pengeluaran)
-                  @case("pemeliharaan")
-                    <p>
-                        Nomor Kamar
-                        <p>
-                          <strong>{{ $data->getKamar()==NULL ? '' : $data->getKamar()->nomor  }}</strong>
-                        </p>
-                    </p>
-                    @break
-                  @case("penambahan aset")
-                    <p>
-                        Nama Aset
-                        <p>
-                          <strong>{{ $data->getAset()==NULL?"" : $data->getAset()->aset }}</strong>
-                        </p>
-                    </p>
-                    @break
-                  @default
-                    <p>
-                        Perbaikan Fasilitas
-                        <p>
-                          <strong>{{ $data->getFasilitas()==NULL ? '' :
-                                      ($data->getFasilitas()->getAset()==NULL ? '' : $data->getFasilitas()->getAset()->aset." Nomor Kamar : ".
-                                        ($data->getFasilitas()->getKamar() == NULL ? "-" : $data->getFasilitas()->getKamar()->nomor ) ) }}</strong>
-                        </p>
-                    </p>
-                    @break
-
-            @endswitch
+           
             <p>
                 Tanggal
                 <p>
@@ -68,7 +40,7 @@
                 Biaya
                 <p>
                     <strong>
-                      {{ number_format($data->total_biaya) }}
+                      {{ number_format($data->nominal) }}
                     </strong>
                 </p>
 
@@ -86,7 +58,7 @@
                 Keterangan
                 <p>
                     <strong>
-                      "{{ $data->keterangan}}"
+                      {{ $data->keterangan}}
                     </strong>
                 </p>
 
@@ -94,7 +66,7 @@
       </div>
       <!-- /.box-body -->
       <div class="box-footer">
-        The footer of the box
+        
       </div>
     </div>
 

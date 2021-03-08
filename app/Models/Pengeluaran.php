@@ -10,13 +10,10 @@ class Pengeluaran extends Model
     use HasFactory;
     protected $fillable=[
         'user_id',
-        'total_biaya',
-        'jenis_pengeluaran',
-        'fasilitas_id',
-        'kamar_id',
-        'aset_id',
-        'jenis_pemeliharaan',
-        'keterangan',
+        'nomor',
+        'nominal',
+        'pengeluaran',
+        'status',
     ];
 
 

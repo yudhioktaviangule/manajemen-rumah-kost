@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Penyewa;
+use App\Models\KamarSewa;
 use App\Models\User;
 class PenyewaController extends Controller
 {
@@ -100,5 +101,13 @@ class PenyewaController extends Controller
         else:
             return redirect()->back();
         endif;
+    }
+
+    public function checkout($id)
+    {
+        $data = KamarSewa::find($id);
+        if($data != NULL){
+            
+        }
     }
 }

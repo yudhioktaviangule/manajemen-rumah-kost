@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->enum('level',['admin','karyawan','penyewa']);
-            $table->enum('aktif',['nonaktif','aktif'])->default('nonaktif');
+            $table->enum('aktif',['nonaktif','aktif','checkout'])->default('nonaktif');
             $table->rememberToken();
             $table->timestamps();
         });

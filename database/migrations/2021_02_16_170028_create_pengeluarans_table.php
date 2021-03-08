@@ -16,13 +16,11 @@ class CreatePengeluaransTable extends Migration
         Schema::create('pengeluarans', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->double('total_biaya');
-            $table->enum('jenis_pengeluaran',['penambahan aset','pemeliharaan','perbaikan fasilitas']);
-            $table->integer('fasilitas_id')->default(0);
-            $table->integer('aset_id')->default(0);
-            $table->integer('kamar_id')->default(0);
-            $table->longtext('keterangan');
-            $table->string('jenis_pemeliharaan')->default('-');
+            $table->string('nomor')->unique();
+            $table->string('pengeluaran')->default('-');
+            $table->double('nominal')->default(0);
+            $table->enum('status',['lunas','belum'])->default('belum');
+            $table->string('keterangan')->default('-');
             $table->timestamps();
         });
     }

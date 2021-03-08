@@ -39,7 +39,7 @@
             </div>
             <div class='form-group'>
                 <label for=jumlah_bayar>Jumlah Pembayaran</label>
-                <input type='number' min='{{$totbayar}}' value="{{ $totbayar }}" class='form-control form-control-sm' name='jumlah_bayar' id='jumlah_bayar'>
+                <input type='number' min='100000' value="{{ $totbayar }}" class='form-control form-control-sm' name='jumlah_bayar' id='jumlah_bayar'>
             </div>
             <div class='form-group'>
                 <label for='metode_pembayaran'>Metode Pembayaran</label>

@@ -12,6 +12,7 @@ use App\Models\Fasilitas;
 use App\Models\Pembayaran;
 use App\Models\Pengeluaran;
 use App\Models\KamarSewa;
+use App\Models\User;
 
 use DataTables;
 use Carbon\Carbon;
@@ -29,6 +30,56 @@ class DataTable extends Controller{
                     $dec = json_decode($row);
                     return View::make("halaman.fasilitas.kamar.buttons",compact("dec"));
                 })->rawColumns(['aksi']);
+        return $dt->make(true);
+    }
+    public function penyewa()
+    {
+        $request = $this->request;
+        $db = User::where('level','penyewa');
+        if($request->_f!=='nofiltered'):
+            $db = $db->where('aktif',$request->_f);
+        endif;
+        $db = $db->get();
+        $dt = DataTables::of($db)
+                ->addIndexColumn()
+                ->addColumn('aksi',function($row){
+                    $cal = json_decode($row);
+                    $value = User::find($cal->id);
+                    return View::make("halaman.penyewa.buttons",compact("value"));
+                })
+                ->addColumn('nik',function($row){
+                    $cal = json_decode($row);
+                    $value = User::find($cal->id);
+                    return $value->getPenyewa()->nik;
+                })
+                ->addColumn('kota_asal',function($row){
+                    $cal = json_decode($row);
+                    $value = User::find($cal->id);
+                    return $value->getPenyewa()->kota_asal;
+                })
+                ->addColumn('jenis_kelamin',function($row){
+                    $cal = json_decode($row);
+                    $value = User::find($cal->id);
+                    return $value->getPenyewa()->jenis_kelamin;
+                })
+                ->addColumn('pekerjaan',function($row){
+                    $cal = json_decode($row);
+                    $value = User::find($cal->id);
+                    return $value->getPenyewa()->pekerjaan;
+                })
+                ->addColumn('hp',function($row){
+                    $cal = json_decode($row);
+                    $value = User::find($cal->id);
+                    return $value->getPenyewa()->hp;
+                })
+                ->addColumn('nomor',function($row){
+                    $cal = json_decode($row);
+                    $value = User::find($cal->id);
+                    $kamar = $value->getPenyewa()->getKamar();
+                    if($kamar==NULL){ return '-';}
+                    else {return $kamar->nomor;}
+                })
+                ->rawColumns(['aksi']);
         return $dt->make(true);
     }
     public function pemeliharaan()
@@ -71,139 +122,7 @@ class DataTable extends Controller{
         $dt->rawColumns(['tanggal','kamar','fasilitas','aset']);
         return $dt->make(true);
     }
-    public function tambahAset()
-    {
-        $db = Pengeluaran::where('jenis_pengeluaran','penambahan aset')->get();
-        $dt = DataTables::of($db)
-                ->addIndexColumn();
-        $dt->addColumn('tanggal',function($r){
-                $decode = json_decode($r);
-                $created_at = $decode->created_at;
-                return Carbon::parse($created_at)->format('d-m-Y');
-            })
-            ->addColumn('kamar',function($r){
-                $decode = json_decode($r);
-                $kamar  = Kamar::find($decode->kamar_id);
-                if($kamar==NULL):
-                    return '';
-                else:
-                    return $kamar->nomor;
-                endif;
-            })
-            ->addColumn('fasilitas',function($r){
-                $decode = json_decode($r);
-                $kamar  = Fasilitas::find($decode->fasilitas_id);
-                if($kamar==NULL):
-                    return '-';
-                else:
-                    return $kamar->getAset()->aset." Kamar ".$kamar->getKamar()->nomor;
-                endif;
-            })
-            ->addColumn('aset',function($r){
-                $decode = json_decode($r);
-                $kamar  = Aset::find($decode->aset_id);
-                if($kamar==NULL):
-                    return 's';
-                else:
-                    return $kamar->aset;
-                endif;
-            });
-        $dt->rawColumns(['tanggal','kamar','fasilitas','aset']);
-        return $dt->make(true);
-    }
-    public function perawatan()
-    {
-        $db = Pengeluaran::where('jenis_pengeluaran','perbaikan fasilitas')->get();
-        $dt = DataTables::of($db)
-                ->addIndexColumn();
-        $dt->addColumn('tanggal',function($r){
-                $decode = json_decode($r);
-                $created_at = $decode->created_at;
-                return Carbon::parse($created_at)->format('d-m-Y');
-            })
-            ->addColumn('kamar',function($r){
-                $decode = json_decode($r);
-                $kamar  = Kamar::find($decode->kamar_id);
-                if($kamar==NULL):
-                    return '';
-                else:
-                    return $kamar->nomor;
-                endif;
-            })
-            ->addColumn('fasilitas',function($r){
-                $decode = json_decode($r);
-                $kamar  = Fasilitas::find($decode->fasilitas_id);
-                if($kamar==NULL):
-                    return '-';
-                    //return $r;
-                else:
-                    return "<strong>".$kamar->getAset()->aset."</strong><br> Kamar :<strong> ".$kamar->getKamar()->nomor."</strong>";
-                endif;
-            })
-            ->addColumn('aset',function($r){
-                $decode = json_decode($r);
-                $kamar  = Aset::find($decode->aset_id);
-                if($kamar==NULL):
-                    return '';
-                else:
-                    return $kamar->aset;
-                endif;
-            });
-        $dt->rawColumns(['tanggal','kamar','fasilitas','aset']);
-        return $dt->make(true);
-    }
 
-    public function penyewaKamar()
-    {
-        $request = $this->request;
-        $data = KamarSewa::whereIn('kamar_id',function($q){
-                    $q->select('id')->from("kamars")->where('status','disewa');
-                })->get();
-        $dataTable = DataTables::of($data)
-                            ->addIndexColumn()
-                            ->addColumn('penyewa',function($row){
-                                $rowD = json_decode($row,TRUE);
-                                $penyewa = new KamarSewa();
-                                $penyewa->forceFill($rowD);
-                                return $penyewa->getPenyewa()->name;
-                            })
-                            ->addColumn('kamar',function($row){
-                                $rowD = json_decode($row,TRUE);
-                                $kamar = new KamarSewa();
-                                $kamar->forceFill($rowD);
-                                return $kamar->getKamar()->nomor;
-                            })
-                            ->addColumn('tagihan',function($row){
-                                $rowD = json_decode($row,TRUE);
-                                $kamar = new KamarSewa();
-                                $kamar->forceFill($rowD);
-                                $now = Carbon::now();
-                                $tanggal_expair = Carbon::parse($kamar->jatuh_tempo);
-                                $isNearly =  $tanggal_expair->diffInDays($now)<10 ? true : false;
-                                $isLate   = $isNearly ? ($tanggal_expair->diffInDays($now)<0 ?true:false) : false;
-                                $totalBayar = ($tanggal_expair->diffInMonths($now) + 1) * $kamar->getKamar()->harga;
-                                return number_format($totalBayar);
-                            })
-                            ->addColumn('status',function($row){
-                                $rowD = json_decode($row,TRUE);
-                                $kamar = new KamarSewa();
-                                $kamar->forceFill($rowD);
-                                $now = Carbon::now();
-                                $tanggal_expair = Carbon::parse($kamar->jatuh_tempo);
-                                $isNearly =  $tanggal_expair->gt($now) && $tanggal_expair->diffInDays($now)<10 ? true : false;
-                                $isLate   = $now->gt($tanggal_expair)?true:false;
-                                if($isLate):
-                                    return "Melewati Batas Waktu Pembayaran";
-                                elseif($isNearly):
-                                    return "Mendekati Masa Pembayaran";
-                                else:
-                                    return '-';
-                                endif;
-
-                            });
-        return $dataTable->make();
-    }
-    
     public function kamar_sewa()
     {
         $db = Penyewa::get();
@@ -270,4 +189,30 @@ class DataTable extends Controller{
                 });
         return $dt->make(true);
     }
+
+    public function pengeluaran()
+    {
+        $request = $this->request;
+        $db = Pengeluaran::get();
+        $dt = DataTables::of($db)
+                ->addIndexColumn()
+                ->addColumn('aksi',function($row){
+                    $value = json_decode($row);
+                    
+                    return View::make("halaman.pengeluaran.buttons",compact("value"));
+                })
+                ->addColumn('tanggal',function($row){
+                    $cal = json_decode($row);
+                    $kal = Carbon::parse($cal->created_at)->format('d-m-Y');
+                    return $kal;
+                })
+                ->addColumn('lunas',function($row){
+                    $cal = json_decode($row);
+                    return strtoupper($cal->status);
+                })
+                
+                ->rawColumns(['aksi']);
+        return $dt->make(true);
+    }
+
 }
