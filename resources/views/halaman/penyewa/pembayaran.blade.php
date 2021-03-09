@@ -72,6 +72,7 @@
               @endphp
               @foreach($byr as $key => $value)
                   @php 
+                      $sAwal  = $vm;
                       if($value->virtual_account==='selesai'):
                         $sAwal  = $vm;
                         $vm-=$value->pembayaran;

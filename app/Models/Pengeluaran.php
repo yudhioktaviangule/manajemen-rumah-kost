@@ -17,19 +17,6 @@ class Pengeluaran extends Model
     ];
 
 
-
-    public function getKamar()
-    {
-        return Kamar::find($this->kamar_id);
-    }
-    public function getAset()
-    {
-        return Aset::find($this->aset_id);
-    }
-    public function getFasilitas()
-    {
-        return Fasilitas::find($this->fasilitas_id);
-    }
     public function getUser()
     {
         return User::find($this->user_id);

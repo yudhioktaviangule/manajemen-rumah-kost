@@ -8,7 +8,7 @@
       <div class="box-header with-border">
         <h3 class="box-title">{{$penyewa->name}}</h3>
         <div class="box-tools pull-right">
-          <a href="{{ route('kamar_sewa.index') }}" class="btn btn-primary btn-sm">
+          <a href="{{ route('penyewa.show',['penyewa'=>$cek->penyewa_id]) }}" class="btn btn-primary btn-sm">
               Kembali
           </a>
         </div>

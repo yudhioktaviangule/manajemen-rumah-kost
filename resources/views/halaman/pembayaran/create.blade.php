@@ -4,8 +4,10 @@
     $sekarang   = $carbon::now();
     $jathTempo  = $carbon::parse($data->jatuh_tempo);
     $diff       = $jathTempo->diffInMonths($sekarang)+1;
-    $totbayar   = $data->getKamar()->harga * $diff;
-    
+    $penyewa    = $data->getPenyewa();
+    $totbayar   = $data->getTotalBayar();
+    $sum   = $data->total_sewa;
+    $sisa  = $data->sisaPembayaran(); 
 @endphp
 
 @extends('template.index')
@@ -34,12 +36,16 @@
                 <p>{{$data->getKamar()->nomor}}</p>
             </div>
             <div class="form-group">
-                <label for="">Tagihan / Bulan</label>
-                <p>Rp. {{ number_format($totbayar) }}</p>
+                <label for="">Total Tagihan</label>
+                <p>Rp. {{ number_format($sum) }}</p>
+            </div>
+            <div class="form-group">
+                <label for="">Saldo Tagihan</label>
+                <p>Rp. {{ number_format($sisa->saldo) }}</p>
             </div>
             <div class='form-group'>
                 <label for=jumlah_bayar>Jumlah Pembayaran</label>
-                <input type='number' min='100000' value="{{ $totbayar }}" class='form-control form-control-sm' name='jumlah_bayar' id='jumlah_bayar'>
+                <input step='50000' type='number' max="{{ $sisa->saldo }}" min='{{$sisa->saldo>100000 ? 100000 : $sisa->saldo }}' value="{{ $sisa->saldo }}" class='form-control form-control-sm' name='jumlah_bayar' id='jumlah_bayar'>
             </div>
             <div class='form-group'>
                 <label for='metode_pembayaran'>Metode Pembayaran</label>

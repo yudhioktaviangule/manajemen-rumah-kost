@@ -1,31 +1,33 @@
 <?php
 
-namespace App\Http\Controllers\Web;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\View;
 use App\Models\Pengeluaran;
-class LaporanPengeluaran extends Controller{
+class LapKeluarApi extends Controller{
     private $request;
     public function __construct(Request $request) {
         $this->request = $request;
-        $this->middleware('auth');
+        
     }
     public function index(){
         $request = $this->request;
-        return view('halaman.lap_pengeluaran.index');
     }
     public function create(){
         $request = $this->request;
     }
     public function store(){
         $request = $this->request;
-        $data = $request->only('tanggal_awal','tanggal_akhir');
-        $between = [$data['tanggal_awal'],$data['tanggal_akhir']];
-       
-        return view('cetak.lap_pengeluaran',compact('between')); 
+        $p = [$request->t_awal,$request->t_akhir];
+        $pengeluaran = Pengeluaran::whereBetween('created_at',$p)->get();
+        $data = [];
+        foreach ($pengeluaran as $key => $value) {
+            $data[$key] = $value->toArray();
+            $data[$key]['admin'] = $value->getUser();
+        }
+        $json = ['data'=>$data];
+        return response()->json($json);
     }
     public function show($id){
         $request = $this->request;

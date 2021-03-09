@@ -31,4 +31,8 @@ class Penyewa extends Model
     {
         return KamarSewa::where('penyewa_id',$this->id)->first();
     }
+    public function getUser()
+    {
+       return User::where('penyewa_id',$this->id)->first();
+    }
 }

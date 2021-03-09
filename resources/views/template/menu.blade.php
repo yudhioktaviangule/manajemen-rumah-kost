@@ -11,7 +11,7 @@
   <li class=""><a href="#"><i class="fa fa-link"></i> <span>Pembayaranku</span></a></li>
 @endif
 @if(Auth::user()->level==='admin')
-  <li class=""><a href="{{ route('user.index') }}"><i class="fa fa-file-o"></i> <span>Laporan</span></a></li>
+  <li class=""><a href="{{ route('laporan.index') }}"><i class="fa fa-file-o"></i> <span>Laporan</span></a></li>
 @endif
 
 

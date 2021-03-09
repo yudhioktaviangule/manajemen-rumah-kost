@@ -36,9 +36,25 @@ class DataTable extends Controller{
     {
         $request = $this->request;
         $db = User::where('level','penyewa');
+        $sql = '';
         if($request->_f!=='nofiltered'):
-            $db = $db->where('aktif',$request->_f);
+            if($request->_f==='nokamar'):
+                $db = $db->where('aktif','aktif');
+                $db=$db->whereNotIn('penyewa_id',function($a){
+                    $a->select('penyewa_id')->from('kamar_sewas');
+                });
+                $sql = $db;
+                $sql = $sql->toSql();
+            elseif($request->_f==='aktif'):
+                $db = $db->where('aktif',$request->_f);
+                $db=$db->whereIn('penyewa_id',function($a){
+                    $a->select('penyewa_id')->from('kamar_sewas');
+                });
+            else:
+                $db = $db->where('aktif',$request->_f);
+            endif;
         endif;
+        
         $db = $db->get();
         $dt = DataTables::of($db)
                 ->addIndexColumn()
@@ -79,6 +95,7 @@ class DataTable extends Controller{
                     if($kamar==NULL){ return '-';}
                     else {return $kamar->nomor;}
                 })
+               
                 ->rawColumns(['aksi']);
         return $dt->make(true);
     }

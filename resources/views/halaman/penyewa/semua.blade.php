@@ -18,9 +18,10 @@
       <div class='form-group'>
         <select onchange="createDtable()" class='form-control' name='aktifasi' id='aktivasi'>
           <option value=''>Filter Aktivasi Penghuni</option>
-          <option value='aktif'>Penghuni Aktif</option>
-          <option value='nonaktif'>Penghuni Non-Aktif</option>
-          <option value='checkout'>Penghuni Checkout</option>
+          <option value='aktif'>Aktif</option>
+          <option value='nonaktif'>Non-Aktif</option>
+          <option value='checkout'>Checkout</option>
+          <option value='nokamar'>Proses Reservasi Kamar</option>
         </select>
       </div>
     </div>

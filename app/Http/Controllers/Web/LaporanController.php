@@ -12,6 +12,7 @@ class LaporanController extends Controller{
     }
     public function index(){
         $request = $this->request;
+        return view('halaman.laporan.index');
     }
     public function create(){
         $request = $this->request;

@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\DataTable;
+use App\Http\Controllers\Api\LapKeluarApi;
 use App\Http\Controllers\Api\SelectTwo;
 use App\Http\Controllers\Api\MorrisApi;
 
@@ -30,4 +31,8 @@ Route::group(['prefix'=>'select2'],function(){
 Route::group(['prefix'=>'morris'],function(){
     Route::get('masuk.keluar',[MorrisApi::class,'masuk_keluar'])->name('chart_pemasukan');
     Route::get('masuk.keluar_skripi',[MorrisApi::class,'skripi'])->name('chart_pengeluaran');
+});
+
+Route::group(['prefix'=>'lap'],function(){
+    Route::resource('api_lap_keluar',LapKeluarApi::class);
 });

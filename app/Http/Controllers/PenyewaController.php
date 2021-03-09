@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Penyewa;
 use App\Models\KamarSewa;
+use App\Models\Kamar;
 use App\Models\User;
 class PenyewaController extends Controller
 {
@@ -106,8 +107,24 @@ class PenyewaController extends Controller
     public function checkout($id)
     {
         $data = KamarSewa::find($id);
+        $p='';
         if($data != NULL){
-            
+            $p = $data->penyewa_id;
+            $kamar  = $data->kamar_id;
+            $dkamar = Kamar::find($kamar);
+            if($dkamar==NULL):
+                return redirect()->back();
+            endif;
+            $dkamar->status='ready';
+            $dkamar->save();
+            $dsewa = Penyewa::find($p);
+            $sewa = $dsewa->getUser();  
+            $sewa->aktif='checkout';
+            $sewa->save();
+            $data->delete();
+            return redirect(route('penyewa.index'));
+        }else{
+            return redirect(route('penyewa.show',['penyewa'=>$p]));
         }
     }
 }
