@@ -11,7 +11,7 @@
       <div class="container-fluid">
           
               <div class="text-center">
-                  <a href="#" class="btn btn-primary">Laporan Pemasukan</a>
+                  <a href="{{ route('laporan_pemasukan.index') }}" class="btn btn-primary">Laporan Pemasukan</a>
                   <br>
                   <br>
                   <a href="{{ route('laporan_pengeluaran.index') }}" class="btn btn-success">Laporan Pengeluaran</a>

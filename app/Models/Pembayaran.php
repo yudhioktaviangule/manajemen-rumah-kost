@@ -22,6 +22,10 @@ class Pembayaran extends Model
 
     public function getKamarSewa()
     {
-        return KamarSewa::find($this->kamar_sewa_id);
+        $ks = KamarSewa::find($this->kamar_sewa_id);
+        if($ks===NULL):
+            $ks = CheckoutKamarSewa::where('tmp_id',$this->kamar_sewa_id)->first();
+        endif;
+        return $ks;
     }
 }

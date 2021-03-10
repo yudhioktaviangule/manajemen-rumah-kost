@@ -15,7 +15,7 @@ use App\Http\Controllers\Web\ReservasiController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Web\PengeluaranController;
 use App\Http\Controllers\Web\LaporanPengeluaran;
-use App\Http\Controllers\Web\LaporanPemasukanController;
+use App\Http\Controllers\Web\LaporanPemasukan;
 use App\Http\Controllers\Web\LaporanController;
 use Illuminate\Support\Facades\Hash;
 Route::get('/', function () {
@@ -24,6 +24,7 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::resource('kamar',KamarController::class);
 Route::resource('kamar',KamarController::class);
 Route::resource('penyewa',PenyewaController::class);
 Route::resource('user',UserController::class);
@@ -38,7 +39,7 @@ Route::resource('reservasi',ReservasiController::class);
 Route::resource('pengeluaran',PengeluaranController::class);
 Route::resource('laporan',LaporanController::class);
 Route::resource('laporan_pengeluaran',LaporanPengeluaran::class);
-Route::resource('laporan_pemasukan',LaporanPemasukanController::class);
+Route::resource('laporan_pemasukan',LaporanPemasukan::class);
 Route::get('daftar_bayar',[PembayaranController::class,'df_bayar'])->name('df.bayar');
 
 Route::get('hash/{nilai}',function($nilai){

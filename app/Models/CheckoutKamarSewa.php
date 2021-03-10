@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class KamarSewa extends Model
+class CheckoutKamarSewa extends Model
 {
     use HasFactory;
-    
     protected $fillable = [
+        'tmp_id',
         'kamar_id',
         'penyewa_id',
         'jatuh_tempo',
@@ -46,5 +46,4 @@ class KamarSewa extends Model
         ];
         return json_decode(json_encode($json));
     }
-
 }

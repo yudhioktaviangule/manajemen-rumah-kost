@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Penyewa;
+use App\Models\CheckoutKamarSewa;
 use App\Models\KamarSewa;
 use App\Models\Kamar;
 use App\Models\User;
@@ -107,6 +108,7 @@ class PenyewaController extends Controller
     public function checkout($id)
     {
         $data = KamarSewa::find($id);
+        $checkout = new CheckoutKamarSewa();
         $p='';
         if($data != NULL){
             $p = $data->penyewa_id;
@@ -121,6 +123,16 @@ class PenyewaController extends Controller
             $sewa = $dsewa->getUser();  
             $sewa->aktif='checkout';
             $sewa->save();
+            $chk = [
+                'tmp_id' => $data->id,
+                'penyewa_id' => $data->penyewa_id,
+                'kamar_id' => $data->kamar_id,
+                'jatuh_tempo' => $data->jatuh_tempo,
+                'lama_sewa' => $data->lama_sewa,
+                'total_sewa' => $data->total_sewa,
+            ];
+            $checkout->fill($chk);
+            $checkout->save();
             $data->delete();
             return redirect(route('penyewa.index'));
         }else{

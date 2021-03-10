@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\DataTable;
 use App\Http\Controllers\Api\LapKeluarApi;
 use App\Http\Controllers\Api\SelectTwo;
 use App\Http\Controllers\Api\MorrisApi;
+use App\Http\Controllers\Api\LapMasukApi;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
@@ -35,4 +36,5 @@ Route::group(['prefix'=>'morris'],function(){
 
 Route::group(['prefix'=>'lap'],function(){
     Route::resource('api_lap_keluar',LapKeluarApi::class);
+    Route::resource('api_lap_masuk',LapMasukApi::class);
 });
