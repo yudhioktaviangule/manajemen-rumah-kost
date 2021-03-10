@@ -31,7 +31,7 @@
 
         }
         .container-fluid{
-            width:{{env('APP_SIZE_PRINT')}}%;
+            width:{{env('APP_SIZE_PRINT_DOC')}}%;
         }
         .text-right{
             text-align: right;
