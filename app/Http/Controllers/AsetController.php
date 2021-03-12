@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Aset;
+
 class AsetController extends Controller
 {
     private $request;

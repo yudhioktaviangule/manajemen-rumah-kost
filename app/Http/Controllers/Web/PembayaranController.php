@@ -99,7 +99,8 @@ class PembayaranController extends Controller{
         $kamarsewa->jatuh_tempo = $tanggal;
         $kamarsewa->save();
         $penyewa_id = $kamarsewa->penyewa_id;
-        return redirect(route('penghuni.bayar',['penyewa_id'=>$penyewa_id]));
+        $v = Auth::user()->level==='penyewa' ? 'clntpembayaran.bayar' : 'penghuni.bayar';
+        return redirect(route($v,['penyewa_id'=>$penyewa_id]));
     }
     public function update($id=''){
         $request = $this->request; 

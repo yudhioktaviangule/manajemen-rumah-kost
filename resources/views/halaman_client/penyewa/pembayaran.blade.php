@@ -1,76 +1,70 @@
-@extends('template.index')
 
-@section('judul','Penghuni')
+@php
+    $carbon     = \Carbon\Carbon::class;
+    $sekarang   = $carbon::now();
+    $jathTempo  = $carbon::parse($data->jatuh_tempo);
+    $diff       = $jathTempo->diffInMonths($sekarang)+1;
+    $penyewa    = Auth::user();
+    $totbayar   = $data->getTotalBayar();
+    $sum   = $data->total_sewa;
+    $sisa  = $data->sisaPembayaran(); 
+@endphp
+
+@extends('template.index')
+@section('judul','Pembayaran')
 @section('content')
-<div class="box">
-  <div class="box-header with-border">
-    <h3 class="box-title">Daftar Penghuni</h3>
-    <div class="box-tools pull-right">
-      <a href="{{ route('penyewa.create') }}" class="btn btn-primary btn-sm">
-          Register Penghuni
-      </a>
-    </div>
-    <!-- /.box-tools -->
-  </div>
-  <!-- /.box-header -->
-  <div class="box-body">
+<div class="col-md-6 col-md-offset-3">
+    <form class="box" action="{{route('pembayaran.store')}}" method="POST">
+        @csrf
+      <div class="box-header with-border">
+        <h3 class="box-title">Data Pembayaran</h3>
+        <div class="box-tools pull-right">
+          <a href="{{ route('clntpembayaran.bayar',['penyewa_id'=>Auth::id()]) }}" class="btn btn-primary btn-sm">
+              Kembali
+          </a>
+        </div>
         
-  </div>
-  
-  <!-- /.box-body -->
-  <div class="box-footer">
-    The footer of the box
-  </div>
-  <!-- box-footer -->
+      </div>
+      
+      <div class="box-body">
+            <div class="form-group">
+                <label for="">Nama</label>
+                <p>{{Auth::user()->name}}</p>
+            </div>
+            <div class="form-group">
+                <label for="">No. Kamar</label>
+                <p>{{$data->getKamar()->nomor}}</p>
+            </div>
+            <div class="form-group">
+                <label for="">Total Tagihan</label>
+                <p>Rp. {{ number_format($sum) }}</p>
+            </div>
+            <div class="form-group">
+                <label for="">Saldo Tagihan</label>
+                <p>Rp. {{ number_format($sisa->saldo) }}</p>
+            </div>
+            <div class='form-group'>
+                <label for=jumlah_bayar>Jumlah Pembayaran</label>
+                <input step='50000' type='number' max="{{ $sisa->saldo }}" min='{{$sisa->saldo>100000 ? 100000 : $sisa->saldo }}' value="{{ $sisa->saldo }}" class='form-control form-control-sm' name='jumlah_bayar' id='jumlah_bayar'>
+            </div>
+            <div class='form-group'>
+                <label for='metode_pembayaran'>Metode Pembayaran</label>
+                <select class='form-control' name='metode_pembayaran' id='metode_pembayaran'>
+                    <option value=''>Pilih Metode Pembayaran</option>
+                    <option value='transfer'>Transfer</option>
+                </select>
+            </div>
+            <input type="hidden" name='kamar_sewa_id' value="{{ $data->id }}">
+      </div>
+      <!-- /.box-body -->
+      <div class="box-footer">
+        <button class="btn btn-primary">
+            Simpan
+        </button>
+      </div>
+      <!-- box-footer -->
+    </form>
+
 </div>
-<!-- /.box -->
-@endsection
-@section("css")
-    <link rel="stylesheet" href="{{asset('aset/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">
-@endsection
-@section("jscript")
-<script src="{{asset('aset/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('aset/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
-  <script>
-    $(document).ready(()=>{
-      window.hapus = (id)=>{
-          const f = $("#form-hapus");
-          const url = `{{ route('penyewa.index') }}/${id}`;
-          const con = confirm("Ingin Menghapus Data?")
-          if(con){
-            f.attr('action',url);
-            f.submit();
-          }
-      }
-      window.createDtable = ()=>{
-        if(window.dtTable!=undefined){
-          window.dtTable.destroy();
-        }
-        window.dtTable = $(".table").DataTable({
-          serverSide:true,
-          processing:true,
-          columns:[
-            {data:'nik',name:'nik'},
-            {data:'name',name:'name'},
-            {data:'hp',name:'hp'},
-            {data:'jenis_kelamin',name:'jenis_kelamin'},
-            {data:'kota_asal',name:'kota_asal'},
-            {data:'pekerjaan',name:'pekerjaan'},
-            {data:'nomor',name:'nomor'},
-            {data:'aksi',name:'aksi'},
-          ],
-          ajax:{
-            url:`{{route('api.datatable.penyewa')}}`,
-            type:'post',
-            data:{
-              '_token':`{{csrf_token()}}`,
-              '_f' : $("#aktivasi").val()==''?'nofiltered' : $("#aktivasi").val(),
-            }
-          }
-        });
-      }
-      createDtable();
-    })
-  </script>
 
 @endsection

@@ -55,3 +55,5 @@ Route::get("cetak.pembayaran/{kamar_sewa_id}",[PembayaranController::class,'ceta
 Route::get("penyewa.checkout/{kamar_sewa_id}",[PenyewaController::class,'checkout'])->name('penyewa.checkout');
 
 Route::resource('clntpembayaran',PenghuniPembayaranController::class);
+Route::get('clnt_byr_penghuni/{penyewa_id}',[PenghuniPembayaranController::class,'cek_va'])->name('clntpembayaran.bayar');
+Route::get('clnt_req_bayar/{kamar_sewa_id}',[PenghuniPembayaranController::class,'create_byr'])->name('clntpembayaran.createbayar');

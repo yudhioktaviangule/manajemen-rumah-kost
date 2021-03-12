@@ -46,7 +46,7 @@
             
       </div>
       <div class="box-footer">
-            <a href="{{ route('penghuni.bayar',['penyewa_id'=>$data->id]) }}" class="btn btn-success"><i class="fa fa-get-pocket"></i> Pembayaran</a>
+            <a href="{{ route('clntpembayaran.bayar',['penyewa_id'=>$data->id]) }}" class="btn btn-success"><i class="fa fa-get-pocket"></i> Pembayaran</a>
       </div>
     </div >
 
