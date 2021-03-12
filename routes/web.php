@@ -18,6 +18,7 @@ use App\Http\Controllers\Web\LaporanPengeluaran;
 use App\Http\Controllers\Web\LaporanPemasukan;
 use App\Http\Controllers\Web\LaporanController;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\Client\PenghuniPembayaranController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -25,7 +26,7 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::resource('kamar',KamarController::class);
-Route::resource('kamar',KamarController::class);
+
 Route::resource('penyewa',PenyewaController::class);
 Route::resource('user',UserController::class);
 Route::resource('fasilitas',FasilitasController::class);
@@ -52,3 +53,5 @@ Route::get("pembayaran_create/{kamar_sewa_id}",[PembayaranController::class,'cre
 Route::get("verifikasi.pembayaran/{pembayaran_id}",[PembayaranController::class,'verifikasi'])->name('pembayaran.verifikasi');
 Route::get("cetak.pembayaran/{kamar_sewa_id}",[PembayaranController::class,'cetak'])->name('pembayaran.cetak');
 Route::get("penyewa.checkout/{kamar_sewa_id}",[PenyewaController::class,'checkout'])->name('penyewa.checkout');
+
+Route::resource('clntpembayaran',PenghuniPembayaranController::class);

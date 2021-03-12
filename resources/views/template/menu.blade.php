@@ -8,7 +8,7 @@
   <li class=""><a href="{{ route('kamar.index') }}"><i class="fa fa-bed"></i> <span>Kamar</span></a></li>
   <li class=""><a href="{{ route('pengeluaran.index') }}"><i class="fa fa-credit-card"></i> <span>Pengeluaran</span></a></li>
 @else
-  <li class=""><a href="#"><i class="fa fa-link"></i> <span>Pembayaranku</span></a></li>
+  <li class=""><a href="#"><i class="fa fa-credit-card"></i> <span>Pembayaran</span></a></li>
 @endif
 @if(Auth::user()->level==='admin')
   <li class=""><a href="{{ route('laporan.index') }}"><i class="fa fa-file-o"></i> <span>Laporan</span></a></li>
