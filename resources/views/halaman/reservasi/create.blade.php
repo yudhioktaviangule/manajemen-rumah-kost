@@ -37,7 +37,7 @@
             </div>
             <div class="form-group">
                 <label for="">Lama</label>
-                <input onkeyup="hitung($(this))" type="number" class="form-control" name="lama_sewa" id='lama' min=0 value="0">
+                <input onkeyup="hitung($(this))" onchange="hitung($(this))" type="number" class="form-control" name="lama_sewa" id='lama' min=0 value="0">
             </div>
             <div class="form-group">
                 <label for="">Total Pembayaran</label>
