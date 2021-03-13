@@ -95,7 +95,7 @@
                 data.map(value=>{
                     const {metode,sisa:{lunas:lns},created_at,nomor,name:keterangan,penghuni:{name:namaPenyewa},pembayaran:jumlah,kamar:{nomor:nokamar}}= value;
                     const tanggal = moment(created_at).format('DD-MM-YYYY');
-                    total+=jumlah;
+                    total+=parseInt(jumlah);
                     html+=`
                         <tr>
                             <td class='text-center'>${tanggal}</td>
