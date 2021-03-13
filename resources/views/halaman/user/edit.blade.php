@@ -44,8 +44,9 @@
             <div class="form-group">
                 <label for="">Level</label>
                 <select name="level" id="" class="form-control">
-                    <option value="admin">ADMIN</option>
-                    <option value="user">USER</option>
+                    <option value=''>Pilih Hak Akses</option>
+                    <option value='admin'>ADMIN</option>
+                    <option value='karyawan'>KARYAWAN</option>
                 </select>
             </div> 
             
