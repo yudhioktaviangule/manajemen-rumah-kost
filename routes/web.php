@@ -17,6 +17,7 @@ use App\Http\Controllers\Web\PengeluaranController;
 use App\Http\Controllers\Web\LaporanPengeluaran;
 use App\Http\Controllers\Web\LaporanPemasukan;
 use App\Http\Controllers\Web\LaporanController;
+use App\Http\Controllers\Web\LanjutNgekostController;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Client\PenghuniPembayaranController;
 Route::get('/', function () {
@@ -41,6 +42,7 @@ Route::resource('pengeluaran',PengeluaranController::class);
 Route::resource('laporan',LaporanController::class);
 Route::resource('laporan_pengeluaran',LaporanPengeluaran::class);
 Route::resource('laporan_pemasukan',LaporanPemasukan::class);
+Route::resource('lanjut',LanjutNgekostController::class);
 Route::get('daftar_bayar',[PembayaranController::class,'df_bayar'])->name('df.bayar');
 
 Route::get('hash/{nilai}',function($nilai){

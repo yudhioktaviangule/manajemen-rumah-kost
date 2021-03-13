@@ -51,7 +51,7 @@
       </div>
       <div class="box-footer">
             <a href="{{ route('pindah_kamar.create') }}?id={{$data->getSewa()->id}}" class="btn btn-primary"><i class="fa fa-exchange"></i> Pindah Kamar</a>
-            <a href="#" class="btn btn-info"><i class="fa fa-refresh"></i> Lanjut</a>
+            <a href="{{ route('lanjut.show',['lanjut'=>$data->getSewa()->id]) }}" class="btn btn-warning"><i class="fa fa-refresh"></i> Tambah Lama Sewa</a>
             <a href="{{ route('penghuni.bayar',['penyewa_id'=>$data->id]) }}" class="btn btn-success"><i class="fa fa-get-pocket"></i> Pembayaran</a>
             <a href="{{ route('penyewa.checkout',['kamar_sewa_id'=>$data->getSewa()->id]) }}" class="btn btn-danger"><i class="fa fa-sign-out"></i> Checkout</a>
       </div>
