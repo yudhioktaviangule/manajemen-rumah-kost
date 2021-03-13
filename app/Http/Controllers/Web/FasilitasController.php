@@ -43,6 +43,7 @@ class FasilitasController extends Controller{
         $post = $request->only('keterangan','kamar_id','aset_id');
         $post['kondisi'] = $request->status;
         $fasilitas = new Fasilitas();
+        dd($post);
         $fasilitas->fill($post);
         $fasilitas->save();
         return redirect(route('fasilitas.kamar.terpilih',['kamar_id'=>$post['kamar_id']]));
