@@ -12,7 +12,7 @@ class Fasilitas extends Model
         'kamar_id',
         'aset_id',
         'keterangan',
-        'status'
+        'kondisi'
     ];
 
     public function getKamar()
