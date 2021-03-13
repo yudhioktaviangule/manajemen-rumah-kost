@@ -41,6 +41,7 @@ class FasilitasController extends Controller{
     public function store(){
         $request = $this->request; 
         $post = $request->only('keterangan','kamar_id','aset_id');
+        $post['kondisi'] = $request->status;
         $fasilitas = new Fasilitas();
         $fasilitas->fill($post);
         $fasilitas->save();
