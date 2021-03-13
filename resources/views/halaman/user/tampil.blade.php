@@ -35,7 +35,11 @@
                 <td>{{ strtoupper($value->level)}}</td>
                 <td class='text-right'>
                     <a href='{{ route("user.show",["user"=>$value->id]) }}'  class="btn btn-sm btn-success"><i class="fa fa-eye"></i> Lihat</a>
-                    <a href='{{ route("user.edit",["user"=>$value->id]) }}'  class="btn btn-sm btn-info"><i class="fa fa-edit"></i> Edit</a>
+                    @if($value->level==='penyewa')
+                      <a href='#'  class="btn btn-sm btn-default"><i class="fa fa-edit"></i> Edit</a>
+                    @else
+                      <a href='{{ route("user.edit",["user"=>$value->id]) }}'  class="btn btn-sm btn-info"><i class="fa fa-edit"></i> Edit</a>
+                    @endif
                     @if($value->level==='admin')
                       <a href='#' class="btn btn-sm btn-default"><i class="fa fa-times"></i> Hapus</a>
                     @else
