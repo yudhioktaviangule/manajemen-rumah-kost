@@ -105,7 +105,7 @@
                             <td class='text-left'>${namaPenyewa}</td>
                             <td class='text-center'>${metode.toUpperCase()}</td>
                             <td class='text-center'>${(lns?"LUNAS":"BELUM LUNAS")}</td>
-                            <td class='text-right'>${jumlah.toLocaleString()}</td>
+                            <td class='text-right'>${parseInt(jumlah).toLocaleString()}</td>
                       
                         </tr>
                     `
