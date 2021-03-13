@@ -94,7 +94,7 @@
                 data.map(value=>{
                     const {admin:{name:admin},nominal,pengeluaran,nomor,keterangan,status,created_at}= value;
                     const tanggal = moment(created_at).format('DD-MM-YYYY');
-                    total+=nominal
+                    total+=parseInt(nominal)
                     html+=`
                         <tr>
                             <td class='text-center'>${tanggal}</td>
@@ -103,7 +103,7 @@
                             <td class='text-left'>${admin}</td>
                             <td class='text-center'>${status.toUpperCase()}</td>
                             <td class='text-center'>${keterangan}</td>
-                            <td class='text-right'>${nominal.toLocaleString()}</td>
+                            <td class='text-right'>${parseInt(nominal).toLocaleString()}</td>
                         </tr>
                     `
                 })
