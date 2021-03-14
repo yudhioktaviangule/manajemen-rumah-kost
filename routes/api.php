@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\LapKeluarApi;
 use App\Http\Controllers\Api\SelectTwo;
 use App\Http\Controllers\Api\MorrisApi;
 use App\Http\Controllers\Api\LapMasukApi;
+use App\Http\Controllers\Api\DashboardApi;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
@@ -34,4 +35,9 @@ Route::group(['prefix'=>'select2'],function(){
 Route::group(['prefix'=>'lap'],function(){
     Route::resource('api_lap_keluar',LapKeluarApi::class);
     Route::resource('api_lap_masuk',LapMasukApi::class);
+});
+
+Route::group(['prefix'=>'dashboard'],function(){
+    Route::get('dash_kamar',[DashboardApi::class,'kamar'])->name('dashboard.kamar');
+    Route::get('dash_money',[DashboardApi::class,'money'])->name('dashboard.money');
 });
