@@ -23,10 +23,13 @@ class LanjutNgekostController extends Controller{
         $post = $request->only('lama_sewa');
         $id = $request->kamar_sewa_id;
         $ks = KamarSewa::find($id);
+        $kamar = $ks->getKamar();
+        $total = $kamar->harga * $post['lama_sewa'];
         if($ks==NULL):
             return redirect()->back();
         endif;
         $ks->lama_sewa = $request->lama_sewa;
+        $ks->total_sewa = $total;
         $ks->save();
         return redirect(route('penyewa.show',['penyewa'=>$ks->penyewa_id]));
     }

@@ -29,10 +29,7 @@ Route::group(['prefix'=>'select2'],function(){
     Route::get('api.cek.kamar.in.fas',[SelectTwo::class,'getKamarFas'])->name('api.select2.kamar.in.fas');
     Route::get('api.cek.fas/{id_kamar}',[SelectTwo::class,'getFasilitas'])->name('api.select2.fas');
 });
-Route::group(['prefix'=>'morris'],function(){
-    Route::get('masuk.keluar',[MorrisApi::class,'masuk_keluar'])->name('chart_pemasukan');
-    Route::get('masuk.keluar_skripi',[MorrisApi::class,'skripi'])->name('chart_pengeluaran');
-});
+
 
 Route::group(['prefix'=>'lap'],function(){
     Route::resource('api_lap_keluar',LapKeluarApi::class);
