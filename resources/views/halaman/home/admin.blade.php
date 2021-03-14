@@ -102,7 +102,7 @@
                 let tmr = setInterval(()=>{
                     let cnt = isCurrency?xcnt.toLocaleString():xcnt;
                     if(nnt==150){
-                        cnt=to.toLocaleString();
+                        cnt=parseInt(to).toLocaleString();
                         $(obj).html(cnt);
                         clearInterval(tmr);
                     }
