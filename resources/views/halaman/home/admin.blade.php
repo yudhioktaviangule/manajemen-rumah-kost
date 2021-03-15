@@ -29,7 +29,6 @@
                 </div>
             </div>
         </div>
-        
     </div>
     <div class="row">
         <div class="col-md-12">
@@ -90,12 +89,28 @@
         </div>
         <div class="col-md-4">
         </div>
-    </div>    
+    </div>
+    <div class="row">
+        <div class="col-md-7"></div>
+        <div class="col-md-5">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Jumlah Penghuni</h3>
+                </div>
+                <div class="box-body">
+                    <div class="chartjs-wrapper">
+                        <canvas id="pie-canvas" class='chartjs'></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('jscript')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.bundle.min.js"></script>
     <script>
         $(document).ready(()=>{
-            let jmlKamar,kamarKosong,kamarTerisi;
+            
             const doTimer = (obj,to,plus=1,isCurrency=false)=>{
                 let xcnt =0;
                 let nnt = 0;
@@ -133,6 +148,31 @@
                     doTimer($("#jumlah-bersih-keuntungan"),keuntungan,1342,true);
                     doTimer($("#jumlah-pemasukan"),pemasukan,1342,true);
                     doTimer($("#jumlah-pengeluaran"),pengeluaran,1342,true);
+                    $.ajax({
+                        url:`{{route('dashboard.huni')}}`,
+
+                    }).done(responseHuni=>{
+                        const { data } = responseHuni;
+                        let canvas = $("#pie-canvas")[0]
+                        const cfg = {
+                            type:'pie',
+                            data:{
+                                labels:[
+                                    'Laki Laki',
+                                    'Perempuan'
+                                ],
+                                datasets: [{
+                                    data: data,
+                                    backgroundColor:[
+                                        '#36a2eb',
+                                        '#ff6384',
+                                    ]
+                                }],
+                            }
+                        };
+                        const chart = new Chart(canvas.getContext('2d'), cfg);
+
+                    })
                 });
             });
         });

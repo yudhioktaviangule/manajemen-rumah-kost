@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Kamar;
 use App\Models\Pembayaran;
 use App\Models\Pengeluaran;
+use App\Models\Penyewa;
 use Carbon\Carbon;
 class DashboardApi extends Controller
 {
@@ -52,6 +53,24 @@ class DashboardApi extends Controller
             'pengeluaran' => $pengeluaran,
             'keuntungan' => $keuntungan>0? $keuntungan : 0,
         ];
+        return response()->json($json);
+    }
+
+    private function penghuniAktif($jk='laki-laki')
+    {
+        $penyewa = Penyewa::whereIn('id',function($q){
+                    $q->select('penyewa_id')->from('users')->where('aktif','aktif');
+                })
+                ->where('jenis_kelamin',$jk)
+                ->count();
+        return $penyewa;
+    }
+
+    public function huni()
+    {
+        $l = $this->penghuniAktif('laki-laki');        
+        $p = $this->penghuniAktif('perempuan');        
+        $json = ['data'=>[$l,$p]];
         return response()->json($json);
     }
 }
