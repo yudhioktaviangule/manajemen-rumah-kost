@@ -95,7 +95,7 @@
         <div class="col-md-5">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Jumlah Penghuni</h3>
+                    <h3 class="box-title">Jumlah Penghuni Aktif</h3>
                 </div>
                 <div class="box-body">
                     <div class="chartjs-wrapper">
