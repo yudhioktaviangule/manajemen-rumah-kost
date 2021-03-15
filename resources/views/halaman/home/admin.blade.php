@@ -91,7 +91,18 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-7"></div>
+        <div class="col-md-7">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Penghuni</h3>
+                </div>
+                <div class="box-body">
+                    <div class="chartjs-wrapper">
+                        <canvas id="bar-canvas" class='chartjs'></canvas>
+                    </div>
+                </div>
+            </div>        
+        </div>
         <div class="col-md-5">
             <div class="box">
                 <div class="box-header">
@@ -170,8 +181,34 @@
                                 }],
                             }
                         };
-                        const chart = new Chart(canvas.getContext('2d'), cfg);
-
+                        const chartPie = new Chart(canvas.getContext('2d'), cfg);
+                        $.ajax({
+                            url:`{{route('dashboard.daftar_huni_bulanan')}}`
+                        }).done(responseBar=>{
+                            const h = responseBar;
+                            const barCanvas = $("#bar-canvas");
+                            const bln = 'Jan,Feb,Mar,Apr,Mei,Jun,Jul,Agust,Sep,Okt,Nov,Des';
+                            const labels = bln.split(',');
+                            const lcfg = {
+                                type:'bar',
+                                
+                                data:{
+                                    labels:labels,
+                                    datasets:[
+                                        {
+                                            label:'Penghuni',
+                                            data: h,
+                                            barPercentage: 1,
+                                            barThickness: 10,
+                                            maxBarThickness: 9,
+                                            minBarLength: 2,
+                                            backgroundColor:'#36a2eb',
+                                        }
+                                    ]
+                                }
+                            }
+                            const chartBar = new Chart(barCanvas[0].getContext('2d'),lcfg);
+                        })
                     })
                 });
             });

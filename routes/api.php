@@ -41,4 +41,5 @@ Route::group(['prefix'=>'dashboard'],function(){
     Route::get('dash_kamar',[DashboardApi::class,'kamar'])->name('dashboard.kamar');
     Route::get('dash_money',[DashboardApi::class,'money'])->name('dashboard.money');
     Route::get('dash_huni',[DashboardApi::class,'huni'])->name('dashboard.huni');
+    Route::get('dash_daftar_huni_bulanan',[DashboardApi::class,'daftarHuniBulanan'])->name('dashboard.daftar_huni_bulanan');
 });

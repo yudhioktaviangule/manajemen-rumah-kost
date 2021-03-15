@@ -73,4 +73,34 @@ class DashboardApi extends Controller
         $json = ['data'=>[$l,$p]];
         return response()->json($json);
     }
+
+    private function penghuni($awal,$akhir)
+    {
+        $data = Penyewa::whereBetween('created_at',[$awal,$akhir])
+                    ->whereIn('id',function($q){
+                        $q->select('penyewa_id')->from('users')
+                        ->where('aktif','aktif')
+                        ->orWhere('aktif','checkout');
+                    })->count();
+        return $data;
+    }
+
+
+    public function daftarHuniBulanan()
+    {
+        $awal = Carbon::now()->firstOfYear();
+        
+        $bulan = 1;
+        $dbl = [];
+        while($bulan<13){
+            $xawal = $awal->firstOfMonth();
+            $bulanAwal = $xawal->firstOfMonth()->format('Y-m-d');
+            $bulanAkhir = $xawal->lastOfMonth()->format('Y-m-d');
+            $dbl[] = $this->penghuni($bulanAwal,$bulanAkhir);
+            $awal = $awal->firstOfMonth()->addMonth(1);
+            $bulan++;
+        }
+        $json=$dbl;
+        return response()->json($json);
+    }
 }
