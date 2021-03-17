@@ -2,7 +2,7 @@
 @extends('template.index')
 @section('judul','Virtual Account Penghuni')
 @section('content')
-<div class="col-md-12 col-xs-12">
+<div class="col-md-6 col-xs-12 col-md-offset-3">
     <div class="box">
         @csrf
       <div class="box-header with-border">
@@ -18,42 +18,39 @@
       <div class="box-body">
             <div class="form-group">
                 <label for="">NIK</label>
-                <p>{{$data->nik}}</p>
+                <input type="text" readonly value="{{$data->nik}}" class="form-control">
+                
             </div>
             <div class="form-group">
                 <label for="">No. Kamar</label>
-                <p>{{$data->getKamar()->nomor}}</p>
+                <input type="text" value="{{$data->getKamar()->nomor}}" readonly="readonly" class="form-control">
             </div>
             <div class="form-group">
                 <label for="">Tanggal Check-in</label>
-                <p><i class="fa fa-calendar-check-o"></i> {{\Carbon\Carbon::parse($data->getSewa()->created_at)->format('d-m-Y')}} </p>
+                <input type="text" readonly class="form-control" value="{{\Carbon\Carbon::parse($data->getSewa()->created_at)->format('d-m-Y')}} ">
             </div>
             <div class="form-group">
                 <label for="">Lama Sewa</label>
-                <p>{{$data->getSewa()->lama_sewa}} Bulan</p>
+                <input type="text" value="{{$data->getSewa()->lama_sewa}} Bulan" readonly class="form-control">
             </div>
             <div class="form-group">
                 <label for="">Tanggal Check-out</label>
-                <p><i class="fa fa-calendar-check-o"></i> {{\Carbon\Carbon::parse($data->getSewa()->created_at)->addMonths($data->getSewa()->lama_sewa)->format('d-m-Y')}} </p>
+                <input type="text" value="{{\Carbon\Carbon::parse($data->getSewa()->created_at)->addMonths($data->getSewa()->lama_sewa)->format('d-m-Y')}}" readonly class="form-control"></input>
             </div>
             <div class="form-group">
                 <label for="">Jumlah Tagihan</label>
-                <p>Rp. {{number_format($data->getSewa()->total_sewa)}} </p>
+                <input type="text" readonly value="Rp. {{number_format($data->getSewa()->total_sewa)}},-" id="" class="form-control">
             </div>
             
-            <div class="form-group">
-                <label for="">Jumlah Pembayaran</label>
-                
-            </div>
             
             
             
       </div>
       <div class="box-footer">
-            <a href="{{ route('pindah_kamar.create') }}?id={{$data->getSewa()->id}}" class="btn btn-primary"><i class="fa fa-exchange"></i> Pindah Kamar</a>
-            <a href="{{ route('lanjut.show',['lanjut'=>$data->getSewa()->id]) }}" class="btn btn-warning"><i class="fa fa-refresh"></i> Tambah Lama Sewa</a>
-            <a href="{{ route('penghuni.bayar',['penyewa_id'=>$data->id]) }}" class="btn btn-success"><i class="fa fa-get-pocket"></i> Pembayaran</a>
-            <a href="{{ route('penyewa.checkout',['kamar_sewa_id'=>$data->getSewa()->id]) }}" class="btn btn-danger"><i class="fa fa-sign-out"></i> Checkout</a>
+            <a href="{{ route('pindah_kamar.create') }}?id={{$data->getSewa()->id}}" class="btn btn-sm btn-primary"><i class="fa fa-exchange"></i> Pindah Kamar</a>
+            <a href="{{ route('lanjut.show',['lanjut'=>$data->getSewa()->id]) }}" class="btn btn-sm btn-warning"><i class="fa fa-refresh"></i> Tambah Lama Sewa</a>
+            <a href="{{ route('penghuni.bayar',['penyewa_id'=>$data->id]) }}" class="btn btn-sm btn-success"><i class="fa fa-get-pocket"></i> Pembayaran</a>
+            <a href="{{ route('penyewa.checkout',['kamar_sewa_id'=>$data->getSewa()->id]) }}" class="btn btn-sm btn-danger"><i class="fa fa-sign-out"></i> Checkout</a>
       </div>
     </div >
 
