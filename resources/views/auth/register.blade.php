@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @php
     $kamars = \App\Models\Kamar::where("status","ready")->get();
+    
 @endphp
 @section('content')
 <div class="container">
@@ -10,6 +11,19 @@
                 <div class="card-header">{{ __('Regitrasi') }}</div>
 
                 <div class="card-body">
+                    @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>
+                        Terjadi kesalahan
+                        </strong> 
+                        
+                        @foreach ($errors->all() as $error)
+                                    <p>{{ $error }}</p>
+                        @endforeach
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
+                            
+                            
+                        
+                    @endif
                     <form method="POST" action="{{ route('myregister.store') }}">
                         @csrf
 
