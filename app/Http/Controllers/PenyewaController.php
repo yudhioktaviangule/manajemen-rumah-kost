@@ -10,11 +10,10 @@ use App\Models\Kamar;
 use App\Models\User;
 class PenyewaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct() {
+        $this->middleware("auth");
+        $this->middleware("auth.admin");
+    }
     public function index()
     {
    

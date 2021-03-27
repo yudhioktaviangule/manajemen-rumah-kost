@@ -5,12 +5,16 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\UserReq;
+use App\Models\Kamar;
+use App\Models\KamarSewa;
+
 class UserController extends Controller
 {
     private $request;
    public function __construct(Request $Re) {
        $this->request = $Re;
        $this->middleware('auth');
+       $this->middleware('auth.admin');
    }
     public function index()
     {
@@ -118,10 +122,15 @@ class UserController extends Controller
     public function aktifasi($id)
     {
         $Pemakai=User::find($id);
+        
         if ($Pemakai!=NULL) {
+            $ks = KamarSewa::where('penyewa_id',$Pemakai->penyewa_id)->first();
+            $kamar = Kamar::find($ks->kamar_id);
+            $kamar->status="disewa";
+            $kamar->save();
             $Pemakai->update(['aktif'=>'aktif']);
             $user = $Pemakai;
-            return redirect(route('reservasi.create')."?id=$user->penyewa_id");
+            return redirect()->back();
         }
     }
 }

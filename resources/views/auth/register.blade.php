@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@php
+    $kamars = \App\Models\Kamar::where("status","ready")->get();
+@endphp
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -12,7 +14,7 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nama ') }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -71,7 +73,7 @@
                             <label for="nik" class="col-md-4 col-form-label text-md-right">{{ __('NIK') }}</label>
 
                             <div class="col-md-6">
-                                <input id="nik" type="text" class="form-control @error('nik') is-invalid @enderror" name="nik" value="{{ old('nik') }}" required autocomplete="nik" autofocus>
+                                <input id="nik" maxlength="16" type="text" class="form-control @error('nik') is-invalid @enderror" name="nik" value="{{ old('nik') }}" required autocomplete="nik" autofocus>
 
                                 @error('nik')
                                     <span class="invalid-feedback" role="alert">
@@ -85,7 +87,7 @@
                             <label for="hp" class="col-md-4 col-form-label text-md-right">{{ __('No Hp') }}</label>
 
                             <div class="col-md-6">
-                                <input id="hp" type="text" class="form-control @error('hp') is-invalid @enderror" name="hp" value="{{ old('hp') }}" required autocomplete="hp" autofocus>
+                                <input id="hp" maxlength="12" type="text" class="form-control @error('hp') is-invalid @enderror" name="hp" value="{{ old('hp') }}" required autocomplete="hp" autofocus>
 
                                 @error('hp')
                                     <span class="invalid-feedback" role="alert">
@@ -97,18 +99,15 @@
 
                         <div class="form-group row">
                             <label for="pekerjaan" class="col-md-4 col-form-label text-md-right">{{ __('Pekerjaan') }}</label>
-
                             <div class="col-md-6">
-
                                 <select id="pekerjaan" name="pekerjaan" class='form-control'>
-                                    
                                     <option value="pelajar">Pelajar/Mahasiswa</option>
                                     <option value="pns">PNS</option>
                                     <option value="swasta">Pekerja Swasta</option>
                                 </select>
-
                             </div>
                         </div>
+                 
 
                         <div class="form-group row">
                             <label for="jk" class="col-md-4 col-form-label text-md-right">{{ __('Jenis Kelamin') }}</label>
@@ -121,6 +120,23 @@
                                 </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="kamar_id" class="col-md-4 col-form-label text-md-right">Nomor Kamar</label>
+                            <div class="col-md-6">
+                                <select id="kamar_id" name="kamar_id" class='form-control'>
+                                    @foreach($kamars as $kamar => $value)
+                                        <option value="{{ $value->id }}">{{$value->nomor}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="lama_sewa" class="col-md-4 col-form-label text-md-right">Lama Sewa(Bulan)</label>
+                            <div class="col-md-6">
+                                <input required min=1 value=1 id="lama_sewa" type="number" class="form-control @error('lama_sewa') is-invalid @enderror" name="lama_sewa" required autocomplete="off">
+                            </div>
+                        </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

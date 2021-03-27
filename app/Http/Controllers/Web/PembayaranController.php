@@ -13,12 +13,15 @@ class PembayaranController extends Controller{
     public function __construct(Request $request){
         $this->request = $request; 
         $this->middleware('auth');
+        $this->middleware('auth.admin',['except'=>['store']]);
+        
     }
     public function index(){
         $request = $this->request; 
         return view("halaman.pembayaran.index");
     }
     public function create($kamar=''){
+        $this->middleware('auth.admin');
         $request = $this->request; 
         $skid = $kamar;
         if($skid==NULL):
@@ -85,20 +88,25 @@ class PembayaranController extends Controller{
             'user_id'         => $user_id,
             'virtual_account' => $virtual_account,
         ];
-        
-        $pbayaran = new Pembayaran();
-        $pbayaran->fill($data);
-        $pbayaran->save();
-        
-        $sum = Pembayaran::where('kamar_sewa_id',$post->kamar_sewa_id)->sum('pembayaran');
-        if($sum<$kamarsewa->total_sewa):
-            $tanggal = Carbon::now()->addMonths(1);
-        else:
-            $tanggal = Carbon::parse($kamarsewa->created_at)->addMonths($kamarsewa->lama_sewa);
-        endif;
-        $kamarsewa->jatuh_tempo = $tanggal;
-        $kamarsewa->save();
-        $penyewa_id = $kamarsewa->penyewa_id;
+        $byr = Pembayaran::where("kamar_sewa_id",$post->kamar_sewa_id)->sum('pembayaran');
+        $penyewa_id = $kamarsewa->penyewa_id;  
+        $rto = $byr+$post->jumlah_bayar <= $kamarsewa->total_sewa;
+        //dd($rto);
+        if($rto){
+            $pbayaran = new Pembayaran();
+            $pbayaran->fill($data);
+            $pbayaran->save();
+            
+            $sum = Pembayaran::where('kamar_sewa_id',$post->kamar_sewa_id)->sum('pembayaran');
+            if($sum<$kamarsewa->total_sewa):
+                $tanggal = Carbon::now()->addMonths(1);
+            else:
+                $tanggal = Carbon::parse($kamarsewa->created_at)->addMonths($kamarsewa->lama_sewa);
+            endif;
+            $kamarsewa->jatuh_tempo = $tanggal;
+            $kamarsewa->save();
+                      
+        }
         $v = Auth::user()->level==='penyewa' ? 'clntpembayaran.bayar' : 'penghuni.bayar';
         return redirect(route($v,['penyewa_id'=>$penyewa_id]));
     }

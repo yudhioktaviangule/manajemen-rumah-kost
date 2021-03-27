@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kamar;
+use App\Models\KamarSewa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\Penyewa;
+use Carbon\Carbon;
+
 class PenyewaRegister extends Controller{
     private $request;
     public function __construct(Request $request) {
@@ -34,13 +38,15 @@ class PenyewaRegister extends Controller{
         $penyewa_db = new Penyewa();
         $penyewa_db->fill($penyewa);
         $penyewa_db->save();
+
         $lfalse = true;
+        $penyewa_id = $penyewa_db->id;
         while(!$lfalse==NULL):
-            $rand = Str::random('50');
+            $rand = Str::random('100');
             $lfalse = User::where('remember_token',$rand)->first();
         endwhile;
         $users = [
-            'penyewa_id' => $penyewa_db->id,
+            'penyewa_id' => $penyewa_id,
             'name'  =>  $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
@@ -51,6 +57,22 @@ class PenyewaRegister extends Controller{
         $user = new User();
         $user->fill($users);
         $user->save();
+        
+        $tanggal = Carbon::now()->format("Y-m-d");
+        $kamar = Kamar::find($request->kamar_id);
+        $kamar->status="reserved";
+        $kamar->save();
+        $tot = $kamar->harga*$request->lama_sewa;
+        $ks = [
+            'jatuh_tempo' => $tanggal,
+            'lama_sewa' => $request->lama_sewa,
+            'penyewa_id' => $penyewa_id,
+            'kamar_id'=>$request->kamar_id,
+            'total_sewa'=>$tot,
+        ];
+        $kmr = new KamarSewa();
+        $kmr->fill($ks);
+        $kmr->save();
         return redirect(route('login'));
 
         

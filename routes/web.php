@@ -20,6 +20,8 @@ use App\Http\Controllers\Web\LaporanController;
 use App\Http\Controllers\Web\LanjutNgekostController;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Client\PenghuniPembayaranController;
+use App\Http\Controllers\ErrController;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -59,3 +61,5 @@ Route::get("penyewa.checkout/{kamar_sewa_id}",[PenyewaController::class,'checkou
 Route::resource('clntpembayaran',PenghuniPembayaranController::class);
 Route::get('clnt_byr_penghuni/{penyewa_id}',[PenghuniPembayaranController::class,'cek_va'])->name('clntpembayaran.bayar');
 Route::get('clnt_req_bayar/{kamar_sewa_id}',[PenghuniPembayaranController::class,'create_byr'])->name('clntpembayaran.createbayar');
+
+Route::get('forbidden',[ErrController::class,'forbidden'])->name('forbidden_kingdom');

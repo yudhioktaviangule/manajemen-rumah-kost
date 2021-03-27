@@ -16,7 +16,7 @@ class CreateKamarsTable extends Migration
         Schema::create('kamars', function (Blueprint $table) {
             $table->id();
             $table->string('nomor')->unique();
-            $table->enum('status',['ready','disewa']);
+            $table->enum('status',['ready','disewa','reserved']);
             $table->double('harga');
             $table->enum('is_locked',['no','yes'])->default('no');
             $table->timestamps();

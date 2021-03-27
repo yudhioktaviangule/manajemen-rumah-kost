@@ -10,6 +10,7 @@ class TambahAsetController extends Controller{
     public function __construct(Request $request){
         $this->request = $request; 
         $this->middleware('auth');
+        $this->middleware('auth.admin');
     }
     public function index(){
         $request = $this->request; 
