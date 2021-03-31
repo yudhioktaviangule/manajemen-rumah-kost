@@ -31,7 +31,7 @@
             </div>
             <div class='form-group'>
                 <label for='lama_sewa'>Lama Sewa</label>
-                <input value='{{ $ks->lama_sewa }}' required placeholder='Input Lama Sewa' type='number' class='form-control' id='lama_sewa' name='lama_sewa'>
+                <input value='0' required placeholder='Input Lama Sewa' type='number' class='form-control' id='lama_sewa' name='lama_sewa'>
             </div>
             <input type="hidden" name='kamar_sewa_id' value="{{ $ks->id }}">
       </div>
