@@ -156,6 +156,14 @@
                                         <input required min=1 value=1 id="lama_sewa" type="number" class="form-control @error('lama_sewa') is-invalid @enderror" name="lama_sewa" required autocomplete="off">
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                            <div class="col-4"></div>
+                                            <div class="text-right col-6">
+                                                <button type="submit" class="btn btn-primary ">
+                                                    {{ __('Register') }}
+                                                </button>
+                                            </div>
+                                        </div>
                                 
                             </div>
                         </div>
@@ -163,13 +171,7 @@
                             <div class="col">
                                 <div class="container-fluid">
                                     <div class="container-fluid">
-                                        <div class="form-group">
-                                            <div class="text-right">
-                                                <button type="submit" class="btn btn-primary ">
-                                                    {{ __('Register') }}
-                                                </button>
-                                            </div>
-                                        </div>
+                                        
                                     
                                     </div>
                                 </div>
