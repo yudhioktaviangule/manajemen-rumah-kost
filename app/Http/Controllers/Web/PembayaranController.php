@@ -104,6 +104,7 @@ class PembayaranController extends Controller{
                 $tanggal = Carbon::parse($kamarsewa->created_at)->addMonths($kamarsewa->lama_sewa);
             endif;
             $kamarsewa->jatuh_tempo = $tanggal;
+        
             $kamarsewa->save();
                       
         }
