@@ -44,7 +44,7 @@ class LoginController extends Controller
     {
         $req  = $this->credentials($request);
         $data = User::where('email',$req['email'])
-                        ->where('aktif',$req['aktif'])
+                        ->where('aktif','aktif')
                         ->first();
         if($data!=NULL):
             return $this->guard()->attempt(
