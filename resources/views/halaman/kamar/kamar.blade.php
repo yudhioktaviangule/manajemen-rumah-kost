@@ -1,19 +1,19 @@
 @extends('template.index')
 
-@section('judul','Kamar')
+@section('judul','Data Kamar')
 @section('content')
-<div class="box">
-  <div class="box-header with-border">
-    <h3 class="box-title">Kamar</h3>
-    <div class="box-tools pull-right">
+<div class="card">
+  <div class="card-header with-border">
+    <h3 class="card-title">Kelola data kamar</h3>
+    <div class="card-tools pull-right">
       <a href="{{ route('kamar.create') }}" class="btn btn-primary btn-sm">
           Tambah Kamar
       </a>
     </div>
-    <!-- /.box-tools -->
+    <!-- /.card-tools -->
   </div>
-  <!-- /.box-header -->
-  <div class="box-body">
+  <!-- /.card-header -->
+  <div class="card-body">
     <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
@@ -59,7 +59,7 @@
     </div>
   </div>
   
-  <div class="box-footer">
+  <div class="card-footer">
     <form action="{{ route('kamar.index') }}" id='hapus-kamar' method="POST">
         @csrf
         <input type="hidden" name='_method' value='delete'>
@@ -69,13 +69,19 @@
 </div>
 @endsection
 @section("css")
-    <link rel="stylesheet" href="{{asset('aset/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('lte3/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{asset('lte3/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{asset('lte3/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
+
 @endsection
 
 @section('jscript')
-    <script src="{{asset('aset/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('aset/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
-    
+    <script src="{{asset('lte3/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('lte3/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('lte3/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+    <script src="{{asset('lte3/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('lte3/plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('lte3/plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
     <script>
         $(document).ready(()=>{
             window.hapus=(id)=>{

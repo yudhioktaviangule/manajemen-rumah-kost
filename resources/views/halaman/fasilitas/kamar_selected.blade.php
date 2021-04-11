@@ -2,16 +2,19 @@
 
 @section('judul','Aset Kamar')
 @section('content')
-    <div class="box">
-        <div class="box-header with-border">
-            <h3 class="box-title">No Kamar : {{$data->nomor}}</h3>
-            <div class="box-tools">
+    <div class="card">
+        <div class="card-header with-border">
+            <h3 class="card-title">No Kamar : {{$data->nomor}}</h3>
+            <div class="card-tools">
+                <a href="{{ route('kamar.index') }}" class="btn btn-primary">
+                    Kembali
+                </a>
                 <a href="{{ route('fasilitas.create') }}?id={{$data->id}}" class="btn btn-primary">
-                    TAMBAH Aset Kamar
+                    Tambah Aset Kamar
                 </a>
             </div>
         </div>
-        <div class="box-body">
+        <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead>

@@ -2,28 +2,28 @@
 @section('judul','Dashboard')
 @section('content')
     <div class="row">
-        <div class="col-md-4">
-            <div class="box bg-purple">
-                <div class="box-body text-center">
-                    <i class="fa fa-bed fa-2x"></i>
+        <div class="col-md-4 col-12">
+            <div class="card bg-purple">
+                <div class="card-body text-center">
+                    <i class="fas fa-bed fa-2x"></i>
                     <h3 id='jumlah-kamar'>0</h3>
                     <p>Jumlah Kamar</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="box bg-blue">
-                <div class="box-body text-center">
-                    <i class="fa fa-bed fa-2x"></i>
+        <div class="col-md-4 col-12">
+            <div class="card bg-blue">
+                <div class="card-body text-center">
+                    <i class="fas fa-bed fa-2x"></i>
                     <h3 id='jumlah-kamar-terisi'>0</h3>
                     <p> Kamar Terisi</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="box bg-red">
-                <div class="box-body text-center">
-                    <i class="fa fa-bed fa-2x"></i>
+        <div class="col-md-4 col-12">
+            <div class="card bg-red">
+                <div class="card-body text-center">
+                    <i class="fas fa-bed fa-2x"></i>
                     <h3 id='jumlah-kamar-kosong'>0</h3>
                     <p> Kamar Kosong</p>
                 </div>
@@ -31,11 +31,11 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 col-12">
             <div class="row">
                 <div class="col-md-4">
-                    <div class="box bg-green">
-                        <div class="box-body">
+                    <div class="card bg-green">
+                        <div class="card-body">
                             <div class="container-fluid">
                                 <div  style='padding-left:5px;padding-right:5px; display:inline-block;
                     vertical-align: middle;float:none'>
@@ -51,8 +51,8 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="box bg-blue">
-                        <div class="box-body">
+                    <div class="card bg-blue">
+                        <div class="card-body">
                             <div class="container-fluid">
                                 <div  style='padding-left:5px;padding-right:5px; display:inline-block;
                     vertical-align: middle;float:none'>
@@ -68,12 +68,12 @@
                     </div>            
                 </div>
                 <div class="col-md-4">
-                    <div class="box bg-yellow">
-                        <div class="box-body">
+                    <div class="card bg-yellow">
+                        <div class="card-body">
                             <div class="container-fluid">
                                 <div  style='padding-left:5px;padding-right:5px; display:inline-block;
                     vertical-align: middle;float:none'>
-                                    <i class="fa fa-money fa-2x"></i>
+                                    <i class="far fa-money fa-2x"></i>
                                 </div>
                                 <div style='padding-left:5px;padding-right:5px; display:inline-block;
                     vertical-align: middle;float:none'>
@@ -92,11 +92,11 @@
     </div>
     <div class="row">
         <div class="col-md-7">
-            <div class="box">
-                <div class="box-header">
-                    <h3 class="box-title">Penghuni</h3>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Penghuni</h3>
                 </div>
-                <div class="box-body">
+                <div class="card-body">
                     <div class="chartjs-wrapper">
                         <canvas id="bar-canvas" class='chartjs'></canvas>
                     </div>
@@ -104,11 +104,11 @@
             </div>        
         </div>
         <div class="col-md-5">
-            <div class="box">
-                <div class="box-header">
-                    <h3 class="box-title">Jumlah Penghuni Aktif</h3>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Jumlah Penghuni Aktif</h3>
                 </div>
-                <div class="box-body">
+                <div class="card-body">
                     <div class="chartjs-wrapper">
                         <canvas id="pie-canvas" class='chartjs'></canvas>
                     </div>

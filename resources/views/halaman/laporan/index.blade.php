@@ -2,12 +2,12 @@
 
 @section('judul','Laporan')
 @section('content')
-<div class="box">
-  <div class="box-header with-border">
-    <h3 class="box-title">Pilih Jenis Laporan</h3>
+<div class="card">
+  <div class="card-header with-border">
+    <h3 class="card-title">Pilih Jenis Laporan</h3>
 
   </div>
-  <div class="box-body">
+  <div class="card-body">
       <div class="container-fluid">
           
               <div class="text-center">
@@ -19,11 +19,11 @@
           
       </div>
   </div>
-  <!-- /.box-body -->
-  <div class="box-footer">
-    The footer of the box
+  <!-- /.card-body -->
+  <div class="card-footer">
+    The footer of the card
   </div>
-  <!-- box-footer -->
+  <!-- card-footer -->
 </div>  
 @endsection
 

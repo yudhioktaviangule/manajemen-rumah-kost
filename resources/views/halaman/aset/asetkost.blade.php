@@ -2,15 +2,15 @@
 
 @section('judul','Aset Kost')
 @section('content')
-<div class="box">
-  <div class="box-header with-border">
-    <h3 class="box-title">Daftar Aset</h3>
-    <div class="box-tools">
+<div class="card">
+  <div class="card-header with-border">
+    <h3 class="card-title">Daftar Aset</h3>
+    <div class="card-tools">
         <a href="{{route('m_aset.create')}}" class="btn btn-sm btn-primary">Tambah Aset Kost</a>
     </div>
   </div>
-  <!-- /.box-header -->
-  <div class="box-body">
+  <!-- /.card-header -->
+  <div class="card-body">
     <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
@@ -27,13 +27,11 @@
               <tr>
                 <td>{{ $value->aset}}</td>
                 <td class='text-right'>
-                    <a title='Lihat data aset' href="{{ route('m_aset.show',['m_aset'=>$value->id]) }}" class="btn btn-xs btn-success">
-                        <i class="fa fa-eye"></i> Lihat
-                    </a>
+                    
                     <a title='Edit data aset' href="{{ route('m_aset.edit',['m_aset'=>$value->id]) }}" class="btn btn-xs btn-info">
                         <i class="fa fa-edit"></i> Ubah
                     </a>
-                    <button type="button" onclick="hapus({{$value->id}})" class="btn btn-xs btn-danger"><i class="fa fa-minus"></i> Hapus</button>
+                    <button type="button" onclick="hapus(`{{$value->id}}`)" class="btn btn-xs btn-danger"><i class="fa fa-minus"></i> Hapus</button>
                     
                 </td>
               </tr> 
@@ -44,24 +42,32 @@
         </table>
     </div>
   </div>
-  <!-- /.box-body -->
-  <div class="box-footer">
+  <!-- /.card-body -->
+  <div class="card-footer">
   <form action="{{ route('m_aset.index') }}" id='hapus-aset' method="POST">
         @csrf
         <input type="hidden" name='_method' value='delete'>
     </form>
   </div>
-  <!-- box-footer -->
+  <!-- card-footer -->
 </div>
-<!-- /.box -->
+<!-- /.card -->
 @endsection
 @section("css")
-    <link rel="stylesheet" href="{{asset('aset/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{asset('lte3/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+  <link rel="stylesheet" href="{{asset('lte3/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+  <link rel="stylesheet" href="{{asset('lte3/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
+    
 @endsection
 
 @section('jscript')
-    <script src="{{asset('aset/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('aset/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
+<script src="{{asset('lte3/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('lte3/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{asset('lte3/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{asset('lte3/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+<script src="{{asset('lte3/plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
+<script src="{{asset('lte3/plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
+    
     
     <script>
         $(document).ready(()=>{

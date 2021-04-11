@@ -2,11 +2,11 @@
 
 @section('judul','Laporan Pengeluaran')
 @section('content')
-<div class="box">
-  <div class="box-header with-border">
-    <h3 class="box-title">Laporan Pengeluaran</h3>
+<div class="card">
+  <div class="card-header with-border">
+    <h3 class="card-title">Laporan Pengeluaran</h3>
   </div>
-  <div class="box-body">
+  <div class="card-body">
         <form id='frm-cetak' target="_blank" action="{{route('laporan_pengeluaran.store')}}" method="post">
             <div id="auth"></div>
             <div class='form-group'>
@@ -24,11 +24,11 @@
             </div>
         </form>
   </div>
-  <!-- /.box-body -->
-  <div class="box-footer">
-    The footer of the box
+  <!-- /.card-body -->
+  <div class="card-footer">
+    The footer of the card
   </div>
-  <!-- box-footer -->
+  <!-- card-footer -->
 </div>  
 @endsection
 @section('jscript')

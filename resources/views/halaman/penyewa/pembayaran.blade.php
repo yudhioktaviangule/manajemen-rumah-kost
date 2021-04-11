@@ -6,16 +6,16 @@
 @extends('template.index')
 @section('judul','Pembayaran')
 @section('content')
-<div class="box">
-  <div class="box-header with-border">
-    <h3 class="box-title">Virtual Account</h3>
-    <div class="box-tools pull-right">
+<div class="card">
+  <div class="card-header with-border">
+    <h3 class="card-title">Virtual Account</h3>
+    <div class="card-tools pull-right">
         <a href="{{ route('penyewa.show',['penyewa'=>$penyewa->id]) }}" class="btn btn-sm btn-primary">Kembali</a>
     </div>
-    <!-- /.box-tools -->
+    <!-- /.card-tools -->
   </div>
-  <!-- /.box-header -->
-  <div class="box-body">
+  <!-- /.card-header -->
+  <div class="card-body">
     <div class="table-responsive">
         
         <table>
@@ -44,15 +44,15 @@
   </div>
 </div>
  
-<div class="box">
-  <div class="box-header with-border">
-    <h3 class="box-title">Riwayat Pembayaran</h3>
-    <div class="box-tools pull-right">
-        <a href="{{ route('penghuni.bayar.create',['kamar_sewa_id'=>$ks->id]) }}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>  Pembayaran</a>
+<div class="card">
+  <div class="card-header with-border">
+    <h3 class="card-title">Riwayat Pembayaran</h3>
+    <div class="card-tools pull-right">
+        <a href="{{ route('penghuni.bayar.create',['kamar_sewa_id'=>$ks->id]) }}" class="btn btn-sm btn-primary" id='pbtr'><i class="fa fa-plus"></i>  Pembayaran</a>
         <a target="_blank" href="{{ route('pembayaran.cetak',['kamar_sewa_id'=>$ks->id]) }}" class="btn btn-sm btn-success"><i class="fa fa-print"></i>  Cetak Histori Pembayaran</a>
     </div>
   </div>
-  <div class="box-body">
+  <div class="card-body">
       <table class="table table-bordered">
           <thead>
               <th>Tanggal</th>
@@ -113,12 +113,16 @@
  </div>
 
 @endsection
-@section("css")
-    <link rel="stylesheet" href="{{asset('aset/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">
-@endsection
+
 @section("jscript")
-<script src="{{asset('aset/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('aset/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
+<script>
+    $(document).ready(()=>{
+        const jbayar = parseInt(`{{$vm}}`);
+        const pbtr = $("#pbtr")
+        if(jbayar==0){
 
-
+            pbtr.hide();
+        }
+    });
+</script>
 @endsection

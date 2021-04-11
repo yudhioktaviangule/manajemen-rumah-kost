@@ -2,50 +2,53 @@
 
 @section('judul','Tambah Aset Kamar')
 @section('content')
-<div class="col-md-6 col-md-offset-3">
-    <form class="box" action="{{route('fasilitas.store')}}" method="POST">
-        @csrf
-      <div class="box-header with-border">
-        <h3 class="box-title">Data Aset Kamar</h3>
-        <div class="box-tools pull-right">
-          <a href="{{ route('fasilitas.index') }}" class="btn btn-primary btn-sm">
-              Kembali
-          </a>
-        </div>
-        <!-- /.box-tools -->
-      </div>
-      <!-- /.box-header -->
-      <div class="box-body">
-            <input type="hidden" name='kamar_id' value="{{$cek->id}}">
-            <div class="form-group">
-                <label for="">Aset Kamar</label>
-                <select name="aset_id" id='fasilitas' class="form-control">
-
-                </select>
-            </div> 
-            <div class="form-group">
-                <label for="">Kondisi</label>
-                <select name="status" id='kondisi' class="form-control">
-                    <option value="layak">Layak</option>
-                    <option value="rusak">Rusak</option>
-                </select>
-            </div> 
-            <div class="form-group">
-                <label for="">Keterangan</label>
-                <textarea name="keterangan" id="" cols="30" rows="10" class="form-control"></textarea>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <form class="card" action="{{route('fasilitas.store')}}" method="POST">
+            @csrf
+        <div class="card-header with-border">
+            <h3 class="card-title">Data Aset Kamar</h3>
+            <div class="card-tools pull-right">
+            <a href="{{ url('create_fasilitas') }}/{{$cek->id}}" class="btn btn-primary btn-sm">
+                Kembali
+            </a>
             </div>
-            <div class="form-group">
-                <button class="btn btn-success">
-                    Simpan
-                </button>
-            </div> 
-      </div>
-      <!-- /.box-body -->
-      <div class="box-footer">
-        The footer of the box
-      </div>
-      <!-- box-footer -->
-    </form>
+            <!-- /.card-tools -->
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+                <input type="hidden" name='kamar_id' value="{{$cek->id}}">
+                <div class="form-group">
+                    <label for="">Aset Kamar</label>
+                    <select name="aset_id" id='fasilitas' class="form-control">
+
+                    </select>
+                </div> 
+                <div class="form-group">
+                    <label for="">Kondisi</label>
+                    <select name="status" id='kondisi' class="form-control">
+                        <option value="layak">Layak</option>
+                        <option value="rusak">Rusak</option>
+                    </select>
+                </div> 
+                <div class="form-group">
+                    <label for="">Keterangan</label>
+                    <textarea name="keterangan" id="" cols="30" rows="10" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success">
+                        Simpan
+                    </button>
+                </div> 
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            The footer of the card
+        </div>
+        <!-- card-footer -->
+        </form>
+
+    </div>
 
 </div>
 

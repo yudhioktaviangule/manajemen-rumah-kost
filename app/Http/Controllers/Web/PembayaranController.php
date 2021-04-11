@@ -100,11 +100,12 @@ class PembayaranController extends Controller{
             $sum = Pembayaran::where('kamar_sewa_id',$post->kamar_sewa_id)->sum('pembayaran');
             if($sum<$kamarsewa->total_sewa):
                 $tanggal = Carbon::now()->addMonths(1);
+            elseif($sum==$kamarsewa->total_sewa):
+                
             else:
                 $tanggal = Carbon::parse($kamarsewa->created_at)->addMonths($kamarsewa->lama_sewa);
             endif;
             $kamarsewa->jatuh_tempo = $tanggal;
-        
             $kamarsewa->save();
                       
         }

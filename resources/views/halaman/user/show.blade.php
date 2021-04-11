@@ -13,55 +13,57 @@
         </div>
     @endif
 </p>
-<div class="col-md-6 col-md-offset-3">
-    <form class="box" action="{{route('user.store')}}" method="POST">
-        @csrf
-      <div class="box-header with-border">
-        <h3 class="box-title">Data user</h3>
-        <div class="box-tools pull-right">
-          <a href="{{ route('user.index') }}" class="btn btn-primary btn-sm">
-              Kembali
-          </a>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <form class="card" action="{{route('user.store')}}" method="POST">
+            @csrf
+        <div class="card-header with-border">
+            <h3 class="card-title">Data user</h3>
+            <div class="card-tools pull-right">
+            <a href="{{ route('user.index') }}" class="btn btn-primary btn-sm">
+                Kembali
+            </a>
+            </div>
+            <!-- /.card-tools -->
         </div>
-        <!-- /.box-tools -->
-      </div>
-      <!-- /.box-header -->
-      <div class="box-body">
-            
-            <div class="form-group">
-                <label for="">Nama</label>
-                <p>
-                    <strong>
-                        {{ $data->name }}
-                    </strong>
-                </p>
-            </div> 
-            <div class="form-group">
-                <label for="">E-Mail</label>
-                <p>
-                    <strong>
-                        {{ $data->email }}
-                    </strong>
-                </p>
-            </div> 
-            <div class="form-group">
-                <label for="">Level</label>
-                <p>
-                    <strong>
-                        {{ $data->level }}
-                    </strong>
-                </p>
-            </div> 
-            
+        <!-- /.card-header -->
+        <div class="card-body">
+                
+                <div class="form-group">
+                    <label for="">Nama</label>
+                    <p>
+                        <strong>
+                            {{ $data->name }}
+                        </strong>
+                    </p>
+                </div> 
+                <div class="form-group">
+                    <label for="">E-Mail</label>
+                    <p>
+                        <strong>
+                            {{ $data->email }}
+                        </strong>
+                    </p>
+                </div> 
+                <div class="form-group">
+                    <label for="">Level</label>
+                    <p>
+                        <strong>
+                            {{ $data->level }}
+                        </strong>
+                    </p>
+                </div> 
+                
 
-      </div>
-      <!-- /.box-body -->
-      <div class="box-footer">
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
 
-      </div>
-      <!-- box-footer -->
-    </form>
+        </div>
+        <!-- card-footer -->
+        </form>
 
+    </div>
 </div>
 
 @endsection

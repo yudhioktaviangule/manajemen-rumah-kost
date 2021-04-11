@@ -2,18 +2,18 @@
 
 @section('judul','User')
 @section('content')
-<div class="box">
-  <div class="box-header with-border">
-    <h3 class="box-title">Daftar User</h3>
-    <div class="box-tools pull-right">
+<div class="card">
+  <div class="card-header with-border">
+    <h3 class="card-title">Daftar User</h3>
+    <div class="card-tools pull-right">
       <a href="{{ route('user.create') }}" class="btn btn-primary btn-sm">
           Register User
       </a>
     </div>
-    <!-- /.box-tools -->
+    <!-- /.card-tools -->
   </div>
-  <!-- /.box-header -->
-  <div class="box-body">
+  <!-- /.card-header -->
+  <div class="card-body">
     <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
@@ -61,13 +61,13 @@
     </div>
   </div>
   
-  <!-- /.box-body -->
-  <div class="box-footer">
-    The footer of the box
+  <!-- /.card-body -->
+  <div class="card-footer">
+    The footer of the card
   </div>
-  <!-- box-footer -->
+  <!-- card-footer -->
 </div>
-<!-- /.box -->
+<!-- /.card -->
 @endsection
 @section("jscript")
   <script>

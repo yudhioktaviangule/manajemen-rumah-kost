@@ -2,42 +2,44 @@
 
 @section('judul','Pindah Kamar')
 @section('content')
-<div class="col-md-6 col-md-offset-3">
-    <form class="box" action="{{route('pindah_kamar.update',['pindah_kamar'=>$cek->id])}}" method="POST">
-        @csrf
-      <div class="box-header with-border">
-        <h3 class="box-title">{{$penyewa->name}}</h3>
-        <div class="box-tools pull-right">
-          <a href="{{ route('penyewa.show',['penyewa'=>$cek->penyewa_id]) }}" class="btn btn-primary btn-sm">
-              Kembali
-          </a>
+<div class="row justify-content-center">
+    <div class="col-md-6 col-12">
+        <form class="card" action="{{route('pindah_kamar.update',['pindah_kamar'=>$cek->id])}}" method="POST">
+            @csrf
+        <div class="card-header with-border">
+            <h3 class="card-title">{{$penyewa->name}}</h3>
+            <div class="card-tools pull-right">
+            <a href="{{ route('penyewa.show',['penyewa'=>$cek->penyewa_id]) }}" class="btn btn-primary btn-sm">
+                Kembali
+            </a>
+            </div>
+            
         </div>
         
-      </div>
-      
-      <div class="box-body">
-            <input type="hidden" name='_method' value='put'>
-            <div class="form-group">
-                <label for="">Nomor Kamar</label>
-                <select name="kamar_id" id="kamar" class="form-control">
+        <div class="card-body">
+                <input type="hidden" name='_method' value='put'>
+                <div class="form-group">
+                    <label for="">Nomor Kamar</label>
+                    <select name="kamar_id" id="kamar" class="form-control">
 
-                </select>
-            </div>
-        
+                    </select>
+                </div>
             
-            <div class="form-group">
-                <button class="btn btn-success">
-                    Simpan
-                </button>
-            </div> 
-      </div>
-      <!-- /.box-body -->
-      <div class="box-footer">
-        The footer of the box
-      </div>
-      <!-- box-footer -->
-    </form>
+                
+                <div class="form-group">
+                    <button class="btn btn-success">
+                        Simpan
+                    </button>
+                </div> 
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            The footer of the card
+        </div>
+        <!-- card-footer -->
+        </form>
 
+    </div>
 </div>
 
 @endsection
