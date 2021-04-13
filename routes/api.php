@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\SelectTwo;
 use App\Http\Controllers\Api\MorrisApi;
 use App\Http\Controllers\Api\LapMasukApi;
 use App\Http\Controllers\Api\DashboardApi;
+use App\Http\Controllers\Api\PembayaranPertahunApi;
 use App\Http\Controllers\Api\ValidasiPembayaranApi;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
@@ -39,6 +40,7 @@ Route::group(['prefix'=>'lap'],function(){
 });
 Route::group(['prefix'=>'pembayaran'],function(){
     Route::get("validasi_transfer/{ks?}",[ValidasiPembayaranApi::class,'validasiPembayaranTransfer'])->name('pembayaran.validasi_transfer');
+    Route::get("pertahun/{tahun?}",[PembayaranPertahunApi::class,'getPertahun'])->name('pembayaran.pertahun');
 });
 
 Route::group(['prefix'=>'dashboard'],function(){
