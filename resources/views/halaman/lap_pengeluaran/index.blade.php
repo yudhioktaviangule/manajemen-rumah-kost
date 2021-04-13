@@ -32,7 +32,7 @@
 </div>  
 @endsection
 @section('jscript')
-    <script src="{{asset('aset/bower_components/moment/moment.js')}}"></script>
+    
     <script>
         $(document).ready(()=>{
             window.isValid = false;

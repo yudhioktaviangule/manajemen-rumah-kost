@@ -3,13 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Log in</title>
+  <title>{{env('APP_NAME')}} | Log in</title>
 
-  <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="{{asset('lte3/plugins/fontawesome-free/css/all.min.css')}}">
-  <!-- icheck bootstrap -->
   <link rel="stylesheet" href="{{asset('lte3/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('lte3/dist/css/adminlte.min.css')}}">
@@ -25,6 +22,7 @@
       <p class="login-box-msg">Login Untuk Mulai Sesi</p>
 
       <form action="" method="post">
+        @csrf
         <div class="input-group mb-3">
           <input required type="email" name='email' class="form-control" placeholder="Email">
           <div class="input-group-append">
@@ -57,7 +55,7 @@
       <!-- /.social-auth-links -->
 
       <p class="mb-0">
-        <a href="{{route('register')}}" class="text-center">Register a new membership</a>
+        <a href="{{route('register')}}" class="text-center"><i class="fas fa-edit"></i> Booking Kamar</a>
       </p>
     </div>
     <!-- /.login-card-body -->
@@ -66,10 +64,10 @@
 <!-- /.login-box -->
 
 <!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
+<script src="{{asset('lte3/plugins/jquery/jquery.min.js')}}"></script>
 <!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="{{asset('lte3/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
+<script src="{{asset('lte3/dist/js/adminlte.min.js')}}"></script>
 </body>
 </html>

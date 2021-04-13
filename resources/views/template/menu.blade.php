@@ -8,8 +8,7 @@
                   $data
               </span>
           </span>
-      "
-      ;
+      ";
   @endphp
   
   <li class="treeview">

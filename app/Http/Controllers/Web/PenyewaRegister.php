@@ -28,6 +28,7 @@ class PenyewaRegister extends Controller{
     public function store(RegisterPenyewaPost $request){
         
             $kelamin = $request->jk;
+            
             $penyewa = [
                 'nik' =>$request->nik,
                 'name' =>$request->name,
@@ -35,6 +36,9 @@ class PenyewaRegister extends Controller{
                 'kota_asal' =>$request->kota_asal,
                 "jenis_kelamin" => $kelamin,
                 'pekerjaan' =>$request->pekerjaan,
+                'nama_contact' =>$request->nama_contact,
+                'hubungan_keluarga' =>$request->hubungan_keluarga,
+                'telepon_contact' =>$request->nomor_telepon_keluarga,
             ];
             $penyewa_db = new Penyewa();
             $penyewa_db->fill($penyewa);

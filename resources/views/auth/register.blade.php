@@ -4,11 +4,11 @@
     
 @endphp
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Regitrasi') }}</div>
+                <div class="card-header">{{ __('Regitrasi Penghuni') }}</div>
 
                 <div class="card-body">
                     @if ($errors->any())
@@ -28,8 +28,20 @@
                     <form method="POST" action="{{ route('myregister.store') }}">
                         @csrf
                         <div class="row">
-                            <div class="col">
-                            
+                            <div class="col-md-6 col-12">
+                                <div class="form-group row">
+                                    <label for="nik" class="col-md-4 col-form-label text-md-right">{{ __('NIK') }}</label>
+
+                                    <div class="col-md-6">
+                                        <input id="nik" maxlength="16" type="text" class="form-control @error('nik') is-invalid @enderror" name="nik" value="{{ old('nik') }}" required autocomplete="nik" autofocus>
+
+                                        @error('nik')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>                            
                                 <div class="form-group row">
                                     <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nama ') }}</label>
 
@@ -73,6 +85,20 @@
                                 </div>
 
                                 <div class="form-group row">
+                                    <label for="hp" class="col-md-4 col-form-label text-md-right">{{ __('No Hp') }}</label>
+
+                                    <div class="col-md-6">
+                                        <input id="hp" maxlength="12" type="text" class="form-control @error('hp') is-invalid @enderror" name="hp" value="{{ old('hp') }}" required autocomplete="hp" autofocus>
+
+                                        @error('hp')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
                                     <label for="kota_asal" class="col-md-4 col-form-label text-md-right">{{ __('Kota Asal') }}</label>
 
                                     <div class="col-md-6">
@@ -86,35 +112,10 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group row">
-                                    <label for="nik" class="col-md-4 col-form-label text-md-right">{{ __('NIK') }}</label>
+                                
 
-                                    <div class="col-md-6">
-                                        <input id="nik" maxlength="16" type="text" class="form-control @error('nik') is-invalid @enderror" name="nik" value="{{ old('nik') }}" required autocomplete="nik" autofocus>
-
-                                        @error('nik')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="hp" class="col-md-4 col-form-label text-md-right">{{ __('No Hp') }}</label>
-
-                                    <div class="col-md-6">
-                                        <input id="hp" maxlength="12" type="text" class="form-control @error('hp') is-invalid @enderror" name="hp" value="{{ old('hp') }}" required autocomplete="hp" autofocus>
-
-                                        @error('hp')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
                             </div>
-                            <div class="col">
+                            <div class="col-md-6 col-12">
 
                                 <div class="form-group row">
                                     <label for="pekerjaan" class="col-md-4 col-form-label text-md-right">{{ __('Pekerjaan') }}</label>
@@ -156,14 +157,42 @@
                                         <input required min=1 value=1 id="lama_sewa" type="number" class="form-control @error('lama_sewa') is-invalid @enderror" name="lama_sewa" required autocomplete="off">
                                     </div>
                                 </div>
+                                <p class='text-center'>
+                                    <strong>Contact Keluarga</strong>
+                                </p>
                                 <div class="form-group row">
-                                            <div class="col-4"></div>
-                                            <div class="text-right col-6">
-                                                <button type="submit" class="btn btn-primary ">
-                                                    {{ __('Register') }}
-                                                </button>
-                                            </div>
-                                        </div>
+                                    <label for="lama_sewa" class="col-md-4 col-form-label text-md-right">Nama</label>
+                                    <div class="col-md-6">
+                                        <input required type='text' class="form-control" name="nama_contact" required autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="lama_sewa" class="col-md-4 col-form-label text-md-right">Hubungan Keluarga</label>
+                                    <div class="col-md-6">
+                                        <select name="hubungan_keluarga" id="" class="form-control">
+                                            <option value="Suami / Istri">Suami / Istri</option>
+                                            <option value="Anak">Anak</option>
+                                            <option value="Orang Tua(Ayah)">Ayah</option>
+                                            <option value="Orang Tua(Ibu)">Ibu</option>
+                                            <option value="Saudara">Saudara</option>
+                                            <option value="Kerabat Lain">Kerabat Lain</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="lama_sewa" class="col-md-4 col-form-label text-md-right">No. Telepon/Handphone</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" name="telepon_contact" maxlength="15" placeholder='+62'></input>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-4"></div>
+                                    <div class="text-right col-6">
+                                        <button type="submit" class="btn btn-primary ">
+                                            {{ __('Registrasi') }}
+                                        </button>
+                                    </div>
+                                </div>
                                 
                             </div>
                         </div>

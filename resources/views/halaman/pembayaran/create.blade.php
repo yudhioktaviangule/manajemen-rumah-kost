@@ -15,7 +15,7 @@
 @section('content')
 <div class="row justify-content-center">
     <div class="col-md-6 col-12">
-        <form class="card" action="{{route('pembayaran.store')}}" method="POST">
+        <form class="card" id="cardo" action="{{route('pembayaran.store')}}" method="POST">
             @csrf
         <div class="card-header with-border">
             <h3 class="card-title">Data Pembayaran</h3>
@@ -60,7 +60,7 @@
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
-            <button class="btn btn-primary">
+            <button class="btn btn-primary" onclick="event.preventDefault();validasi($('#cardo'))">
                 Simpan
             </button>
         </div>
@@ -70,4 +70,42 @@
     </div>
 </div>
 
+@endsection
+@section("jscript")
+    <script>
+        $(document).ready(()=>{
+            window.validasi = async(obj)=>{
+                let errors = [];
+                let num = parseInt($("#jumlah_bayar").val());
+                let maxnum = parseInt($("#jumlah_bayar").attr("max"));
+                let mtp = $("#metode_pembayaran");
+                let validasi = num < 1 ? false : true;
+                if(!validasi) {errors.push("- Pembayaran tidak boleh Kosong");}
+                validasi = num>maxnum ? false : true;
+                if(!validasi) {errors.push(`- Pembayaran tidak boleh melebihi ${maxnum.toLocaleString()}`);}
+                validasi = mtp.val()===''?false:true;
+                if(!validasi) {errors.push(`- Metode Pembayaran tidak boleh kosong`);}
+                if(mtp.val()==='transfer'){
+                    try{
+
+                        const {data:{bisa_transfer:validated}} = await axios.get(`{{route('pembayaran.validasi_transfer',['ks'=>$data->id])}}`)
+                        if(!validated){
+                            validasi=false;
+                            errors.push(`- Masih ada pembayaran via transfer belum diverifikasi`);    
+                        }
+                    }catch(e){
+                        validasi=false;
+                        errors.push('- Terjadi masalah jaringan, Periksa jaringan anda');
+                    }
+                }
+                errors = errors.join('\n');
+                let errMsg = `Terjadi Kesalahan\n${errors}`;
+                if(!validasi){
+                    alert(errMsg);
+                }else{
+                    obj.submit();
+                }
+            }
+        })
+    </script>
 @endsection

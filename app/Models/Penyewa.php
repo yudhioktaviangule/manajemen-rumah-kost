@@ -15,6 +15,9 @@ class Penyewa extends Model
         'pekerjaan',
         'nik',
         'jenis_kelamin',
+        'nama_contact',
+        'hubungan_keluarga',
+        'telepon_contact',
     ];
 
     public function getKamar()

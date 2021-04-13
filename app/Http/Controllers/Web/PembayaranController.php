@@ -92,16 +92,16 @@ class PembayaranController extends Controller{
         $penyewa_id = $kamarsewa->penyewa_id;  
         $rto = $byr+$post->jumlah_bayar <= $kamarsewa->total_sewa;
         //dd($rto);
+        $checkout=false;
         if($rto){
             $pbayaran = new Pembayaran();
             $pbayaran->fill($data);
             $pbayaran->save();
-            
             $sum = Pembayaran::where('kamar_sewa_id',$post->kamar_sewa_id)->sum('pembayaran');
             if($sum<$kamarsewa->total_sewa):
                 $tanggal = Carbon::now()->addMonths(1);
             elseif($sum==$kamarsewa->total_sewa):
-                
+                $checkout=true;
             else:
                 $tanggal = Carbon::parse($kamarsewa->created_at)->addMonths($kamarsewa->lama_sewa);
             endif;
@@ -109,6 +109,9 @@ class PembayaranController extends Controller{
             $kamarsewa->save();
                       
         }
+      /*   if($checkout){
+            return redirect(route('penyewa.checkout',['kamar_sewa_id'=>$kamarsewa->id]));
+        } */
         $v = Auth::user()->level==='penyewa' ? 'clntpembayaran.bayar' : 'penghuni.bayar';
         return redirect(route($v,['penyewa_id'=>$penyewa_id]));
     }

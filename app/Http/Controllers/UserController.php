@@ -19,7 +19,7 @@ class UserController extends Controller
     public function index()
     {
         $request= $this->request;
-        $userdata= User::get();
+        $userdata= User::where('level','karyawan')->orWhere('level','admin')->get();
         return view("halaman.user.tampil",compact('userdata'));
     }
 

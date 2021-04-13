@@ -7,7 +7,7 @@
       ";
   @endphp
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <a href="index3.html" class="brand-link">
+    <a href="{{url('/')}}" class="brand-link">
         <span class="brand-text font-weight-light">{{env('APP_NAME')}}</span>
     </a>
     <div class="sidebar">
@@ -69,11 +69,33 @@
                     </li>
 
                     @if(Auth::user()->level==='admin')
-                        <li class="nav-item">
-                            <a class='nav-link' href="{{ route('laporan.index') }}">
-                                <i class="far fa-file nav-icon"></i> 
-                                <p>Laporan</p>
+                        <li class="nav-item menu-close">
+                            
+                            
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-file"></i>
+                                <p>Laporan <i class="right fas fa-angle-left"></i></p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('laporan_pemasukan.index') }}" class="nav-link">
+                                        <i class="fas fa-file nav-icon"></i>
+                                        <p>Pemasukan</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('laporan_pengeluaran.index') }}" class="nav-link">
+                                        <i class="fas fa-file nav-icon"></i>
+                                        <p>Pengeluaran</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('laporan_pembayaran.index') }}" class="nav-link">
+                                        <i class="fas fa-file nav-icon"></i>
+                                        <p>Pembayaran Tahunan</p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                     @endif
                 @endif

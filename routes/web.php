@@ -21,6 +21,7 @@ use App\Http\Controllers\Web\LanjutNgekostController;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Client\PenghuniPembayaranController;
 use App\Http\Controllers\ErrController;
+use App\Http\Controllers\HistPembayaranController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -44,6 +45,7 @@ Route::resource('pengeluaran',PengeluaranController::class);
 Route::resource('laporan',LaporanController::class);
 Route::resource('laporan_pengeluaran',LaporanPengeluaran::class);
 Route::resource('laporan_pemasukan',LaporanPemasukan::class);
+Route::resource('laporan_pembayaran',HistPembayaranController::class);
 Route::resource('lanjut',LanjutNgekostController::class);
 Route::get('daftar_bayar',[PembayaranController::class,'df_bayar'])->name('df.bayar');
 

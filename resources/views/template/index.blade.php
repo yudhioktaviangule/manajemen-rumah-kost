@@ -54,6 +54,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <strong>Copyright &copy; 2021 <a href="{{route('home')}}">{{env('APP_NAME')}}</a>.</strong> All rights reserved.
     </footer>
 </div>
+		<script src="{{asset('aset/bower_components/moment/moment.js')}}"></script>
         <script src="{{ asset('lte3/plugins/jquery/jquery.min.js') }}"></script>
         <script src="{{ asset('lte3/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('lte3/dist/js/adminlte.min.js') }}"></script>

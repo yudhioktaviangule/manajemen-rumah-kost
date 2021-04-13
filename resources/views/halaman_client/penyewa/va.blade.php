@@ -47,7 +47,7 @@
   <div class="box-header with-border">
     <h3 class="box-title">Riwayat Pembayaran</h3>
     <div class="box-tools pull-right">
-        <a href="{{ route('clntpembayaran.createbayar',['kamar_sewa_id'=>$ks->id]) }}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>  Request Pembayaran</a>
+        <a id='pbtr' href="{{ route('clntpembayaran.createbayar',['kamar_sewa_id'=>$ks->id]) }}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>  Request Pembayaran</a>
     </div>
   </div>
   <div class="box-body">
@@ -109,4 +109,14 @@
 @section("jscript")
     <script src="{{asset('aset/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('aset/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
+    <script>
+        $(document).ready(()=>{
+            const jbayar = parseInt(`{{$vm}}`);
+            const pbtr = $("#pbtr")
+            if(jbayar==0){
+
+                pbtr.hide();
+            }
+        });
+    </script>
 @endsection
