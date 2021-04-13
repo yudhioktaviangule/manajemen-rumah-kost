@@ -7,6 +7,7 @@
     <h3 class="card-title">Laporan Pemasukan</h3>
     <div class="card-tools">
         <div class="form-group" id='cetak-group'>
+            <a href="#" id='loading' style='display:none'><i class="fas fa-spinner fa-pulse"></i> Silahkan Tunggu</a>
             <a href='#' id='tcetak' onclick='cetak()' class="btn btn-primary btn-sm">
                 <i class="fa fa-print"></i> Cetak
             </a>
@@ -40,6 +41,7 @@
         moment.locale("id");
         $(document).ready(()=>{
             $("#tcetak").hide(100);
+            $("#loading").hide(100);
             let defaultView = `
                
                 <h3 >Rekap Pembayaran Kamar _TAHUN_</h3>
@@ -90,9 +92,11 @@
             }
             const renderBody = async(context='',tahun)=>{
                 context = context.replace(/_TAHUN_/g,tahun);
+                $("#tcetak").hide(100);
+                $("#loading").show(100);
                 const {data:{periode,total_res:totalKeseluruhan,results:hasil}} = await axios(`api/pembayaran/pertahun/${tahun}`)
                 let htmlContext = ``;
-
+                $("#loading").hide(100);
                 if(Array.isArray(hasil)){
                     hasil.map((valueX,index)=>{
                         const {detail,subtotal} = valueX;
@@ -140,10 +144,11 @@
                 });
                 
                 let content= `
-                
                 ${isi}
                 `;
+                $("#tablenya").html("");
                 $("#tcetak").hide(100);
+                renderSelect();
                 newWindow.document.write(content);
                 newWindow.focus();
                 setTimeout(() => {
