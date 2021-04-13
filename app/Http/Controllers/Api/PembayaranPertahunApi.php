@@ -9,10 +9,8 @@ use Illuminate\Http\Request;
 
 class PembayaranPertahunApi extends Controller
 {
-    public function getPertahun($tahun)
-    {
-        $kamar = Kamar::get();
-        
+
+    private function getData($kamar,$tahun){
         $totalRes = 0;
         foreach($kamar as $key =>$kamars):
             $pembayaran[$key] = [
@@ -41,7 +39,24 @@ class PembayaranPertahunApi extends Controller
             $pembayaran[$key]['subtotal'] = $subtotal;
             $totalRes+=$subtotal;
         endforeach;
+        return ['periode'=>intval($tahun),'total_res'=>$totalRes,'results'=>$pembayaran];
+    }
+    public function getPertahun($tahun,$kamar_id='0')
+    {
+        if($kamar_id=='0'){
+            $kamar = Kamar::get();
+        }else{
+            $kamar = Kamar::find($kamar_id);
+            $kamar = $kamar==NULL?Kamar::get():[$kamar];
+        }
 
-        return response()->json(['periode'=>intval($tahun),'total_res'=>$totalRes,'results'=>$pembayaran]);
+        $json = $this->getData($kamar,$tahun);
+        return response()->json($json);
+    }
+
+    public function getKamar()
+    {
+        $json = Kamar::get();
+        return response()->json($json);
     }
 }

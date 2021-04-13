@@ -40,7 +40,8 @@ Route::group(['prefix'=>'lap'],function(){
 });
 Route::group(['prefix'=>'pembayaran'],function(){
     Route::get("validasi_transfer/{ks?}",[ValidasiPembayaranApi::class,'validasiPembayaranTransfer'])->name('pembayaran.validasi_transfer');
-    Route::get("pertahun/{tahun?}",[PembayaranPertahunApi::class,'getPertahun'])->name('pembayaran.pertahun');
+    Route::get("pertahun/{tahun?}/{kamar_id?}",[PembayaranPertahunApi::class,'getPertahun'])->name('pembayaran.pertahun');
+    Route::get("gkmr",[PembayaranPertahunApi::class,'getKamar']);
 });
 
 Route::group(['prefix'=>'dashboard'],function(){

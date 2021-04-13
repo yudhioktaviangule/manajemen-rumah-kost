@@ -18,7 +18,13 @@
     
         <div class='form-group'>
             <label for='periode'>Periode</label>
-            <select required onchange="renderToTable($(this))" class='form-control' name='periode' id='periode'>
+            <select required onchange="getKamar($(this))" class='form-control' name='periode' id='periode'>
+                <option value=''>Pilih Periode</option>
+            </select>
+        </div>
+        <div class='form-group' id='cont-kamar'>
+            <label for='periode'>Nomor Kamar</label>
+            <select required onchange="renderToTable($(this),$('#periode'))" class='form-control' name='periode' id='kamar'>
                 <option value=''>Pilih Periode</option>
             </select>
         </div>
@@ -38,10 +44,12 @@
 @section('jscript')
     
     <script>
+        var bSel = '';
         moment.locale("id");
         $(document).ready(()=>{
             $("#tcetak").hide(100);
-            $("#loading").hide(100);
+            $("#tcetak").hide(100);
+            $("#cont-kamar").hide();
             let defaultView = `
                
                 <h3 >Rekap Pembayaran Kamar _TAHUN_</h3>
@@ -80,7 +88,7 @@
             ]
             let period = $("#periode")
             const TAHUN = parseInt(moment().format("YYYY"))
-            window.renderToTable = (object)=>{
+            window.renderToTable = (objkamar,object)=>{
                 let headHtml = ``;
                 bulanes.map(v=>{
                     headHtml+=`
@@ -88,13 +96,31 @@
                     `;
                 })
                 let context = defaultView.replace(/_BULAN1_/g,headHtml);
-                renderBody(context,object.val());
+                renderBody(context,object.val(),objkamar.val());
             }
-            const renderBody = async(context='',tahun)=>{
+
+            window.getKamar = async()=>{
+                $("#loading").show();
+                $("#cont-kamar").hide();
+                const {data} = await axios.get('/api/pembayaran/gkmr');
+                $("#loading").hide();
+                let html = `
+                    <option value="">Pilih Kamar</option>
+                    <option value="all">Semua</option>
+                `;
+                if(Array.isArray(data)){
+                    data.map(value=>{
+                        html+=`<option value="${value.id}">${value.nomor}</option>`;
+                    })
+                }
+                $("#kamar").html(html);
+                $("#cont-kamar").show();
+            }
+            const renderBody = async(context='',tahun,kamar_id='all')=>{
                 context = context.replace(/_TAHUN_/g,tahun);
                 $("#tcetak").hide(100);
                 $("#loading").show(100);
-                const {data:{periode,total_res:totalKeseluruhan,results:hasil}} = await axios(`api/pembayaran/pertahun/${tahun}`)
+                const {data:{periode,total_res:totalKeseluruhan,results:hasil}} = await axios.get(`/api/pembayaran/pertahun/${tahun}/${kamar_id}`)
                 let htmlContext = ``;
                 $("#loading").hide(100);
                 if(Array.isArray(hasil)){
@@ -124,8 +150,14 @@
             }
             const renderSelect = ()=>{
                 let html=`<option value=''>PILIH TAHUN</option>`;
-                for(let i = TAHUN;i<TAHUN+5;i++){
-                    html+=`<option value=${i}>Tahun ${i}</option>`;
+                for(let i = TAHUN;i>=TAHUN-5;i--){
+                    if(i===TAHUN){
+                        html+=`<option value=${i}>Tahun ini (${i})</option>`;
+                        
+                    }else{
+                        html+=`<option value=${i}>Tahun ${i}</option>`;
+
+                    }
                 }
                 $("#periode").html(html);
             }
@@ -148,6 +180,7 @@
                 `;
                 $("#tablenya").html("");
                 $("#tcetak").hide(100);
+                $("#cont-kamar").hide();
                 renderSelect();
                 newWindow.document.write(content);
                 newWindow.focus();
