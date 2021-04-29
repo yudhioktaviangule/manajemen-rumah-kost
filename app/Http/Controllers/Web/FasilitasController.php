@@ -13,6 +13,7 @@ class FasilitasController extends Controller{
         $this->request = $request; 
         $this->middleware('auth');
         $this->middleware('auth.admin');
+        //
     }
     public function index(){
         $request = $this->request; 
