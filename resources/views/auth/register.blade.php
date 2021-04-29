@@ -188,6 +188,7 @@
                                 <div class="form-group row">
                                     <div class="col-4"></div>
                                     <div class="text-right col-6">
+                                        @csrf
                                         <button type="submit" class="btn btn-primary ">
                                             {{ __('Registrasi') }}
                                         </button>
