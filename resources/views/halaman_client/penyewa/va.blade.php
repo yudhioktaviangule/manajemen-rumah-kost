@@ -36,7 +36,7 @@
             </tr>
             <tr>
                 <th>Total Tagihan</th>
-                <td>: Rp. {{number_format($ks->total_sewa)}} </td>
+                <td>: Rp. {{number_format($ks->sisaPembayaran())}} </td>
             </tr>
         </table>
     </div>
