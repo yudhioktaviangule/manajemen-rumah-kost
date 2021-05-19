@@ -6,16 +6,16 @@
 @extends('template.index')
 @section('judul','Pembayaran')
 @section('content')
-<div class="box">
-  <div class="box-header with-border">
-    <h3 class="box-title">Virtual Account</h3>
-    <div class="box-tools pull-right">
+<div class="card">
+  <div class="card-header with-border">
+    <h3 class="card-title">Virtual Account</h3>
+    <div class="card-tools pull-right">
         <a href="{{ route('home') }}" class="btn btn-sm btn-primary">Kembali</a>
     </div>
-    <!-- /.box-tools -->
+    <!-- /.card-tools -->
   </div>
-  <!-- /.box-header -->
-  <div class="box-body">
+  <!-- /.card-header -->
+  <div class="card-body">
     <div class="table-responsive">
         <table>
             <tr>
@@ -43,14 +43,14 @@
   </div>
 </div>
  
-<div class="box">
-  <div class="box-header with-border">
-    <h3 class="box-title">Riwayat Pembayaran</h3>
-    <div class="box-tools pull-right">
+<div class="card">
+  <div class="card-header with-border">
+    <h3 class="card-title">Riwayat Pembayaran</h3>
+    <div class="card-tools pull-right">
         <a id='pbtr' href="{{ route('clntpembayaran.createbayar',['kamar_sewa_id'=>$ks->id]) }}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>  Request Pembayaran</a>
     </div>
   </div>
-  <div class="box-body">
+  <div class="card-body">
       <table class="table table-bordered">
           <thead>
               <th>Tanggal</th>
