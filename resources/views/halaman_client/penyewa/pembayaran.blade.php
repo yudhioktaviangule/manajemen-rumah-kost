@@ -36,10 +36,7 @@
                     <label for="">No. Kamar</label>
                     <p>{{$data->getKamar()->nomor}}</p>
                 </div>
-                <div class="form-group">
-                    <label for="">Total Tagihan</label>
-                    <p>Rp. {{ number_format($sum) }}</p>
-                </div>
+                
                 <div class="form-group">
                     <label for="">Saldo Tagihan</label>
                     <p>Rp. {{ number_format($sisa->saldo) }}</p>

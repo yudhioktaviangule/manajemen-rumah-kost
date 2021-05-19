@@ -35,7 +35,7 @@
                 <td>: {{number_format($ks->lama_sewa)}} Bulan</td>
             </tr>
             <tr>
-                <th>Total Tagihan</th>
+                <th>Saldo Tagihan</th>
                 <td>: Rp. {{number_format($ks->sisaPembayaran()->saldo)}} </td>
             </tr>
         </table>
