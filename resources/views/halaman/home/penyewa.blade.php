@@ -9,13 +9,13 @@
 @section('judul','Virtual Account Penghuni')
 @section('content')
 <div class="col-md-6 col-xs-12 col-md-offset-3">
-    <div class="box">
+    <div class="card">
         @csrf
-      <div class="box-header with-border">
-        <h3 class="box-title"><i class="fa fa-user"></i> {{Auth::user()->name}}</h3>   
+      <div class="card-header with-border">
+        <h3 class="card-title"><i class="fa fa-user"></i> {{Auth::user()->name}}</h3>   
       </div>
       
-      <div class="box-body">
+      <div class="card-body">
             <div class="form-group">
                 <label for="">NIK</label>
                 <p>{{$data->nik}}</p>
@@ -49,7 +49,7 @@
             
             
       </div>
-      <div class="box-footer">
+      <div class="card-footer">
             <a href="{{ route('clntpembayaran.bayar',['penyewa_id'=>$data->id]) }}" class="btn btn-block btn-success"><i class="fa fa-get-pocket"></i> Pembayaran</a>
       </div>
     </div >
