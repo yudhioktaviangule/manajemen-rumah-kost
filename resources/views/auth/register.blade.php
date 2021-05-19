@@ -1,12 +1,25 @@
-@extends('layouts.app')
+
 @php
     $kamars = \App\Models\Kamar::where("status","ready")->get();
     
 @endphp
-@section('content')
-<div class="container-fluid">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{env('APP_NAME')}} | Log in</title>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="{{asset('lte3/plugins/fontawesome-free/css/all.min.css')}}">
+  <link rel="stylesheet" href="{{asset('lte3/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{asset('lte3/dist/css/adminlte.min.css')}}">
+</head>
+<body class="hold-transition" style="background:url({{asset('lte3/dist/img/bgapps.png')}})">
+<div class="container-fluid" style="margin-top:20px">
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        <div class="col-md-11">
             <div class="card">
                 <div class="card-header">{{ __('Regitrasi Penghuni') }}</div>
 
@@ -214,4 +227,8 @@
         </div>
     </div>
 </div>
-@endsection
+<script src="{{asset('lte3/plugins/jquery/jquery.min.js')}}"></script>
+<script src="{{asset('lte3/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('lte3/dist/js/adminlte.min.js')}}"></script>
+</body>
+</html>

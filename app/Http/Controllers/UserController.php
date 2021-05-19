@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\UserReq;
+use App\Models\CheckoutKamarSewa;
 use App\Models\Kamar;
 use App\Models\KamarSewa;
 
@@ -125,6 +126,9 @@ class UserController extends Controller
         
         if ($Pemakai!=NULL) {
             $ks = KamarSewa::where('penyewa_id',$Pemakai->penyewa_id)->first();
+            if($ks==NULL){
+                $ks = CheckoutKamarSewa::where('penyewa_id',$Pemakai->penyewa_id)->first();
+            }
             $kamar = Kamar::find($ks->kamar_id);
             $kamar->status="disewa";
             $kamar->save();

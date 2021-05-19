@@ -24,15 +24,19 @@ class RegisterPenyewaPost extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:3',
-            'email' => 'required|email|unique:users',
-            'password' => 'required',
-            'kamar_id' => 'required',
-            'kota_asal' => 'required',
-            'lama_sewa' => 'required|numeric|min:1',
-            'pekerjaan' => 'required',
-            'hp' => 'required|min:10|unique:penyewas',
-            'nik' => 'required|min:16|max:16|unique:penyewas',
+            'name'              => 'required|min:3',
+            'email'             => 'required|email|unique:users',
+            'password'          => 'required',
+            'nama_contact'      => 'required',
+            'hubungan_keluarga' => 'required',
+            'telepon_contact'   => 'required',
+            'jk'                => 'required',
+            'kamar_id'          => 'required',
+            'kota_asal'         => 'required',
+            'lama_sewa'         => 'required|numeric|min:1',
+            'pekerjaan'         => 'required',
+            'hp'                => 'required|min:10|unique:penyewas',
+            'nik'               => 'required|min:16|max:16|unique:penyewas',
         ];
     }
 }

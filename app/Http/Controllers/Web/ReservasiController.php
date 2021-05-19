@@ -1,14 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Web;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Penyewa;
 use App\Models\KamarSewa;
 use App\Models\Kamar;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\View;
 class ReservasiController extends Controller{
     private $request;
     public function __construct(Request $request) {

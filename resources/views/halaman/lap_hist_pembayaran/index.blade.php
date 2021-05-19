@@ -54,17 +54,17 @@
                
                 <h3 >Rekap Pembayaran Kamar _TAHUN_</h3>
                 <table cellspacing=0 cellpadding=0 class="table table-bordered" _stable_ >
-                    <thead>
+                    <tdead>
                         <tr>
-                            <th rowspan=2 _bd_topbot_>No.</th>
-                            <th rowspan=2 _bd_topbot_>Kamar</th>
-                            <th colspan=12 _BD_TOP_ >_TAHUN_</th>
-                            <th rowspan=2 _bd_topbot_ >Total</th>
+                            <td rowspan=2 _bd_topbot_>No.</td>
+                            <td rowspan=2 _bd_topbot_>Kamar</td>
+                            <td colspan=12 _BD_TOP_ >_TAHUN_</td>
+                            <td rowspan=2 _bd_topbot_ >Total</td>
                         </tr>
                         <tr>
                             _BULAN1_
                         </tr>
-                    </thead>
+                    </tdead>
                     <tbody>
                         _BODY_
                     </tbody>
@@ -92,7 +92,7 @@
                 let headHtml = ``;
                 bulanes.map(v=>{
                     headHtml+=`
-                        <th _BD_BOTTOM_>${v}</th>
+                        <td _BD_BOTTOM_>${v}</td>
                     `;
                 })
                 let context = defaultView.replace(/_BULAN1_/g,headHtml);
@@ -128,8 +128,8 @@
                         const {detail,subtotal} = valueX;
                         const nomor = index+1;
                         htmlContext+=`<tr>
-                            <th style='padding:5px'>${nomor}</th>
-                            <th style='padding:5px'>${valueX.kamar.nomor}</th>
+                            <td style='padding:5px'>${nomor}</td>
+                            <td style='padding:5px'>${valueX.kamar.nomor}</td>
                             `
                         detail.map(v=>{
                             htmlContext+=`<td style='padding:5px'>${v.toLocaleString()}</td>`
@@ -140,7 +140,7 @@
                 }
                 htmlContext+=`
                     <tr>
-                        <th colspan="14" _bd_topbot_>TOTAL</th>
+                        <td colspan="14" _bd_topbot_>TOTAL</td>
                         <td _bd_topbot_>${ totalKeseluruhan.toLocaleString()}</td>
                     </tr>
                 `;

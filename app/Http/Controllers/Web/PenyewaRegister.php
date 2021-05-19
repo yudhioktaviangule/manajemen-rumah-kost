@@ -28,17 +28,17 @@ class PenyewaRegister extends Controller{
     public function store(RegisterPenyewaPost $request){
         
             $kelamin = $request->jk;
-           // dd($request->input());
+           //dd($request->input());
             $penyewa = [
-                'nik' =>$request->nik,
-                'name' =>$request->name,
-                'hp' =>$request->hp,
-                'kota_asal' =>$request->kota_asal,
-                "jenis_kelamin" => $kelamin,
-                'pekerjaan' =>$request->pekerjaan,
-                'nama_contact' =>$request->nama_contact,
-                'hubungan_keluarga' =>$request->hubungan_keluarga,
-                'telepon_contact' =>$request->telepon_contact,
+                'nik'               => $request->nik,
+                'name'              => $request->name,
+                'hp'                => $request->hp,
+                'kota_asal'         => $request->kota_asal,
+                "jenis_kelamin"     => $kelamin,
+                'pekerjaan'         => $request->pekerjaan,
+                'nama_contact'      => $request->nama_contact,
+                'hubungan_keluarga' => $request->hubungan_keluarga,
+                'telepon_contact'   => $request->telepon_contact,
             ];
             $penyewa_db = new Penyewa();
             $penyewa_db->fill($penyewa);
@@ -51,12 +51,12 @@ class PenyewaRegister extends Controller{
                 $lfalse = User::where('remember_token',$rand)->first();
             endwhile;
             $users = [
-                'penyewa_id' => $penyewa_id,
-                'name'  =>  $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'level' => 'penyewa',
-                'aktif' => 'nonaktif',
+                'penyewa_id'     => $penyewa_id,
+                'name'           => $request->name,
+                'email'          => $request->email,
+                'password'       => Hash::make($request->password),
+                'level'          => 'penyewa',
+                'aktif'          => 'nonaktif',
                 'remember_token' => $rand,
             ];
             $user = new User();
@@ -70,10 +70,10 @@ class PenyewaRegister extends Controller{
             $tot = $kamar->harga*$request->lama_sewa;
             $ks = [
                 'jatuh_tempo' => $tanggal,
-                'lama_sewa' => $request->lama_sewa,
-                'penyewa_id' => $penyewa_id,
-                'kamar_id'=>$request->kamar_id,
-                'total_sewa'=>$tot,
+                'lama_sewa'   => $request->lama_sewa,
+                'penyewa_id'  => $penyewa_id,
+                'kamar_id'    => $request->kamar_id,
+                'total_sewa'  => $tot,
             ];
             $kmr = new KamarSewa();
             $kmr->fill($ks);

@@ -98,8 +98,8 @@ class PembayaranController extends Controller{
             $pbayaran->fill($data);
             $pbayaran->save();
             $sum = Pembayaran::where('kamar_sewa_id',$post->kamar_sewa_id)->sum('pembayaran');
+            $tanggal = Carbon::now()->addMonths(1);
             if($sum<$kamarsewa->total_sewa):
-                $tanggal = Carbon::now()->addMonths(1);
             elseif($sum==$kamarsewa->total_sewa):
                 $checkout=true;
             else:

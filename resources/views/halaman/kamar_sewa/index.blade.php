@@ -2,12 +2,12 @@
 
 @section('judul','Fasilitas Kamar')
 @section('content')
-<div class="box">
-  <div class="box-header with-border">
-    <h3 class="box-title">Daftar Penyewa</h3>
+<div class="card">
+  <div class="card-header with-border">
+    <h3 class="card-title">Daftar Penyewa</h3>
 
   </div>
-  <div class="box-body">
+  <div class="card-body">
     <div class="table-responsive">
         <table class="table table-bordered" id='fasilitas'>
             <thead>
@@ -23,11 +23,11 @@
         </table>
     </div>
   </div>
-  <!-- /.box-body -->
-  <div class="box-footer">
-    The footer of the box
+  <!-- /.card-body -->
+  <div class="card-footer">
+    The footer of the card
   </div>
-  <!-- box-footer -->
+  <!-- card-footer -->
 </div>  
 @endsection
 @section("css")

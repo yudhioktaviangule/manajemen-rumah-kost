@@ -29,7 +29,6 @@ class TambahAsetController extends Controller{
     }
     public function store(){
         $request = $this->request; 
-        $request = $this->request; 
         $post    = $request->only('user_id','keterangan','total_biaya','aset_id');
         $post['jenis_pengeluaran']  = 'penambahan aset';
         $post['fasilitas_id']       = 0;

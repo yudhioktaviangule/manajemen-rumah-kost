@@ -19,6 +19,7 @@ class PembayaranPertahunApi extends Controller
                 'subtotal' => 0,
             ];
             $subtotal = 0;
+            $p=[];
             for($i = 1;$i<13;$i++){
                 $bulana = sprintf("%02d",$i);
                 if($i+1==13){
@@ -32,14 +33,24 @@ class PembayaranPertahunApi extends Controller
                 $b = "$tahunplus-$bulanb-01";
                 $sum = Pembayaran::whereIn('kamar_sewa_id',function($kmr)use($kamars){
                     $kmr->select("id")->from("kamar_sewas")->where('kamar_id',$kamars->id);
-                })->where('virtual_account','selesai')->whereBetween('updated_at',[$a,$b])->sum('pembayaran');
-                $subtotal+=intval($sum);
+                })
+                ->where('virtual_account','selesai')->whereBetween('updated_at',[$a,$b])->sum('pembayaran');
+                
+                
+                $sum2 = Pembayaran::whereIn('kamar_sewa_id',function($kmr)use($kamars){
+                    $kmr->select("id")->from("checkout_kamar_sewas")->where('kamar_id',$kamars->id);
+                })
+                ->where('virtual_account','selesai')->whereBetween('updated_at',[$a,$b])->sum('pembayaran');
+                
+                
+                $subtotal+=intval($sum+$sum2);
+                
                 $pembayaran[$key]['detail'][] = $sum;
             }
             $pembayaran[$key]['subtotal'] = $subtotal;
             $totalRes+=$subtotal;
         endforeach;
-        return ['periode'=>intval($tahun),'total_res'=>$totalRes,'results'=>$pembayaran];
+        return ['periode'=>intval($tahun),'total_res'=>$totalRes,'results'=>$pembayaran,'p'=>$p];
     }
     public function getPertahun($tahun,$kamar_id='0')
     {

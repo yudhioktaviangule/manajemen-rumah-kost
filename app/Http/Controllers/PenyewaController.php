@@ -29,7 +29,8 @@ class PenyewaController extends Controller
      */
     public function create()
     {
-        return view('halaman.penyewa.create');
+        $kamar = Kamar::where('status','ready')->get();
+        return view('halaman.penyewa.create',compact('kamar'));
     }
 
     /**
