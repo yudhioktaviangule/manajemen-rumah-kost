@@ -317,7 +317,7 @@
                     content = content.replace(/_BODY_/g,html)
                 }
                 $(".modal").modal('toggle')
-                $("#modal-title").html(`${tipe} {{env('APP_NAME','Kostanku')}}`)
+                $("#modal-title").html(`${tipe} Bulan ini`)
                 $("#modal-bdy").html(content)
                 $(".modal button[type='submit']").hide()
             }
