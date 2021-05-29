@@ -240,7 +240,7 @@
                         </div>
                         <div class='form-group'>
                             <label>Metode Pembayaran Tunai</label>
-                            <h3>${data.tunai.toLocaleString()}</h3>
+                            <h3>${parseInt(data.tunai).toLocaleString()}</h3>
 
                         </div>
                     `
@@ -301,7 +301,7 @@
                                 <td>${admin}</td>
                                 <td>${jenis_pengeluaran}</td>
                                 <td>${status}</td>
-                                <td>${nominal.toLocaleString()}</td>
+                                <td>${parseInt(nominal).toLocaleString()}</td>
                                 <td>${keterangan}</td>
                             </tr>
                         `
