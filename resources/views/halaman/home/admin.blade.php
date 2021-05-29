@@ -391,6 +391,7 @@
                 $(".modal").modal({
                     backdrop:'static',
                     keyboard:false,
+                    show:true,
                 })
                 $("#modal-title").html(`Pembayaran Kamar Tahun ${tanggal}`)
                 $("#modal-bdy").html(data)
