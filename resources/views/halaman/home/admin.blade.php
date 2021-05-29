@@ -250,11 +250,11 @@
                     content = `
                         <div class='form-group'>
                             <label>Jumlah Pemasukan</label>
-                            <h3 class='text-right'>${window._pemasukan.toLocaleString()}</h3>
+                            <h3 class='text-right'>${parseInt(window._pemasukan).toLocaleString()}</h3>
                         </div>
                         <div class='form-group'>
                             <label>Jumlah Pengeluaran</label>
-                            <h3 class='text-right'>${window._pengeluaran.toLocaleString()}</h3>
+                            <h3 class='text-right'>${parseInt(window._pengeluaran).toLocaleString()}</h3>
                         </div>
                         <hr>
                         <div class='form-group'>
