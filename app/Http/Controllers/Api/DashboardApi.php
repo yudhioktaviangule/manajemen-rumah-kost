@@ -56,6 +56,16 @@ class DashboardApi extends Controller
         return response()->json($json);
     }
 
+    public function moneyMasuk(Request $request)
+    {
+        $tanggalAwal = $request->awal;
+        $tanggalAkhir = $request->akhir;
+        $tunai = Pembayaran::where('metode','tunai')->whereBetween('created_at',[$tanggalAwal,$tanggalAkhir])->sum('pembayaran');
+        $tf = Pembayaran::where('metode','transfer')->whereBetween('created_at',[$tanggalAwal,$tanggalAkhir])->sum('pembayaran');
+        $response = ['tunai'=>$tunai,'transfer'=>$tf];
+        return response()->json($response);
+    }
+
     private function penghuniAktif($jk='laki-laki')
     {
         $penyewa = Penyewa::whereIn('id',function($q){

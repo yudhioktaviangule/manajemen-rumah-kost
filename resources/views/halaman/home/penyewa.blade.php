@@ -37,13 +37,9 @@
                     <label for="">Tanggal Check-out</label>
                     <p><i class="fa fa-calendar-check-o"></i> {{\Carbon\Carbon::parse($data->getSewa()->created_at)->addMonths($data->getSewa()->lama_sewa)->format('d-m-Y')}} </p>
                 </div>
-                <div class="form-group">
-                    <label for="">Jumlah Tagihan</label>
-                    <p>Rp. {{ number_format($data->getSewa()->total_sewa) }} </p>
-                </div>
                 
                 <div class="form-group">
-                    <label for="">Saldo Tagihan</label>
+                    <label for="">Sisa Tagihan</label>
                     <p>Rp. {{ number_format($saldo) }}</p>
                 </div>
                 

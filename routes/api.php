@@ -49,4 +49,7 @@ Route::group(['prefix'=>'dashboard'],function(){
     Route::get('dash_money',[DashboardApi::class,'money'])->name('dashboard.money');
     Route::get('dash_huni',[DashboardApi::class,'huni'])->name('dashboard.huni');
     Route::get('dash_daftar_huni_bulanan',[DashboardApi::class,'daftarHuniBulanan'])->name('dashboard.daftar_huni_bulanan');
+    Route::group(['prefix'=>'modals'],function(){
+        Route::post('dash_money_masuk',[DashboardApi::class,'moneyMasuk'])->name('dashboard.money.masuk');
+    });
 });

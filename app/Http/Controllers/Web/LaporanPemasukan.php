@@ -22,10 +22,10 @@ class LaporanPemasukan extends Controller{
     }
     public function store(){
         $request = $this->request;
-        $data = $request->only('tanggal_awal','tanggal_akhir');
+        $data = $request->only('tanggal_awal','tanggal_akhir','transaksi');
         $between = [$data['tanggal_awal'],$data['tanggal_akhir']];
-       
-        return view('cetak.lap_pemasukan',compact('between')); 
+        $jenis  = $data['transaksi'];
+        return view('cetak.lap_pemasukan',compact('between','jenis')); 
     }
     public function show($id){
         $request = $this->request;
