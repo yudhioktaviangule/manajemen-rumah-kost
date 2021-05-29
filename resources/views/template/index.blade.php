@@ -15,26 +15,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </head>
 <body class="hold-transition sidebar-mini">
 	<div class="wrapper"> 
-		@include("template.nav")
+		
 		@include("template.sidebar")
   		<div class="content-wrapper">
     
-			<div class="content-header">
+			<div class="content-header bg-primary">
 				<div class="container-fluid">
 					<div class="row mb-2">
 						<div class="col-sm-6">
 							<h1 class="m-0">@yield('judul')</h1>
 						</div>
 						<div class="col-sm-6">
-							<ol class="breadcrumb float-sm-right">
-								<li class="breadcrumb-item"><a href="#">Home</a></li>
-								<li class="breadcrumb-item active">@yield('judul')</li>
+							<ol class="breadcrumb float-sm-right text-light">
+								<li class="breadcrumb-item"><a class='text-light' href="#">Home</a></li>
+								<li class="breadcrumb-item active text-light">@yield('judul')</li>
 							</ol>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="content">
+			<div class="content" style="margin-top:10px">
 				<div class="container-fluid">@yield('content')</div>
 			</div>
   		</div>
