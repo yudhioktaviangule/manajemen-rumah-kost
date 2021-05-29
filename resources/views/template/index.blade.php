@@ -59,6 +59,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="{{ asset('lte3/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('lte3/dist/js/adminlte.min.js') }}"></script>
 		<script src="{{asset('js/app.js')}}"></script>
+		<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+    	</form>
 		<script>
 			$(document).ready(()=>{
 				window.logot = ()=>{
