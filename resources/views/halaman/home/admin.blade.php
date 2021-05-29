@@ -388,7 +388,10 @@
                     </tr>
                 `
                 let data = content.replace(/_BODY_/g,html)
-                $(".modal").modal('toggle')
+                $(".modal").modal({
+                    backdrop:'static',
+                    keyboard:false,
+                })
                 $("#modal-title").html(`Pembayaran Kamar Tahun ${tanggal}`)
                 $("#modal-bdy").html(data)
 
