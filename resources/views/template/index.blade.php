@@ -23,7 +23,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 				<div class="container-fluid">
 					<div class="row mb-2">
 						<div class="col-sm-6">
-							<h1 class="m-0">@yield('judul')</h1>
+							<div class="row">
+								<a href="#" class='btn btn-default text-primary' style="margin-right:10px" data-widget="pushmenu"><i class="fas fa-bars"></i></a>
+								<h1 class="m-0">@yield('judul')</h1>
+							</div>
 						</div>
 						<div class="col-sm-6">
 							<ol class="breadcrumb float-sm-right text-light">
