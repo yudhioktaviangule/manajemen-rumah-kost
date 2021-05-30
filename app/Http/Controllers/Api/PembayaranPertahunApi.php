@@ -45,7 +45,7 @@ class PembayaranPertahunApi extends Controller
                 
                 $subtotal+=intval($sum+$sum2);
                 
-                $pembayaran[$key]['detail'][] = $sum;
+                $pembayaran[$key]['detail'][] = intval($sum+$sum2);
             }
             $pembayaran[$key]['subtotal'] = $subtotal;
             $totalRes+=$subtotal;
