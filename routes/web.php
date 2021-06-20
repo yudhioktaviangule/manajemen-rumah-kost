@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Client\PenghuniPembayaranController;
 use App\Http\Controllers\ErrController;
 use App\Http\Controllers\HistPembayaranController;
+use App\Http\Controllers\Web\CheckoutActivationAfterLunasController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -47,6 +48,8 @@ Route::resource('laporan_pengeluaran',LaporanPengeluaran::class);
 Route::resource('laporan_pemasukan',LaporanPemasukan::class);
 Route::resource('laporan_pembayaran',HistPembayaranController::class);
 Route::resource('lanjut',LanjutNgekostController::class);
+Route::resource('checkout_lanjutan',CheckoutActivationAfterLunasController::class);
+
 Route::get('daftar_bayar',[PembayaranController::class,'df_bayar'])->name('df.bayar');
 
 
@@ -63,3 +66,5 @@ Route::get('clnt_byr_penghuni/{penyewa_id}',[PenghuniPembayaranController::class
 Route::get('clnt_req_bayar/{kamar_sewa_id}',[PenghuniPembayaranController::class,'create_byr'])->name('clntpembayaran.createbayar');
 
 Route::get('forbidden',[ErrController::class,'forbidden'])->name('forbidden_kingdom');
+
+Route::get("checkout.activation/{checkout_id?}",[CheckoutActivationAfterLunasController::class,'showCheckoutUser'])->name("tambah.lama.sewa");

@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\CheckoutKamarSewa;
+use App\Models\Kamar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\KamarSewa;
 use App\Models\Pembayaran;
+use App\Models\Penyewa;
 use Carbon\Carbon;
 class PembayaranController extends Controller{
     private $request;
@@ -109,14 +112,56 @@ class PembayaranController extends Controller{
             $kamarsewa->save();
                       
         }
+        if($checkout){
+            $v = "tambah.lama.sewa";
+            $checkout_id = $this->checkoutIfComplete($post->kamar_sewa_id);
+            return redirect(route($v,['checkout_id'=>$checkout_id]));
+        }else{
+            $v = Auth::user()->level==='penyewa' ? 'clntpembayaran.bayar' : 'penghuni.bayar';
+            return redirect(route($v,['penyewa_id'=>$penyewa_id]));
+        }
+
+
       /*   if($checkout){
             return redirect(route('penyewa.checkout',['kamar_sewa_id'=>$kamarsewa->id]));
         } */
-        $v = Auth::user()->level==='penyewa' ? 'clntpembayaran.bayar' : 'penghuni.bayar';
-        return redirect(route($v,['penyewa_id'=>$penyewa_id]));
+
     }
     public function update($id=''){
         $request = $this->request; 
+    }
+
+    public function checkoutIfComplete($id)
+    {
+        $data = KamarSewa::find($id);
+        $checkout = new CheckoutKamarSewa();
+        $p='';
+        
+        $p = $data->penyewa_id;
+        $kamar  = $data->kamar_id;
+        $dkamar = Kamar::find($kamar);
+        if($dkamar==NULL):
+            return redirect()->back();
+        endif;
+        $dkamar->status='ready';
+        $dkamar->save();
+        $dsewa = Penyewa::find($p);
+        $sewa = $dsewa->getUser();  
+        $sewa->aktif='checkout';
+        $sewa->save();
+        $chk = [
+            'tmp_id' => $data->id,
+            'penyewa_id' => $data->penyewa_id,
+            'kamar_id' => $data->kamar_id,
+            'jatuh_tempo' => $data->jatuh_tempo,
+            'lama_sewa' => $data->lama_sewa,
+            'total_sewa' => $data->total_sewa,
+        ];
+        $checkout->fill($chk);
+        $checkout->save();
+        $data->delete();
+        
+        return $checkout->id;
     }
     public function destroy($id=''){
         

@@ -45,10 +45,8 @@
             
         </div>
         <div class="card-footer">
-                <a href="{{ route('pindah_kamar.create') }}?id={{$data->getSewa()->id}}" class="btn btn-sm btn-primary"><i class="fas fa-bed"></i> Pindah Kamar</a>
-                <a href="{{ route('lanjut.show',['lanjut'=>$data->getSewa()->id]) }}" class="btn btn-sm btn-warning"><i class="fas fa-plus"></i> Tambah Lama Sewa</a>
-                <a href="{{ route('penghuni.bayar',['penyewa_id'=>$data->id]) }}" class="btn btn-sm btn-success"><i class="fab fa-get-pocket"></i> Pembayaran</a>
-                <a href="{{ route('penyewa.checkout',['kamar_sewa_id'=>$data->getSewa()->id]) }}" class="btn btn-sm btn-danger"><i class="fas fa-sign-out-alt"></i> Checkout</a>
+            <a href="{{ route('pindah_kamar.create') }}?id={{$data->getSewa()->id}}" class="btn btn-sm btn-primary"><i class="fas fa-bed"></i> Pindah Kamar</a>
+            <a href="{{ route('penghuni.bayar',['penyewa_id'=>$data->id]) }}" class="btn btn-sm btn-success"><i class="fab fa-get-pocket"></i> Pembayaran</a>
         </div>
         </div >
 
