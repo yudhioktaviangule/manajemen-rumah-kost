@@ -21,6 +21,7 @@ class CreatePengeluaransTable extends Migration
             $table->double('nominal')->default(0);
             $table->enum('status',['lunas','belum'])->default('belum');
             $table->string('keterangan')->default('-');
+            $table->date("tanggal");
             $table->timestamps();
         });
     }

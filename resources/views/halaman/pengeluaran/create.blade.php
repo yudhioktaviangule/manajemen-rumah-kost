@@ -24,8 +24,12 @@
                     <input type="text" class="form-control" name="pengeluaran" required>
                 </div>
                 <div class='form-group'>
+                    <label for='tanggal'>Tanggal</label>
+                    <input type='date' required class='form-control' id='tanggal' name='tanggal'>
+                </div>
+                <div class='form-group'>
                     <label for='nominal'>Nominal</label>
-                    <input type='number' min="1000" value='1000' step='1000' class='form-control' id='nominal' name='nominal'>
+                    <input type='number' required min="1000" value='1000' step='500' class='form-control' id='nominal' name='nominal'>
                 </div>
                 <div class='form-group'>
                     <label for='status'>Ket. Lunas</label>

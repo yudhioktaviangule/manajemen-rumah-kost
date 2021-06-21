@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\BusinessLogic\BLPengeluaran;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Kamar;
@@ -37,12 +38,15 @@ class DashboardApi extends Controller
 
     }
     public function money(){
+        $keluar = new BLPengeluaran();
+
+        
         $keuntungan = 0;
         $pengeluaran = 0;
         $tanggalAwal = Carbon::now()->firstOfMonth()->format('Y-m-d');
         $tanggalAkhir = Carbon::now()->lastOfMonth()->format('Y-m-d');
         $pembayaran = Pembayaran::whereBetween('created_at',[$tanggalAwal,$tanggalAkhir])->sum('pembayaran');
-        $pengeluaran = Pengeluaran::whereBetween('created_at',[$tanggalAwal,$tanggalAkhir])->sum('nominal');
+        $pengeluaran = $keluar->getPengeluaran([$tanggalAwal,$tanggalAkhir]);
         $keuntungan = $pembayaran-$pengeluaran;
         $json = [
             'tanggal_filter'=>[

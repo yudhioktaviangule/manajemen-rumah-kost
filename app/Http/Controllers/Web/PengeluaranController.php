@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Web;
+
+use App\BusinessLogic\BLPengeluaran;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -14,7 +16,8 @@ class PengeluaranController extends Controller{
     }
     public function index(){
         $request = $this->request;
-        return view('halaman.pengeluaran.index');
+        $pengeluaranBL = new BLPengeluaran();
+        return view('halaman.pengeluaran.index',compact("pengeluaranBL"));
     }
     public function create(){
         $request = $this->request;

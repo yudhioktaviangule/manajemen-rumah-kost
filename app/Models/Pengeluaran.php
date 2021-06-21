@@ -14,6 +14,7 @@ class Pengeluaran extends Model
         'nominal',
         'pengeluaran',
         'status',
+        'tanggal'
     ];
 
 
