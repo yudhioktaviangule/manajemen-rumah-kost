@@ -220,7 +220,7 @@ class DataTable extends Controller{
                 })
                 ->addColumn('tanggal',function($row){
                     $cal = json_decode($row);
-                    $kal = Carbon::parse($cal->created_at)->format('d-m-Y');
+                    $kal = Carbon::parse($cal->tanggal)->format('d-m-Y');
                     return $kal;
                 })
                 ->addColumn('lunas',function($row){

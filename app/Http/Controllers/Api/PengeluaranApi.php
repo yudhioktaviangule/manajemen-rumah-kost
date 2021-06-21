@@ -12,18 +12,5 @@ class PengeluaranApi extends BaseApi
     }
 
 
-    public function getJumlah($type="")
-    {
-        $pengeluaran = new BLPengeluaran();
-        switch ($type) {
-            case 'bulan':
-                
-                break;
-            
-            default:
-                # code...
-                break;
-        }
-    }
 
 }

@@ -20,7 +20,7 @@ class LapKeluarApi extends Controller{
     public function store(){
         $request = $this->request;
         $p = [$request->t_awal,$request->t_akhir];
-        $pengeluaran = Pengeluaran::whereBetween('created_at',$p)->get();
+        $pengeluaran = Pengeluaran::whereBetween('tanggal',$p)->get();
         $data = [];
         foreach ($pengeluaran as $key => $value) {
             $data[$key] = $value->toArray();
