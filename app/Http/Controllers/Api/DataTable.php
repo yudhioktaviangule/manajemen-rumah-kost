@@ -106,7 +106,7 @@ class DataTable extends Controller{
                 ->addIndexColumn();
         $dt->addColumn('tanggal',function($r){
                 $decode = json_decode($r);
-                $created_at = $decode->created_at;
+                $created_at = $decode->tanggal;
                 return Carbon::parse($created_at)->format('d-m-Y');
             })
             ->addColumn('kamar',function($r){
